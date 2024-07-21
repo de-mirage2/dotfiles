@@ -1,0 +1,7 @@
+require 'plugins.fugitive'
+require 'plugins.lsp'
+require 'plugins.treesitter'
+require 'plugins.telescope'
+require 'plugins.undotree'
+require 'plugins.vimtex'
+require 'plugins.lualine'
