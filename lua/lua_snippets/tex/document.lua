@@ -33,6 +33,16 @@ end
 
 M = {
   s({trig = 'testDocument', show_condition = in_doc, condition = in_doc}, t("document.lua LOADED")),
+  s({trig = '=env', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta(
+    [[
+    \begin{<>}
+      <>
+    \end{<>}
+    ]], {i(1,'align'), i(0), rep(1)}
+  )),
+  s({trig = '=sec', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta([[\section{<>}]], i(1))),
+  s({trig = '=ssec', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta([[\subsection{<>}]], i(1))),
+  s({trig = '=sssec', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta([[\subsubsection{<>}]], i(1))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns

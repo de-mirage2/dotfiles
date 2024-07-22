@@ -35,6 +35,13 @@ end
 
 M = {
   s({trig = "testPreamble", show_condition = in_pre, condition = in_pre}, t("preamble.lua LOADED")),
+  s({trig = ";doc", show_condition = in_pre, condition = in_pre, snippetType = 'autosnippet'}, fmta(
+    [[
+    \begin{document}
+      <>
+    \end{document}
+    ]], {i(0)}
+  )),
   s({trig = "TemplatePhysics", show_condition = in_pre, condition = in_pre},
     fmta(
       [[ 

@@ -13,7 +13,7 @@ lsp.setup()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {"clangd", "pylsp", "jdtls", "ltex"},
+  ensure_installed = {"clangd", "pylsp", "jdtls"},
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})
@@ -43,5 +43,6 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp_action.luasnip_supertab(),
     ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
   }),
 })
