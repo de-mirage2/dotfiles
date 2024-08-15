@@ -1,5 +1,5 @@
 local ls = require("luasnip")
-local s = ls.snippet
+-- local s = ls.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
 local t = ls.text_node
@@ -30,17 +30,21 @@ function in_math()
   return vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 1
 end
 
+local s = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math })
+local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, snippetType = 'autosnippet'})
+
+
 function autobasic(tr, defi)
-  return s({trig = tr, condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, t('{'..defi..'}'))
+  return aus({trig = tr}, t(defi..' '))
 end
 
 function sbasic(tr, defi)
-  return s({trig = tr, condition = in_math, show_condition = in_math}, t('{'..defi..'}'))
+  return s({trig = tr}, t(defi..' '))
 end
 -- i hate lua --
 
 M = {
-  s({trig = "testMath", condition = in_math, show_condition = in_math}, t("math.lua LOADED")),
+  s({trig = "testMath"}, t("math.lua LOADED")),
 
   -- auto
   autobasic('pdX', '\\partial'),
@@ -73,28 +77,28 @@ M = {
   sbasic('becs', '\\because'),
   
   -- derivative
-  s({trig = "dddX", condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1), i(2)})),
-  s({trig = "ddX", condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1)})),
-  s({trig = "pppX", condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  s({trig = "ppX", condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus({trig = "dddX"}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1), i(2)})),
+  aus({trig = "ddX"}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1)})),
+  aus({trig = "pppX"}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus({trig = "ppX"}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
 
   -- fraction & binomial
-  s({trig = 'ff', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
-  s({trig = 'ncr', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
+  aus({trig = 'ff'}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
+  aus({trig = 'ncr'}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
 
   -- function
-  s({trig = 'func', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1, 'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}'), i(4, 'x'), i(0)})),
+  aus({trig = 'func'}, fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1, 'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}'), i(4, 'x'), i(0)})),
 
   -- limit
-  s({trig = 'lim', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\lim_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
+  aus({trig = 'lim'}, fmta([[\lim_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
 
   -- integral
-  s({trig = 'int', condition = in_math, show_condition = in_math, snippetType='autosnippet'}, fmta([[\int_{<>}^{<>}<>\,\mathrm{d}<>]], {i(1), i(2), i(0), i(3)})),
+  aus({trig = 'int'}, fmta([[\int_{<>}^{<>}<>\,\mathrm{d}<>]], {i(1), i(2), i(0), i(3)})),
 
   -- fonts
-  s({trig = 'mtb', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\mathbb{<>}]], {i(1)})), 
-  s({trig = 'mtc', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\mathcal{<>}]], {i(1)})), 
-  s({trig = 'mtr', condition = in_math, show_condition = in_math, snippetType = 'autosnippet'}, fmta([[\mathrm{<>}]], {i(1)})), 
+  aus({trig = 'mtb'}, fmta([[\mathbb{<>}]], {i(1)})), 
+  aus({trig = 'mtc'}, fmta([[\mathcal{<>}]], {i(1)})), 
+  aus({trig = 'mtr'}, fmta([[\mathrm{<>}]], {i(1)})), 
 }
 
 local auto_cmdparenth = {
@@ -119,6 +123,7 @@ local auto_cmdparenth = {
   "vec",
   "Im",
   "Re",
+  "Pr",
 }
 
 local auto_bigcmdparenth = {
@@ -149,7 +154,7 @@ local auto_cmd = {
 
 local auto_greek = {
   ['a'] = 'alpha',
-  ['A'] = 'Alpha',
+  ['b'] = 'beta',
   ['g'] = 'gamma',
   ['G'] = 'Gamma',
   ['d'] = 'delta',
@@ -180,26 +185,29 @@ local auto_greek = {
 
 local auto_cmdparenth_snippets = {}
 for _, v in ipairs(auto_cmdparenth) do
-  table.insert( auto_cmdparenth_snippets, s( { trig = v, condition = in_math, show_condition = in_math, snippetType = 'autosnippet' }, fmta([[\<>\left(<>\right)]], {v, i(0)}) ) )
+  table.insert( auto_cmdparenth_snippets, aus( { trig = v, }, fmta([[\<>\left(<>\right)]], {v, i(0)}) ) )
+  --table.insert( auto_cmdparenth_snippets, aus( {regTrig = true, wordTrig = false, trig = [[(^\\)]]..v, }, fmta([[\<>\left(<>\right)]], {v, i(0)}) ) )
 end
 vim.list_extend(M, auto_cmdparenth_snippets)
 
 local auto_bigcmdparenth_snippets = {}
 for _, v in ipairs(auto_bigcmdparenth) do
-  table.insert( auto_bigcmdparenth_snippets, s( { trig = v, condition = in_math, show_condition = in_math, snippetType = 'autosnippet' }, fmta([[\<>_{<>}^{<>}]], {v, i(1), i(2)}) ) )
+  table.insert( auto_bigcmdparenth_snippets, aus( { trig = v, }, fmta([[\<>_{<>}^{<>}]], {v, i(1), i(2)}) ) )
+  --table.insert( auto_bigcmdparenth_snippets, aus( { regTrig = true, wordTrig = false, trig = [[(^\\)]]..v, }, fmta([[\<>_{<>}^{<>}]], {v, i(1), i(2)}) ) )
 end
 vim.list_extend(M, auto_bigcmdparenth_snippets)
 
 
 local auto_cmd_snippets = {}
 for _, v in ipairs(auto_cmd) do
-  table.insert( auto_cmd_snippets, s( { trig = v, condition = in_math, show_condition = in_math, snippetType = 'autosnippet' }, fmta([[{\<>}]], {v}) ) )
+  table.insert( auto_cmd_snippets, aus( { trig = v, }, fmta([[\<> ]], {v}) ) )
+  --table.insert( auto_cmd_snippets, aus( {regTrig = true, wordTrig = false, trig = [[(^\\)]]..v, }, fmta([[\<> ]], {v}) ) )
 end
 vim.list_extend(M, auto_cmd_snippets)
 
 local auto_greek_snippets = {}
 for k, v in pairs(auto_greek) do 
-  table.insert( auto_greek_snippets, s( { trig = ';' .. k, condition = in_math, show_condition = in_math, snippetType = 'autosnippet' }, fmta([[{\<>}]], {v}) ) )
+  table.insert( auto_greek_snippets, aus( { trig = ';' .. k, }, fmta([[\<> ]], {v}) ) )
 end
 vim.list_extend(M, auto_greek_snippets)
 

@@ -1,5 +1,5 @@
 local ls = require("luasnip")
-local s = ls.snippet
+-- local s = ls.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
 local t = ls.text_node
@@ -31,18 +31,23 @@ function in_doc()
   return (is_in_doc[1] > 0 and is_in_doc[2] > 0 and (vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 0))
 end
 
+local s = ls.extend_decorator.apply(ls.snippet, { show_condition = in_doc, condition = in_doc })
+local aus = ls.extend_decorator.apply(s, { snippetType = 'autosnippet' })
+
 M = {
-  s({trig = 'testDocument', show_condition = in_doc, condition = in_doc}, t("document.lua LOADED")),
-  s({trig = '=env', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta(
+  s({trig = 'testDocument' }, t("document.lua LOADED")),
+  s({trig = '=env', snippetType = 'autosnippet'}, fmta(
     [[
     \begin{<>}
       <>
     \end{<>}
     ]], {i(1,'align'), i(0), rep(1)}
   )),
-  s({trig = '=sec', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta([[\section{<>}]], i(1))),
-  s({trig = '=ssec', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta([[\subsection{<>}]], i(1))),
-  s({trig = '=sssec', show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet'}, fmta([[\subsubsection{<>}]], i(1))),
+  s({trig = '=sec', snippetType = 'autosnippet'}, fmta([[\section{<>}]], i(1))),
+  s({trig = '=ssec', snippetType = 'autosnippet'}, fmta([[\subsection{<>}]], i(1))),
+  s({trig = '=sssec', snippetType = 'autosnippet'}, fmta([[\subsubsection{<>}]], i(1))),
+  s({trig = '=mm', snippetType = 'autosnippet'}, fmta([[\(<>\)]], i(1))),
+  s({trig = '=MM', snippetType = 'autosnippet'}, fmta([=[\[<>\]]=], i(1))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns
@@ -74,5 +79,47 @@ M = {
     end )),
   ]=]
 }
+
+local auto_expand = {
+  ['indep'] = 'independent',
+  ['govt'] = 'government',
+}
+
+local auto_greek = {
+  ['a'] = 'alpha',
+  ['b'] = 'beta',
+  ['g'] = 'gamma',
+  ['G'] = 'Gamma',
+  ['d'] = 'delta',
+  ['D'] = 'Delta',
+  ['ep'] = 'epsilon',
+  ['ve'] = 'varepsilon',
+  ['z'] = 'zeta',
+  ['et'] = 'eta',
+  ['th'] = 'theta',
+  ['Th'] = 'Theta',
+  ['l'] = 'lambda',
+  ['L'] = 'Lambda',
+  ['m'] = 'mu',
+  ['x'] = 'xi',
+  ['X'] = 'Xi',
+  ['r'] = 'rho',
+  ['s'] = 'sigma',
+  ['t'] = 'tau',
+  ['ph'] = 'phi',
+  ['vp'] = 'varphi',
+  ['Ph'] = 'Phi',
+  ['x'] = 'chi',
+  ['ps'] = 'psi',
+  ['Ps'] = 'Psi',
+  ['o'] = 'omega',
+  ['O'] = 'Omega',
+}
+
+local auto_greek_snippets = {}
+for k, v in pairs(auto_greek) do 
+  table.insert( auto_greek_snippets, aus( { trig = '=g' .. k, }, fmta([[\(\<>\)]], {v}) ) )
+end
+vim.list_extend(M, auto_greek_snippets)
 
 return M

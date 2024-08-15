@@ -1,5 +1,5 @@
 local ls = require("luasnip")
-local s = ls.snippet
+-- local s = ls.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
 local t = ls.text_node
@@ -31,11 +31,13 @@ function in_pre()
   return (is_in_doc[1] == 0 or is_in_doc[2] == 0)
 end
 
+local s = ls.extend_decorator.apply(ls.snippet, {show_condition = in_pre, condition = in_pre})
+
 -- it's texy time --
 
 M = {
-  s({trig = "testPreamble", show_condition = in_pre, condition = in_pre}, t("preamble.lua LOADED")),
-  s({trig = ";doc", show_condition = in_pre, condition = in_pre, snippetType = 'autosnippet'}, fmta(
+  s({trig = "testPreamble"}, t("preamble.lua LOADED")),
+  s({trig = ";doc", snippetType = 'autosnippet'}, fmta(
     [[
     \begin{document}
       <>
@@ -49,7 +51,6 @@ M = {
       \usepackage[a4paper,margin=2cm]{geometry}
       \usepackage[mathtools,booktabs,enumitem,siunitx,spreadtab,graphicx]
       \usepackage{fancyhdr,fourier-orns}\renewcommand{\headrulewidth}{0pt}\setlength{\headheight}{14.5pt}
-
       \usepackage{tikz}
       \usetikzlibrary{arrows.meta,calc,decorations}
       \usepackage{pgfplots}
@@ -105,7 +106,7 @@ M = {
       \end{align}
 
       \section{Analysis}
-      The percent error for our experment is calculated as follows: \[\left\vert\frac{5192.83\FU-9.81\FU}{9.81\FU}\right\vert\cdot 100\% \approx 528.34\%\]
+      The percent error for our experiment is calculated as follows: \[\left\vert\frac{5192.83\FU-9.81\FU}{9.81\FU}\right\vert\cdot 100\% \approx 528.34\%\]
       we fucked up bigtime 
 
       \section{Conclusion}
@@ -116,7 +117,7 @@ M = {
       ]], { i(1), i(2), i(0) }
     )
   ),
-  s({trig = "TemplateJEE", show_condition = in_pre, condition = in_pre},
+  s({trig = "TemplateJEE"},
     fmta(
       [[
       \documentclass[12pt,a4paper,notitlepage]{minimal}
@@ -131,7 +132,7 @@ M = {
       ]], { i(0) }
     )
   ),
-  s({trig = "TemplateLinearAlgebra", show_condition = in_pre, condition = in_pre},
+  s({trig = "TemplateLinearAlgebra"},
     fmta(
       [[
       \documentclass[12pt,a4paper]{minimal}
@@ -147,7 +148,7 @@ M = {
       ]], { i(1), i(0) }
     )
   ),
-  s({trig="tablelab"},
+  --[=[s({trig="tablelab"},
     t(
       [[
       \begin{center}\begin{spreadtab}{{tabular}{lccccl}}
@@ -162,6 +163,7 @@ M = {
       ]]
     )
   ),
+  ]=]
 }
 
 return M
