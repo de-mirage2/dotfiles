@@ -30,17 +30,14 @@ function in_math()
   return vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 1
 end
 
-local s = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math })
-local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, snippetType = 'autosnippet'})
+local s = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, trigEngine = 'pattern' })
+local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, snippetType = 'autosnippet', trigEngine = 'pattern' })
 
 
 function autobasic(tr, defi)
   return aus({trig = tr}, t(defi..' '))
 end
 
-function sbasic(tr, defi)
-  return s({trig = tr}, t(defi..' '))
-end
 -- i hate lua --
 
 M = {
@@ -72,9 +69,9 @@ M = {
   autobasic('inv', '^{-1}'),
 
   -- basic
-  sbasic('qed', '\\blacksquare'),
-  sbasic('thfr', '\\therefore'),
-  sbasic('becs', '\\because'),
+  autobasic('qed', '\\blacksquare'),
+  autobasic('thfr', '\\therefore'),
+  autobasic('becs', '\\because'),
   
   -- derivative
   aus({trig = "dddX"}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1), i(2)})),
@@ -96,34 +93,31 @@ M = {
   aus({trig = 'int'}, fmta([[\int_{<>}^{<>}<>\,\mathrm{d}<>]], {i(1), i(2), i(0), i(3)})),
 
   -- fonts
-  aus({trig = 'mtb'}, fmta([[\mathbb{<>}]], {i(1)})), 
-  aus({trig = 'mtc'}, fmta([[\mathcal{<>}]], {i(1)})), 
-  aus({trig = 'mtr'}, fmta([[\mathrm{<>}]], {i(1)})), 
+  aus({trig = 'mtb'}, fmta([[\mathbb{<>}]], {i(1)})), -- blackboard bold
+  aus({trig = 'mtc'}, fmta([[\mathcal{<>}]], {i(1)})), -- calligraphic
+  aus({trig = 'mtr'}, fmta([[\mathrm{<>}]], {i(1)})),  -- roman
+
+  -- left-right delimiters
+  aus({trig = 'lrp'}, fmta([[\left(<>\right)]], {i(1)})),
+  aus({trig = 'lr|'}, fmta([[\left|<>\right|]], {i(1)})),
+  aus({trig = 'lre'}, fmta([[\left.<>\right\vert]], {i(1)})),
+  aus({trig = 'lrn'}, fmta([[\left\Vert<>\right\Vert]], {i(1)})),
+  aus({trig = 'lrb'}, fmta([[\left\{<>\right\}]], {i(1)})),
+  aus({trig = 'lrv'}, fmta([[\left\langle<>\right\rangle]], {i(1)})),
+
 }
 
 local auto_cmdparenth = {
-  "arcsin",
-  "sin",
-  "arccos",
-  "cos",
-  "arctan",
-  "tan",
-  "csc",
-  "sec",
-  "cot",
-  "log",
-  "ln",
   "exp",
-  "det",
-  "max",
-  "min",
-  "argmax",
-  "argmin",
-  "det",
-  "vec",
   "Im",
   "Re",
   "Pr",
+}
+
+local auto_cmdbracket = {
+  "vec",
+  "bar",
+  "hat",
 }
 
 local auto_bigcmdparenth = {
@@ -135,7 +129,7 @@ local auto_bigcmdparenth = {
 }
 
 local auto_cmd = {
-  "aleph",
+  "aleph", -- non-func
   "ast",
   "star",
   "perp",
@@ -150,6 +144,23 @@ local auto_cmd = {
   "neg",
   "emptyset",
   "forall",
+  "log", -- func
+  "ln",
+  "sin",
+  "cos",
+  "tan",
+  "arcsin",
+  "arccos",
+  "arctan",
+  "csc",
+  "cot",
+  "sec",
+  "det", 
+  "max",
+  "min",
+  "argmax",
+  "argmin",
+
 }
 
 local auto_greek = {
@@ -189,6 +200,12 @@ for _, v in ipairs(auto_cmdparenth) do
   --table.insert( auto_cmdparenth_snippets, aus( {regTrig = true, wordTrig = false, trig = [[(^\\)]]..v, }, fmta([[\<>\left(<>\right)]], {v, i(0)}) ) )
 end
 vim.list_extend(M, auto_cmdparenth_snippets)
+
+local auto_cmdbracket_snippets = {}
+for _, v in ipairs(auto_cmdbracket) do
+  table.insert( auto_cmdbracket_snippets, aus( { trig = v, }, fmta([[\<>{<>}]], {v, i(1)}) ) )
+end
+vim.list_extend(M, auto_cmdbracket_snippets)
 
 local auto_bigcmdparenth_snippets = {}
 for _, v in ipairs(auto_bigcmdparenth) do

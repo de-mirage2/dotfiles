@@ -7,6 +7,9 @@ op.expandtab = true
 o.softtabstop = 2
 op.tabstop = 2
 
+o.textwidth = 0
+o.wrapmargin = 0
+
 op.smartindent = true
 
 op.nu = true 

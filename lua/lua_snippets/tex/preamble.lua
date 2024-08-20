@@ -124,7 +124,6 @@ M = {
       \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
       \usepackage{tikz}
       \usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
-      \newcommand{\set}[1]{\left\{#1\right\}\newcommand{\abs}[1]{\left\vert#1\right\vert}\newcommand{\norm}[1]\left\Vert#1\right\Vert} % amsmath macros
       %\usepackage{pgfplots}
       \begin{document}
         <>

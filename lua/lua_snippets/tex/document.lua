@@ -32,22 +32,29 @@ function in_doc()
 end
 
 local s = ls.extend_decorator.apply(ls.snippet, { show_condition = in_doc, condition = in_doc })
-local aus = ls.extend_decorator.apply(s, { snippetType = 'autosnippet' })
+local aus = ls.extend_decorator.apply(s, { snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
 
 M = {
   s({trig = 'testDocument' }, t("document.lua LOADED")),
-  s({trig = '=env', snippetType = 'autosnippet'}, fmta(
+  aus({trig = '=ali'}, fmta(
+    [[
+    \begin{ali}
+      <>
+    \end{ali}
+    ]], {i(0)}
+  )),
+  aus({trig = '=env'}, fmta(
     [[
     \begin{<>}
       <>
     \end{<>}
-    ]], {i(1,'align'), i(0), rep(1)}
+    ]], {i(1,'gather'), i(0), rep(1)}
   )),
-  s({trig = '=sec', snippetType = 'autosnippet'}, fmta([[\section{<>}]], i(1))),
-  s({trig = '=ssec', snippetType = 'autosnippet'}, fmta([[\subsection{<>}]], i(1))),
-  s({trig = '=sssec', snippetType = 'autosnippet'}, fmta([[\subsubsection{<>}]], i(1))),
-  s({trig = '=mm', snippetType = 'autosnippet'}, fmta([[\(<>\)]], i(1))),
-  s({trig = '=MM', snippetType = 'autosnippet'}, fmta([=[\[<>\]]=], i(1))),
+  aus({trig = '=sec'}, fmta([[\section{<>}]], i(1))),
+  aus({trig = '=ssec'}, fmta([[\subsection{<>}]], i(1))),
+  aus({trig = '=sssec'}, fmta([[\subsubsection{<>}]], i(1))),
+  aus({trig = '=mm'}, fmta([[\(<>\)]], i(1))),
+  aus({trig = '=MM'}, fmta([=[\[<>\]]=], i(1))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns

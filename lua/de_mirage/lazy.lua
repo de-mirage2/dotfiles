@@ -81,7 +81,7 @@ require("lazy").setup({
   -- LaTeX/TeX utilities
   { 'lervag/vimtex', lazy = false },
   -- Calendar
-  { 'itchyny/calendar.vim', lazy = false}
+  { 'itchyny/calendar.vim', lazy = false },
   -- Theme/UI
   { "Mofiqul/dracula.nvim" },
   { 'nvim-lualine/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons'} },
