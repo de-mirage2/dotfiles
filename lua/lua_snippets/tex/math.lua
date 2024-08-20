@@ -84,6 +84,7 @@ M = {
   
   -- power & subscript
   aus({trig = "^^"}, fmta([[^{<>}]], {i(1)})),
+  aus({trig = "__"}, fmta([[_{<>}]], {i(1)})),
 
   -- e^{}
   aus({trig = "ee"}, fmta([[e^{<>}]], {i(1)})),
