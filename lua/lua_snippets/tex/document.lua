@@ -35,7 +35,7 @@ local s = ls.extend_decorator.apply(ls.snippet, { show_condition = in_doc, condi
 local aus = ls.extend_decorator.apply(s, { snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
 
 M = {
-  s({trig = 'testDocument' }, t("document.lua LOADED")),
+  --s({trig = 'testDocument' }, t("document.lua LOADED")),
   aus({trig = '=ali'}, fmta(
     [[
     \begin{ali}

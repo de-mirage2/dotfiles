@@ -36,7 +36,7 @@ local s = ls.extend_decorator.apply(ls.snippet, {show_condition = in_pre, condit
 -- it's texy time --
 
 M = {
-  s({trig = "testPreamble"}, t("preamble.lua LOADED")),
+  --s({trig = "testPreamble"}, t("preamble.lua LOADED")),
   s({trig = ";doc", snippetType = 'autosnippet'}, fmta(
     [[
     \begin{document}
@@ -112,6 +112,33 @@ M = {
       \section{Conclusion}
       i love latex 
 
+      \vfill\hfill\oldpilcrowfive\LaTeX
+      \end{document}
+      ]], { i(1), i(2), i(0) }
+    )
+  ),
+  s({trig = "TemplateChemistry"},
+    fmta(
+      [[
+      \documentclass[a3paper]{article}
+      \usepackage[margin=3cm]{geometry}
+      \usepackage{amssymb,amsthm,fourier-orns}
+      \usepackage[version=4]{mhchem}
+      \usepackage{siunitx}
+
+      \title{<> Lab}
+      \author{Miraj Parikh\thanks{In collaboration with: <>}}
+      \date{\today}
+
+      \theoremstyle{definition}
+      \newtheorem{prob}{Problem}
+      \newcommand{\soln}{{\it{Solution}}:\quad}
+
+      \begin{document}
+        \maketitle
+        \begin{prob} <> \end{prob}
+        \soln Solution
+      
       \vfill\hfill\oldpilcrowfive\LaTeX
       \end{document}
       ]], { i(1), i(2), i(0) }

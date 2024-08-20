@@ -41,17 +41,21 @@ end
 -- i hate lua --
 
 M = {
-  s({trig = "testMath"}, t("math.lua LOADED")),
+  --s({trig = "testMath"}, t("math.lua LOADED")),
 
   -- auto
+  autobasic('**', '\\cdot'),
+  autobasic('xx', '\\times'),
+
   autobasic('pdX', '\\partial'),
   autobasic('dX', '\\mathrm{d}'),
   
-  autobasic('exi', '\\exists'),
-  autobasic('nexi', '\\nexists'),
+  autobasic('EE', '\\exists'),
+  autobasic('NEE', '\\nexists'),
+  autobasic('FAA', '\\forall'),
 
-  autobasic('ins', '\\in'),
-  autobasic('nin', '\\notin'),
+  autobasic('cc', '\\in'),
+  autobasic('ncc', '\\notin'),
   autobasic('subs', '\\subset'),
   autobasic('sups', '\\supset'),
   autobasic('sube', '\\subseteq'),
@@ -59,25 +63,36 @@ M = {
   autobasic('ssup', '\\sup'),
   autobasic('sinf', '\\inf'),
 
-  autobasic('arrl', '\\leftarrow'),
-  autobasic('arrr', '\\rightarrow'),
-  autobasic('arrL', '\\Leftarrow'),
-  autobasic('arrR', '\\Rightarrow'),
+  autobasic('<-', '\\leftarrow'),
+  autobasic('->', '\\rightarrow'),
+  autobasic('<<', '\\Leftarrow'),
+  autobasic('>>', '\\Rightarrow'),
 
-  autobasic('inf', '\\infty'),
+  autobasic('!=', '\\neq'),
+  autobasic('>=', '\\geq'),
+  autobasic('<=', '\\leq'),
+
+  autobasic('ooo', '\\infty'),
 
   autobasic('inv', '^{-1}'),
 
-  -- basic
+  autobasic('nab', '\\nabla'),
+
   autobasic('qed', '\\blacksquare'),
   autobasic('thfr', '\\therefore'),
   autobasic('becs', '\\because'),
   
+  -- power & subscript
+  aus({trig = "^^"}, fmta([[^{<>}]], {i(1)})),
+
+  -- e^{}
+  aus({trig = "ee"}, fmta([[e^{<>}]], {i(1)})),
+
   -- derivative
-  aus({trig = "dddX"}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1), i(2)})),
-  aus({trig = "ddX"}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1)})),
-  aus({trig = "pppX"}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  aus({trig = "ppX"}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus({trig = "dydx"}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1), i(2)})),
+  aus({trig = "ddx"}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1)})),
+  aus({trig = "pdpx"}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus({trig = "ppx"}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
 
   -- fraction & binomial
   aus({trig = 'ff'}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
@@ -105,6 +120,11 @@ M = {
   aus({trig = 'lrb'}, fmta([[\left\{<>\right\}]], {i(1)})),
   aus({trig = 'lrv'}, fmta([[\left\langle<>\right\rangle]], {i(1)})),
 
+  -- taylor-maclaurin
+  aus({trig = 'taylor'}, fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}\left(<>\right)}{n!}\left(x-<>\right)^n]], {i(1), i(2, 'c'), rep(2)})),
+  aus({trig = 'maclau'}, fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}(0)x^n}{n!}]], {i(1)})),
+  
+
 }
 
 local auto_cmdparenth = {
@@ -118,6 +138,7 @@ local auto_cmdbracket = {
   "vec",
   "bar",
   "hat",
+  "dot",
 }
 
 local auto_bigcmdparenth = {
@@ -137,13 +158,8 @@ local auto_cmd = {
   "deg",
   "angle",
   "approx",
-  "neq",
-  "leq",
-  "geq",
-  "nabla",
   "neg",
   "emptyset",
-  "forall",
   "log", -- func
   "ln",
   "sin",
