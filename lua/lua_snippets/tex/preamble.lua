@@ -32,19 +32,23 @@ function in_pre()
 end
 
 local s = ls.extend_decorator.apply(ls.snippet, {show_condition = in_pre, condition = in_pre})
+local aus = ls.extend_decorator.apply(ls.snippet, {show_condition = in_pre, condition = in_pre, snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern'})
 
 -- it's texy time --
 
 M = {
   --s({trig = "testPreamble"}, t("preamble.lua LOADED")),
-  s({trig = ";doc", snippetType = 'autosnippet'}, fmta(
+
+  aus({trig = ";up"}, fmta([[\usepackage{<>}]], i(1))),
+  aus({trig = ";nc"}, fmta([[\newcommand{<>}<>{<>}]], {i(1),i(2),i(3)})),
+  aus({trig = ";doc"}, fmta(
     [[
     \begin{document}
       <>
     \end{document}
-    ]], {i(0)}
+    ]], i(0)
   )),
-  s({trig = "TemplatePhysics", show_condition = in_pre, condition = in_pre},
+  s({trig = "TemplatePhysics"},
     fmta(
       [[ 
       \documentclass[12pt,a4paper]{article}

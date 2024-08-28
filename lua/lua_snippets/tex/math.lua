@@ -30,61 +30,61 @@ function in_math()
   return vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 1
 end
 
-local s = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, trigEngine = 'pattern' })
-local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, snippetType = 'autosnippet', trigEngine = 'pattern' })
+local s = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'pattern' })
+local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' })
 
 
-function autobasic(tr, defi)
+function aub(tr, defi)
   return aus({trig = tr}, t(defi..' '))
 end
 
 -- i hate lua --
 
 M = {
-  --s({trig = "testMath"}, t("math.lua LOADED")),
-
+  -- s({trig = "testMath"}, t("math.lua LOADED")),
+  -- **
   -- auto
-  autobasic('**', '\\cdot'),
-  autobasic('xx', '\\times'),
+  aub('@@', '\\cdot'),
+  aub('xx', '\\times'),
 
-  autobasic('pdX', '\\partial'),
-  autobasic('dX', '\\mathrm{d}'),
+  aub('pdd', '\\partial'), -- P. Diddy
+  aub('ddd', '\\mathrm{d}'),
   
-  autobasic('EE', '\\exists'),
-  autobasic('NEE', '\\nexists'),
-  autobasic('FAA', '\\forall'),
+  aub('EE', '\\exists'),
+  aub('NE', '\\nexists'),
+  aub('FAL', '\\forall'),
 
-  autobasic('cc', '\\in'),
-  autobasic('ncc', '\\notin'),
-  autobasic('subs', '\\subset'),
-  autobasic('sups', '\\supset'),
-  autobasic('sube', '\\subseteq'),
-  autobasic('supe', '\\supseteq'),
-  autobasic('ssup', '\\sup'),
-  autobasic('sinf', '\\inf'),
+  aub('cc', '\\in'),
+  aub('ncc', '\\notin'),
+  aub('subs', '\\subset'),
+  aub('sups', '\\supset'),
+  aub('sube', '\\subseteq'),
+  aub('supe', '\\supseteq'),
+  aub('ssup', '\\sup'),
+  aub('sinf', '\\inf'),
 
-  autobasic('<-', '\\leftarrow'),
-  autobasic('->', '\\rightarrow'),
-  autobasic('<<', '\\Leftarrow'),
-  autobasic('>>', '\\Rightarrow'),
+  aub('arrl', '\\leftarrow'),
+  aub('arrr', '\\rightarrow'),
+  aub('arrL', '\\Leftarrow'),
+  aub('arrR', '\\Rightarrow'),
 
-  autobasic('!=', '\\neq'),
-  autobasic('>=', '\\geq'),
-  autobasic('<=', '\\leq'),
+  aub('!=', '\\neq'),
+  aub('>=', '\\geq'),
+  aub('<=', '\\leq'),
 
-  autobasic('ooo', '\\infty'),
+  aub('ooo', '\\infty'),
 
-  autobasic('inv', '^{-1}'),
+  aub('inv', '^{-1}'),
 
-  autobasic('nab', '\\nabla'),
+  aub('nab', '\\nabla'),
 
-  autobasic('qed', '\\blacksquare'),
-  autobasic('thfr', '\\therefore'),
-  autobasic('becs', '\\because'),
+  aub('qed', '\\blacksquare'),
+  aub('thfr', '\\therefore'),
+  aub('becs', '\\because'),
   
   -- power & subscript
-  aus({trig = "^^"}, fmta([[^{<>}]], {i(1)})),
-  aus({trig = "__"}, fmta([[_{<>}]], {i(1)})),
+  --aus({trig = "++"}, fmta([[^{<>}]], {i(1)})),
+  --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
 
   -- e^{}
   aus({trig = "ee"}, fmta([[e^{<>}]], {i(1)})),

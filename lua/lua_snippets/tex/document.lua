@@ -38,9 +38,9 @@ M = {
   --s({trig = 'testDocument' }, t("document.lua LOADED")),
   aus({trig = '=ali'}, fmta(
     [[
-    \begin{ali}
+    \begin{align}
       <>
-    \end{ali}
+    \end{align}
     ]], {i(0)}
   )),
   aus({trig = '=env'}, fmta(
@@ -53,8 +53,9 @@ M = {
   aus({trig = '=sec'}, fmta([[\section{<>}]], i(1))),
   aus({trig = '=ssec'}, fmta([[\subsection{<>}]], i(1))),
   aus({trig = '=sssec'}, fmta([[\subsubsection{<>}]], i(1))),
-  aus({trig = '=mm'}, fmta([[\(<>\)]], i(1))),
-  aus({trig = '=MM'}, fmta([=[\[<>\]]=], i(1))),
+  aus({trig = '=m'}, fmta([[\(<>\)]], i(1))),
+  aus({trig = '=M'}, fmta([=[\[<>\]]=], i(1))),
+  aus({trig = '=sig'}, fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns
@@ -90,6 +91,12 @@ M = {
 local auto_expand = {
   ['indep'] = 'independent',
   ['govt'] = 'government',
+  ['approx'] = 'approximate',
+  ['info'] = 'information',
+  ['thru'] = 'through',
+  ['w/'] = 'with',
+  ['lang'] = 'language',
+  ['wrt'] = 'with respect to',
 }
 
 local auto_greek = {
@@ -129,4 +136,9 @@ for k, v in pairs(auto_greek) do
 end
 vim.list_extend(M, auto_greek_snippets)
 
+local auto_expand_snippets = {}
+for k, v in pairs(auto_expand) do 
+  table.insert( auto_expand_snippets, aus( { trig = '='..k, trigEngine = 'plain' }, fmta([[<>]], {v}) ) )
+end
+vim.list_extend(M, auto_expand_snippets)
 return M
