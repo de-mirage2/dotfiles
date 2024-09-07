@@ -33,9 +33,18 @@ end
 local s = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'pattern' })
 local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' })
 
+function aub(tr, defi) -- auto basic
+  return aus(tr, t(defi..' '))
+end
 
-function aub(tr, defi)
-  return aus({trig = tr}, t(defi..' '))
+function raus(tr, streplace, nodevec) -- regex autosnippet
+  return aus(
+    {trig = "[^%a]" .. tr},
+    fmta("<>"..streplace, {
+      f( function(_, snip) return snip.captures[1] end ),
+      unpack(nodevec) -- eclipse.org/forums/index.php/t/628382 
+    })
+  )
 end
 
 -- i hate lua --
@@ -87,7 +96,7 @@ M = {
   --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
 
   -- e^{}
-  aus({trig = "ee"}, fmta([[e^{<>}]], {i(1)})),
+  raus("ee", [[e^{<>}]], {i(1)}),
 
   -- derivative
   aus({trig = "dydx"}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1), i(2)})),
@@ -116,6 +125,7 @@ M = {
   -- left-right delimiters
   aus({trig = 'lrp'}, fmta([[\left(<>\right)]], {i(1)})),
   aus({trig = 'lr|'}, fmta([[\left|<>\right|]], {i(1)})),
+  aus({trig = 'lrr'}, fmta([=[\left\[<>\right\]]=], {i(1)})),
   aus({trig = 'lre'}, fmta([[\left.<>\right\vert]], {i(1)})),
   aus({trig = 'lrn'}, fmta([[\left\Vert<>\right\Vert]], {i(1)})),
   aus({trig = 'lrb'}, fmta([[\left\{<>\right\}]], {i(1)})),
@@ -191,8 +201,8 @@ local auto_greek = {
   ['ve'] = 'varepsilon',
   ['z'] = 'zeta',
   ['et'] = 'eta',
-  ['th'] = 'theta',
-  ['Th'] = 'Theta',
+  ['h'] = 'theta',
+  ['H'] = 'Theta',
   ['l'] = 'lambda',
   ['L'] = 'Lambda',
   ['m'] = 'mu',

@@ -51,14 +51,34 @@ M = {
   s({trig = "TemplatePhysics"},
     fmta(
       [[ 
-      \documentclass[12pt,a4paper]{article}
-      \usepackage[a4paper,margin=2cm]{geometry}
-      \usepackage[mathtools,booktabs,enumitem,siunitx,spreadtab,graphicx]
+      \documentclass[11pt,a4paper]{article}
+      \usepackage[a4paper]{geometry}
+      \usepackage{mathtools,booktabs,enumitem,siunitx,graphicx,listings,color}
       \usepackage{fancyhdr,fourier-orns}\renewcommand{\headrulewidth}{0pt}\setlength{\headheight}{14.5pt}
       \usepackage{tikz}
-      \usetikzlibrary{arrows.meta,calc,decorations}
-      \usepackage{pgfplots}
-      \usepackage{pgfplotstable}
+      \usetikzlibrary{arrows.meta,quotes,calc,decorations}
+
+      
+      \definecolor{dkgreen}{rgb}{0,0.3,0}
+      \definecolor{gray}{rgb}{0.5,0.5,0.5}
+      \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+      \lstset{frame=tb,
+        language=R,
+        aboveskip=3mm,
+        belowskip=3mm,
+        showstringspaces=false,
+        columns=flexible,
+        basicstyle={\scriptsize\ttfamily},
+        numbers=none,
+        numberstyle=\tiny\color{gray},
+        keywordstyle=\color{blue},
+        commentstyle=\color{dkgreen},
+        stringstyle=\color{mauve},
+        breaklines=true,
+        breakatwhitespace=true,
+        tabsize=3
+      }
 
       \newcommand{\disptwo}[2]{\makebox[8cm]{#1\\dotfill}#2}
       \newcommand{\stepexpl}[1]{\parbox[t]{5cm}{\raggedright #1}}
@@ -68,7 +88,6 @@ M = {
       \author{Miraj Parikh\thanks{in collaboration with lab partners <>}}
       \date{\today}
 
-      \STautoround{3}
       \begin{document}
       \fancyhf{}\pagestyle{fancy}\fancyhead[R]{Parikh \\thepage}
       \maketitle\thispagestyle{fancy}\tableofcontents
@@ -77,8 +96,8 @@ M = {
 
       \section{Materials}
       \begin{itemize}
-        \item \dispTwo{Meterstick}{Measure projectile initial height}
-        \item \dispTwo{}{}
+        \item \disptwo{Meterstick}{Measure projectile initial height}
+        \item \disptwo{object}{reason}
       \end{itemize}
 
       \section{Procedure}
@@ -91,23 +110,73 @@ M = {
 
       \section{Data}
       The raw data collected by conducting the prior procedure, along with constants used in calculations: 
-      \begin{center}\begin{spreadtab}{{tabular}{lccccl}}\toprule 
-      &@\\multicolumn{4}{c}{Trial Data}& \\
+      \begin{center}\begin{tabular}{lccccl}\toprule 
+      &\\multicolumn{4}{c}{Trial Data (units)}& \\
       \cmidrule(lr){2-5}
-      @ $x$ (units) & @ 1 & @ 2 & @ 3 & @ avg. \\
-      @ 0.25        & 4.1 & 3.2 & 2.7 & :={sum(b2:[-1,0])/3} \\
+      $x$ (units) & 1 & 2 & 3 & avg. \\
+      0.25        & 4.1 & 3.2 & 2.7 & 1.0 \\
       \bottomrule\end{spreadtab}\end{center}
       Constants: 
       \begin{itemize}
-        \item \disptwo{$g=9.81\si{\meter\per\square\second}$}{Standard gravity of Earth}
+        \item \disptwo{\(g=9.81\si{\meter\per\square\second}\)}{Standard gravity of Earth}
       \end{itemize}
 
-      \section{Calculations}
+      \section{Derivations}
       \begin{align}
         \vec{F}_{net} &=m\vec{a} \\
                       &=\frac24 && \text{im yapping} \\
                       &=\frac12 && \stepExpl{call me sir yaps-a-lot, because i truly am yapping a lot here aren't i?}
       \end{align}
+      
+      \section{Graphing \& Calculations}
+      \begin{center}
+        \begin{tabular}{cc}\toprule
+          \(d\) (\unit\meter) & \(\overline{t}^2\) (\unit{\square\second}) \\ \midrule
+          0.50 & 0.6084\\
+          0.75 & 1.0955\\
+          1.00 & 1.2844\\
+          1.25 & 1.8045\\ \bottomrule
+        \end{tabular}
+      \end{center}
+
+      % \begin{center}\includegraphics[scale=0.35]{"../R/plot.png"}\end{center}
+      \begin{lstlisting}
+      ## 
+      ## Call:
+      ## lm(formula = d ~ t2, data = expdata)
+      ##  
+      ## Residuals:
+      ##         1         2         3         4 
+      ##  0.004681 -0.058887  0.069509 -0.015303 
+      ## 
+      ## Coefficients:
+      ##             Estimate Std. Error t value Pr(>|t|)  
+      ## (Intercept)  0.10366    0.09717   1.067   0.3978  
+      ## t2           0.64375    0.07637   8.429   0.0138 *
+      ## ---
+      ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+      ## 
+      ## Residual standard error: 0.0654 on 2 degrees of freedom
+      ## Multiple R-squared:  0.9726, Adjusted R-squared:  0.9589 
+      ## F-statistic: 71.05 on 1 and 2 DF,  p-value: 0.01378
+      \end{lstlisting}
+      Using the R language to calculate and visualize the data:
+      \begin{center}\begin{tabular}{cc}\toprule
+        \(R^2\) & Equation \\\midrule
+        0.9589 & \(d \sim 0.64375t^2 + 0.10366\) \\
+      \bottomrule\end{tabular}\end{center}
+      
+      With a slope of 0.64375 indicated by the linear regression model, the experimental value of \(\theta \) may now be evaluated:
+      \begin{align}
+        m &= 0.64375 \\
+        \frac{g}{2}\sin \theta &= \\
+        \sin \theta &= \frac{2}{g}\cdot 0.64375 \\
+        \theta &= \arcsin\left(\frac{2}{g}\cdot 0.64375\right) \\
+               &= \qty{7.54}{\degree}
+      \end{align}
+
+      The experimental value of \(\theta\) evaluates to \qty{7.54}{\degree}
+
 
       \section{Analysis}
       The percent error for our experiment is calculated as follows: \[\left\vert\frac{5192.83\FU-9.81\FU}{9.81\FU}\right\vert\cdot 100\% \approx 528.34\%\]
@@ -125,8 +194,8 @@ M = {
     fmta(
       [[
       \documentclass[a3paper]{article}
-      \usepackage[margin=3cm]{geometry}
-      \usepackage{amssymb,amsthm,fourier-orns}
+      \usepackage[margin=2.5cm]{geometry}
+      \usepackage{amssymb,amsthm,booktabs,fourier-orns,enumitem}
       \usepackage[version=4]{mhchem}
       \usepackage{siunitx}
 
@@ -137,6 +206,7 @@ M = {
       \theoremstyle{definition}
       \newtheorem{prob}{Problem}
       \newcommand{\soln}{{\it{Solution}}:\quad}
+      \DeclareSIUnit{\Molar}{\textsc{m}}
 
       \begin{document}
         \maketitle

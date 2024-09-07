@@ -50,12 +50,21 @@ M = {
     \end{<>}
     ]], {i(1,'gather'), i(0), rep(1)}
   )),
+  aus({trig = '=tab'}, fmta(
+    [[
+    \begin{center}\begin{<>}{<>}
+      <>
+    \end{<>}\end{center}
+    ]], {i(1,'tabular'), i(2), i(0), rep(1)}
+  )),
   aus({trig = '=sec'}, fmta([[\section{<>}]], i(1))),
   aus({trig = '=ssec'}, fmta([[\subsection{<>}]], i(1))),
   aus({trig = '=sssec'}, fmta([[\subsubsection{<>}]], i(1))),
   aus({trig = '=m'}, fmta([[\(<>\)]], i(1))),
   aus({trig = '=M'}, fmta([=[\[<>\]]=], i(1))),
   aus({trig = '=sig'}, fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
+  aus({trig = '=bf'}, fmta([[\textbf{<>}]], i(1))),
+  aus({trig = '=it'}, fmta([[\textit{<>}]], i(1))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns
