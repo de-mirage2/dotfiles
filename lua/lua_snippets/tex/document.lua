@@ -31,6 +31,14 @@ function in_doc()
   return (is_in_doc[1] > 0 and is_in_doc[2] > 0 and (vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 0))
 end
 
+local get_visual = function(args, parent)
+  if (#parent.snippet.env.LS_SELECT_RAW > 0) then
+    return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
+  else  -- If LS_SELECT_RAW is empty, return a blank insert node
+    return sn(nil, i(1))
+  end
+end
+
 local s = ls.extend_decorator.apply(ls.snippet, { show_condition = in_doc, condition = in_doc })
 local aus = ls.extend_decorator.apply(s, { snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
 
@@ -42,6 +50,13 @@ M = {
       <>
     \end{align}
     ]], {i(0)}
+  )),
+  aus({trig = '=tikz'}, fmta(
+    [[
+    \begin{center}\begin{tikzpicture}[<>]
+      <>
+    \end{tikzpicture}\end{center}
+    ]], {i(1), i(0)}
   )),
   aus({trig = '=env'}, fmta(
     [[
@@ -62,9 +77,13 @@ M = {
   aus({trig = '=sssec'}, fmta([[\subsubsection{<>}]], i(1))),
   aus({trig = '=m'}, fmta([[\(<>\)]], i(1))),
   aus({trig = '=M'}, fmta([=[\[<>\]]=], i(1))),
-  aus({trig = '=sig'}, fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
   aus({trig = '=bf'}, fmta([[\textbf{<>}]], i(1))),
   aus({trig = '=it'}, fmta([[\textit{<>}]], i(1))),
+  aus({trig = 'tmm'}, fmta([[\(<>\)]], d(1, get_visual))),
+  aus({trig = 'tMM'}, fmta([=[\[<>\]]=], d(1, get_visual))),
+  aus({trig = 'tbb'}, fmta([[\textbf{<>}]], d(1, get_visual))),
+  aus({trig = 'tii'}, fmta([[\textit{<>}]], d(1, get_visual))),
+  aus({trig = '=sig'}, fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns
@@ -100,12 +119,17 @@ M = {
 local auto_expand = {
   ['indep'] = 'independent',
   ['govt'] = 'government',
-  ['approx'] = 'approximate',
-  ['info'] = 'information',
+  ['dept'] = 'department',
+  ['envt'] = 'environment',
+  ['entmt'] = 'entertainment',
+  ['natl'] = 'national',
+  ['intl'] = 'international',
   ['thru'] = 'through',
   ['w/'] = 'with',
   ['lang'] = 'language',
   ['wrt'] = 'with respect to',
+  ['a11y'] = 'accessibility',
+
 }
 
 local auto_greek = {
@@ -141,13 +165,13 @@ local auto_greek = {
 
 local auto_greek_snippets = {}
 for k, v in pairs(auto_greek) do 
-  table.insert( auto_greek_snippets, aus( { trig = '=g' .. k, }, fmta([[\(\<>\)]], {v}) ) )
+  table.insert( auto_greek_snippets, aus( { trig = ';' .. k, }, fmta([[\(\<>\)]], {v}) ) )
 end
 vim.list_extend(M, auto_greek_snippets)
 
 local auto_expand_snippets = {}
 for k, v in pairs(auto_expand) do 
-  table.insert( auto_expand_snippets, aus( { trig = '='..k, trigEngine = 'plain' }, fmta([[<>]], {v}) ) )
+  table.insert( auto_expand_snippets, aus( { trig = ';'..k, trigEngine = 'plain' }, fmta([[<>]], {v}) ) )
 end
 vim.list_extend(M, auto_expand_snippets)
 return M

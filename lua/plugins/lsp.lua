@@ -13,7 +13,7 @@ lsp.setup()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {"clangd", "pylsp", "jdtls"},
+  ensure_installed = {"clangd", "pylsp", "jdtls", "texlab", "rust_analyzer"},
   handlers = {
     function(server_name)
       require('lspconfig')[server_name].setup({})
@@ -24,12 +24,12 @@ require('mason-lspconfig').setup({
 ls.config.set_config({
   history = false,
   enable_autosnippets = true,
+  store_selection_keys = "<Tab>",
 })
 
 require("luasnip").log.set_loglevel("debug")
 -- require("luasnip.loaders.from_vscode").lazy_load() -- friendly snippets
 require("luasnip.loaders.from_lua").lazy_load { paths = "~/.config/nvim/lua/lua_snippets" }
-
 
 cmp.setup({
   window = {

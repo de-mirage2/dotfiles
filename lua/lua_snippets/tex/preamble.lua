@@ -51,14 +51,14 @@ M = {
   s({trig = "TemplatePhysics"},
     fmta(
       [[ 
-      \documentclass[11pt,a4paper]{article}
+      \documentclass{article}
       \usepackage[a4paper]{geometry}
       \usepackage{mathtools,booktabs,enumitem,siunitx,graphicx,listings,color}
       \usepackage{fancyhdr,fourier-orns}\renewcommand{\headrulewidth}{0pt}\setlength{\headheight}{14.5pt}
       \usepackage{tikz}
+      \usepackage[nodayofweek]{datetime}
       \usetikzlibrary{arrows.meta,quotes,calc,decorations}
-
-      
+ 
       \definecolor{dkgreen}{rgb}{0,0.3,0}
       \definecolor{gray}{rgb}{0.5,0.5,0.5}
       \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -80,24 +80,31 @@ M = {
         tabsize=3
       }
 
-      \newcommand{\disptwo}[2]{\makebox[8cm]{#1\\dotfill}#2}
       \newcommand{\stepexpl}[1]{\parbox[t]{5cm}{\raggedright #1}}
-      \newcommand{\FU}{\\si{\meter\per\square\second}} % final units
+      \newcommand{\FU}{\unit{\meter\per\square\second}} % final units
 
       \title{<>}
-      \author{Miraj Parikh\thanks{in collaboration with lab partners <>}}
+      \author{
+        <>
+        \and
+        Miraj Parikh
+        \and
+        <>
+        \and
+        <>
+      }
       \date{\today}
 
       \begin{document}
-      \fancyhf{}\pagestyle{fancy}\fancyhead[R]{Parikh \\thepage}
+      \fancyhf{}\pagestyle{fancy}\fancyhead[R]{<> \thepage}
       \maketitle\thispagestyle{fancy}\tableofcontents
       <>
       \abstract{Abstracts are a summary of the experiment as a whole and should familiarize the reader with the purpose of the research. Abstracts will always be written last, even though they are the first paragraph of a lab report. Briefly include methods and results.}
 
       \section{Materials}
       \begin{itemize}
-        \item \disptwo{Meterstick}{Measure projectile initial height}
-        \item \disptwo{object}{reason}
+        \item Meterstick \dotfill Measure projectile initial height
+        \item Object \dotfill reason
       \end{itemize}
 
       \section{Procedure}
@@ -111,21 +118,21 @@ M = {
       \section{Data}
       The raw data collected by conducting the prior procedure, along with constants used in calculations: 
       \begin{center}\begin{tabular}{lccccl}\toprule 
-      &\\multicolumn{4}{c}{Trial Data (units)}& \\
+      &\multicolumn{4}{c}{Trial Data (units)}& \\
       \cmidrule(lr){2-5}
-      $x$ (units) & 1 & 2 & 3 & avg. \\
+      \(x\) (units) & 1 & 2 & 3 & avg. \\\midrule
       0.25        & 4.1 & 3.2 & 2.7 & 1.0 \\
-      \bottomrule\end{spreadtab}\end{center}
+      \bottomrule\end{tabular}\end{center}
       Constants: 
       \begin{itemize}
-        \item \disptwo{\(g=9.81\si{\meter\per\square\second}\)}{Standard gravity of Earth}
+        \item \(g=\qty{9.81}{\meter\per\square\second}\) \dotfill Standard gravity of Earth
       \end{itemize}
 
       \section{Derivations}
       \begin{align}
         \vec{F}_{net} &=m\vec{a} \\
                       &=\frac24 && \text{im yapping} \\
-                      &=\frac12 && \stepExpl{call me sir yaps-a-lot, because i truly am yapping a lot here aren't i?}
+                      &=\frac12 && \stepexpl{this is a really long explanation that spans a few lines blah blah blah blah}
       \end{align}
       
       \section{Graphing \& Calculations}
@@ -141,24 +148,7 @@ M = {
 
       % \begin{center}\includegraphics[scale=0.35]{"../R/plot.png"}\end{center}
       \begin{lstlisting}
-      ## 
-      ## Call:
-      ## lm(formula = d ~ t2, data = expdata)
-      ##  
-      ## Residuals:
-      ##         1         2         3         4 
-      ##  0.004681 -0.058887  0.069509 -0.015303 
-      ## 
-      ## Coefficients:
-      ##             Estimate Std. Error t value Pr(>|t|)  
-      ## (Intercept)  0.10366    0.09717   1.067   0.3978  
-      ## t2           0.64375    0.07637   8.429   0.0138 *
-      ## ---
-      ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-      ## 
-      ## Residual standard error: 0.0654 on 2 degrees of freedom
-      ## Multiple R-squared:  0.9726, Adjusted R-squared:  0.9589 
-      ## F-statistic: 71.05 on 1 and 2 DF,  p-value: 0.01378
+      ## R Output goes here 
       \end{lstlisting}
       Using the R language to calculate and visualize the data:
       \begin{center}\begin{tabular}{cc}\toprule
@@ -187,14 +177,14 @@ M = {
 
       \vfill\hfill\oldpilcrowfive\LaTeX
       \end{document}
-      ]], { i(1), i(2), i(0) }
+      ]], { i(1, "Lab Title"), i(3, "David Halliday"), i(4, "Kenneth Krane"), i(5, "Robert Resnick"), i(2, "Halliday Krane Parikh Resnick"), i(0) }
     )
   ),
   s({trig = "TemplateChemistry"},
     fmta(
       [[
-      \documentclass[a3paper]{article}
-      \usepackage[margin=2.5cm]{geometry}
+      \documentclass{article}
+      \usepackage[a3paper,margin=2.5cm]{geometry}
       \usepackage{amssymb,amsthm,booktabs,fourier-orns,enumitem}
       \usepackage[version=4]{mhchem}
       \usepackage{siunitx}
@@ -216,6 +206,21 @@ M = {
       \vfill\hfill\oldpilcrowfive\LaTeX
       \end{document}
       ]], { i(1), i(2), i(0) }
+    )
+  ),
+  s({trig = "TemplatePROOF"},
+    fmta(
+      [[
+      \documentclass{article}
+      \usepackage[a4paper,margin=2cm]{geometry}
+      \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
+      \usepackage{tikz}
+      \usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
+      %\usepackage{pgfplots}
+      \begin{document}
+        <>
+      \end{document}
+      ]], { i(0) }
     )
   ),
   s({trig = "TemplateJEE"},

@@ -80,8 +80,13 @@ require("lazy").setup({
   { 'R-nvim/R.nvim', lazy = false },
   -- LaTeX/TeX utilities
   { 'lervag/vimtex', lazy = false },
+  {
+	  'xeluxee/competitest.nvim',
+	  dependencies = 'MunifTanjim/nui.nvim',
+	  config = function() require('competitest').setup() end,
+  },
   -- Calendar
-  { 'itchyny/calendar.vim', lazy = false },
+  -- { 'itchyny/calendar.vim', lazy = false },
   -- Theme/UI
   { "Mofiqul/dracula.nvim" },
   { 'nvim-lualine/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons'} },
