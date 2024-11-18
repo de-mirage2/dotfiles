@@ -43,15 +43,21 @@ M = {
   -- power & subscript
   --aus({trig = "++"}, fmta([[^{<>}]], {i(1)})),
   --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
+  
+  -- inv
+  aus({trig = 'inV'}, t('^{-1}')),
+
+  -- complement
+  aus({trig = 'coM'}, t('^\\complement')),
 
   -- e^{}
   aus({trig = "eE"}, fmta([[e^{<>}]], {i(1)})),
 
   -- derivative
-  aus({trig = "dydx"}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
-  aus({trig = "ddx"}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
-  aus({trig = "pypx"}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  aus({trig = "ppx"}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus({trig = 'dydx'}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
+  aus({trig = 'ddx'}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
+  aus({trig = 'pypx'}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus({trig = 'ppx'}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
 
   -- fraction & binomial
   aus({trig = 'ff'}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
@@ -81,10 +87,10 @@ M = {
   -- left-right delimiters
   aus({trig = 'lrp'}, fmta([[\left(<>\right)]], {i(1)})),
   aus({trig = 'lr|'}, fmta([[\left|<>\right|]], {i(1)})),
-  aus({trig = 'lrr'}, fmta([=[\left\[<>\right\]]=], {i(1)})),
+  aus({trig = 'lrb'}, fmta([=[\left[<>\right]=], {i(1)})),
   aus({trig = 'lre'}, fmta([[\left.<>\right\vert]], {i(1)})),
   aus({trig = 'lrn'}, fmta([[\left\Vert<>\right\Vert]], {i(1)})),
-  aus({trig = 'lrb'}, fmta([[\left\{<>\right\}]], {i(1)})),
+  aus({trig = 'lrs'}, fmta([[\left\{<>\right\}]], {i(1)})),
   aus({trig = 'lrv'}, fmta([[\left\langle<>\right\rangle]], {i(1)})),
 
   -- taylor-maclaurin
@@ -111,39 +117,38 @@ M = {
 }
 
 local auto_cmdparenth = {
-  "exp",
-  "Im",
-  "Re",
-  "Pr",
-  "gcd",
-  "lcm",
+  'exp',
+  'Im',
+  'Re',
+  'Pr',
+  'gcd',
+  'lcm',
 }
 
 local auto_cmdbracket = {
-  "vec",
-  "bar",
-  "hat",
-  "dot",
+  'vec',
+  'bar',
+  'hat',
 }
 
 local auto_bigcmdparenth = {
-  "sum",
-  "prod",
-  "coprod",
-  "bigcap",
-  "bigcup",
+  'sum',
+  'prod',
+  'coprod',
+  'bigcap',
+  'bigcup',
 }
 
 local auto_cmd = {
-  "aleph", -- non-func
-  "ast",
-  "perp",
-  "propto",
-  "log", -- func
-  "ln",
-  "argmax",
-  "argmin",
-  "sqrt",
+  'aleph', -- non-func
+  'ast',
+  'perp',
+  'perpto',
+  'log', -- func
+  'ln',
+  'argmax',
+  'argmin',
+  'sqrt',
 }
 
 local auto_cmd_pair = {
@@ -154,7 +159,7 @@ local auto_cmd_pair = {
   ['~='] = 'approx',
   ['~~'] = 'sim',
   ['!='] = 'neq',
-  [':='] = 'definedas',
+  [':='] = 'coloneq',
   ['>='] = 'geq',
   ['<='] = 'leq',
   ['**'] = 'cdot',
@@ -165,13 +170,13 @@ local auto_cmd_pair = {
   ['NE'] = 'nexists',
   ['FA'] = 'forall',
   ['iN'] = 'in',
+  ['nN'] = 'notin',
   ['NN'] = 'mathbb{N}',
   ['RR'] = 'mathbb{R}',
   ['ZZ'] = 'mathbb{Z}',
   ['QQ'] = 'mathbb{Q}',
   ['CC'] = 'mathbb{C}',
   ['OO'] = 'emptyset',
-  ['nN'] = 'notin',
   ['cc'] = 'subset',
   ['qq'] = 'supset',
   ['cq'] = 'subseteq',
@@ -185,9 +190,7 @@ local auto_cmd_pair = {
   ['sinf'] = 'inf',
   ['ooo'] = 'infty',
   ['lll'] = 'ell',
-  --['inV'] = '^{-1}',
-  --['coM'] = '^\\complement'
-  ['nB'] = 'nabla',
+  ['del'] = 'nabla',
   ['qed'] = 'blacksquare',
   ['thfr'] = 'therefore',
   ['becs'] = 'because',
@@ -198,7 +201,7 @@ local auto_cmd_pair = {
   ['=>'] = 'implies',
   ['<='] = 'impliedby',
   ['iff'] = 'iff',
-  ['<H>'] = 'rightleftharpoons'
+  ['<H>'] = 'rightleftharpoons',
   ['+-'] = 'pm',
   ['-+'] = 'mp',
 }
