@@ -54,10 +54,10 @@ tooltip {
   opacity: 0.9;
 }
 
-#battery {padding-right:10px;}
+#battery {padding-right:9px;}
 #memory {padding-right:7px;}
 #cpu {padding-right:8px;}
-#network {padding-right:12px;}
+#network {padding-right:11px;} #network.disconnected {padding-right:3px;}
 #pulseaudio.source-muted {padding-right:10px;}
 
 #clock {

@@ -88,7 +88,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "<span size='x-large'>{icon}</span>",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
@@ -107,10 +107,10 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "<span size='x-large'></span>",
-        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-ethernet": "<span size='x-large'></span>",
         "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "D/C",
+        "format-disconnected": "<span size='x-large'></span>",
         "interval": 5,
         "on-click": "nm-connection-editor"
     },
