@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 20, // Waybar height (to be removed for auto height)
+    "height": 10, // Waybar height (to be removed for auto height)
     "margin": 0,
     "width": 1280, // Waybar width
     "spacing": 5, // Gaps between modules (4px)
@@ -62,7 +62,7 @@
     },
     "cpu": {
         "interval": 10,
-        "format": "<span size='xx-large'></span>",
+        "format": "<span size='x-large'></span>",
         "tooltip-format": "{usage}% {avg_frequency}GHz",
         "states": {
             "critical": 75,
@@ -72,7 +72,7 @@
     },
     "memory": {
         "interval": 10,
-        "format": "<span size='xx-large'></span>",
+        "format": "<span size='x-large'></span>",
         "tooltip-format": "{percentage}% {used}G/{total}G\nSwap: {swapPercentage}% {swapUsed}G/{swapTotal}G",
         //"on-click": "htop"
     },
@@ -84,7 +84,7 @@
         // "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""],
         "interval": 5,
-        "format": "<span size='xx-large'>{icon}</span>",
+        "format": "<span size='x-large'>{icon}</span>",
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -97,7 +97,7 @@
             // "good": 95,
             "critical": 15
         },
-        "format": "<span size='xx-large'>{icon}</span>",
+        "format": "<span size='x-large'>{icon}</span>",
         "format-charging": "",
         "format-plugged": "",
         "format-time": "{H}:{m}",
@@ -106,7 +106,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "<span size='xx-large'></span>",
+        "format-wifi": "<span size='x-large'></span>",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
@@ -116,10 +116,10 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format":                 "<span size='xx-large'>{icon} {format_source}</span>",
-        "format-bluetooth":       "<span size='xx-large'>{icon} {format_source}</span>",
-        "format-bluetooth-muted": "<span size='xx-large'>{icon}  {format_source}</span>",
-        "format-muted":           "<span size='xx-large'>{format_source}</span>",
+        "format":                 "<span size='x-large'>{icon} {format_source}</span>",
+        "format-bluetooth":       "<span size='x-large'>{icon} {format_source}</span>",
+        "format-bluetooth-muted": "<span size='x-large'>{icon}  {format_source}</span>",
+        "format-muted":           "<span size='x-large'>{format_source}</span>",
         "tooltip-format":         "{desc}\n{volume}%",
         "format-source":          "",
         "format-source-muted":    "",

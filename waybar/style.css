@@ -3,6 +3,8 @@
     font-family: CommitMono Nerd Font;
     font-size: 8px;
     font-weight: 900;
+    padding: 0;
+    margin: -1;
 }
 
 window#waybar {
@@ -47,7 +49,7 @@ tooltip {
   margin: 0;
   color: #aaf;
   background-color: rgba(187, 187, 256, 0.1);
-  border-radius: 3px;
+  border-radius: 13px;
   padding: 0 4px;
   opacity: 0.9;
 }
@@ -60,9 +62,10 @@ tooltip {
 
 #clock {
     color: #ddf;
-    background-color : rgba(94, 161, 255,0.3);
+    background-color: rgba(94, 161, 255,0.3);
     min-width: 125px;
     border: 1px solid rgba(94, 161, 255,0.5); 
+    border-radius: 100px;
     /* box-shadow: rgba(17, 17, 27, 0.2) 0 0 3 2px; */
 }
 
@@ -133,6 +136,7 @@ label:focus {
 
 #tray {
   padding: 0 6px;
+  border-right: none;
 }
 
 #tray > .passive {
