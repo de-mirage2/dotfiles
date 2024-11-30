@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: CommitMono Nerd Font;
+    font-family: CommitMono Nerd Font Propo;
     font-size: 8px;
     font-weight: 900;
     padding: 0;
@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-    background-color: rgba(30, 50, 200, 0.3);
+    background-color: rgba(30, 10, 20, 0.6);
 }
 
 window#waybar.hidden {
@@ -53,12 +53,6 @@ tooltip {
   padding: 0 4px;
   opacity: 0.9;
 }
-
-#battery {padding-right:9px;}
-#memory {padding-right:7px;}
-#cpu {padding-right:8px;}
-#network {padding-right:11px;} #network.disconnected {padding-right:3px;}
-#pulseaudio.source-muted {padding-right:10px;}
 
 #clock {
     color: #ddf;

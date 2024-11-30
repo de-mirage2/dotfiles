@@ -1,0 +1,79 @@
+window {
+    background-color: transparent;
+    font-family: 'CommitMono Nerd Font';
+    /* font-weight: regular; */
+    font-size: 12px;
+}
+
+#outer-box {
+    padding: 2 2px;
+    background-color: rgba(0,0,0,0.35);
+    /* opacity: 0.2; */
+    /* border-radius: 10px; */
+    /* border: 1px solid rgba(220, 220, 220, 0.1); */
+}
+
+#input {
+    color: #d6d6d6;
+    font-size: 14px;
+    padding: 3px 5px 3px 10px;
+    margin: 2px 3px 0px 3px;
+    background: transparent;
+    /* background: rgba(255,255,255,0.04); */
+    border-radius: 50px;
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0);
+
+}
+#input:focus {
+    transition-duration: 0.3s;
+    /* border: 1px solid rgba(220, 220, 220, 0.5); */
+    /* background: rgba(255,255,255,0.05); */
+
+    background: linear-gradient(40deg,transparent, rgba(255,255,255,0.05) ,transparent,transparent,transparent,transparent);
+}
+#input > image {
+    -gtk-icon-transform:scalex(1);
+}
+
+#inner-box {
+    color: #d6d6d6;
+    margin: 2px;
+    padding: 3px;
+    /* background: rgba(0,0,0,0.4); */
+    border-radius: 10px;
+    /* border: 1px solid rgba(0,0,0,0.3); */
+    /* border-top: none; */
+}
+
+#scroll {
+    margin: 5px;
+    margin-bottom: 5px;
+    /* background: rgba(255,255,255,0.1); */
+    border-radius: 10px;
+}
+
+#text {
+    color: #a2acb0;
+    padding-left : 15px;
+}
+#text:selected {
+    color: #ffffff;
+}
+
+#entry {
+    /* important for that annoying border around selected entries */
+    color: transparent;
+    padding: 10px;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    border-radius: 0px;
+    /* background: rgba(255,255,255,0.03); */
+}
+#entry:selected {
+    transition-duration:0.1s;
+    /* background: rgba(255,255,255,0.15); */
+    padding-left: 27px;
+    background: linear-gradient(60deg,transparent, rgba(255,255,255,0.05) ,transparent,transparent,transparent);
+    border-left: 2px solid #5ea1ff;
+}
