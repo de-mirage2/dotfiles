@@ -3,18 +3,36 @@
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 10, // Waybar height (to be removed for auto height)
     "margin": 0,
-    "width": 1280, // Waybar width
+    //"width": 1280, // Waybar width
     "spacing": 5, // Gaps between modules (4px)
     "border-size": 2,
     "padding": 10,
     "fixed-center": true,
     //"reload_style_on_change": true,
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "custom/player"],
+    "modules-left": ["sway/workspaces","hyprland/workspaces", "custom/player"],
     "modules-center": ["clock"],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "keyboard-state", "battery", "tray"],
     // Modules configuration
     "hyprland/workspaces": {
+          "disable-scroll": true,
+          "all-outputs": true,
+          "warp-on-scroll": false,
+          "active-only": false,
+          "sort-by-number": true,
+          "format": "{name}",
+    //    "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //    }
+    }, 
+    "sway/workspaces": {
           "disable-scroll": true,
           "all-outputs": true,
           "warp-on-scroll": false,
