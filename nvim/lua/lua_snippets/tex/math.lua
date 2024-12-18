@@ -60,13 +60,14 @@ M = {
   aus({trig = 'ppx'}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
 
   -- fraction & binomial
-  aus({trig = 'ff'}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
+  aus({trig = 'ff', priority=999}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
+  aus({trig = 'FF', priority=999}, fmta([[\frac<>]], {i(1)})),
   aus({trig = 'ncr'}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
 
   -- function
   aus({trig = 'func'}, fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}'), i(4,'x'), i(0,'e^x')})),
 
-  -- limit
+  -- limit, limsup, liminf
   aus({trig = 'lmt'}, fmta([[\lim_{<>\to{<>}}\left(<>\right)]], {i(1), i(2,'\\infty'), i(0)})), 
   aus({trig = 'lms'}, fmta([[\limsup_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
   aus({trig = 'lmi'}, fmta([[\liminf_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
@@ -87,7 +88,7 @@ M = {
   -- left-right delimiters
   aus({trig = 'lrp'}, fmta([[\left(<>\right)]], {i(1)})),
   aus({trig = 'lr|'}, fmta([[\left|<>\right|]], {i(1)})),
-  aus({trig = 'lrb'}, fmta([=[\left[<>\right]=], {i(1)})),
+  aus({trig = 'lrb'}, fmta([=[\left[<>\right]]=], {i(1)})),
   aus({trig = 'lre'}, fmta([[\left.<>\right\vert]], {i(1)})),
   aus({trig = 'lrn'}, fmta([[\left\Vert<>\right\Vert]], {i(1)})),
   aus({trig = 'lrs'}, fmta([[\left\{<>\right\}]], {i(1)})),
@@ -113,6 +114,7 @@ M = {
   aus({trig = 'dddot', priority=1002}, fmta([[\dddot{<>}]], {i(1)})),
   aus({trig = 'ddddot', priority=1003}, fmta([[\ddddot{<>}]], {i(1)})),
   
+  -- subscript digital
   raus({trig = '([%a%)%]%}])0(%d)'}, f( function(_, snip) return snip.captures[1].."_{"..snip.captures[2].."}" end )), -- a01 -> a_{1} and k08 -> k_{8}
 }
 
@@ -129,6 +131,7 @@ local auto_cmdbracket = {
   'vec',
   'bar',
   'hat',
+  'tilde',
 }
 
 local auto_bigcmdparenth = {
@@ -155,6 +158,8 @@ local auto_cmd_pair = {
   ['asin'] = 'arcsin',
   ['acos'] = 'arccos',
   ['atan'] = 'arctan',
+  ['ld.'] = 'ldots',
+  ['cd.'] = 'cdots',
   ['-='] = 'equiv',
   ['~='] = 'approx',
   ['~~'] = 'sim',
@@ -228,20 +233,20 @@ local auto_greek = {
   ['n'] = 'nu',
   ['x'] = 'xi',
   ['X'] = 'Xi',
-  ['pi'] = 'pi',
-  ['Pi'] = 'Pi',
+  ['p'] = 'pi',
+  ['P'] = 'Pi',
   ['r'] = 'rho',
   ['s'] = 'sigma',
   ['S'] = 'Sigma',
   ['t'] = 'tau',
   ['u'] = 'upsilon',
   ['U'] = 'Upsilon',
-  ['ph'] = 'phi',
-  ['vp'] = 'varphi',
-  ['Ph'] = 'Phi',
+  ['f'] = 'phi',
+  ['vf'] = 'varphi',
+  ['F'] = 'Phi',
   ['x'] = 'chi',
-  ['ps'] = 'psi',
-  ['Ps'] = 'Psi',
+  ['y'] = 'psi',
+  ['Y'] = 'Psi',
   ['o'] = 'omega',
   ['O'] = 'Omega',
 }

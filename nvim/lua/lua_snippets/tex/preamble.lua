@@ -50,15 +50,20 @@ M = {
   )),
   s({trig = "TemplatePhysics"},
     fmta(
-      [[ 
+      [==[ 
       \documentclass{article}
-      \usepackage[a4paper]{geometry}
-      \usepackage{mathtools,booktabs,enumitem,siunitx,graphicx,listings,color}
+      \usepackage[a4paper,margin=2cm]{geometry}
+      \usepackage{mathtools,booktabs,enumitem,siunitx,graphicx,listings,color,esvect}
       \usepackage{fancyhdr,fourier-orns}\renewcommand{\headrulewidth}{0pt}\setlength{\headheight}{14.5pt}
       \usepackage{tikz}
       \usepackage[nodayofweek]{datetime}
-      \usetikzlibrary{arrows.meta,quotes,calc,decorations}
+      \usetikzlibrary{arrows.meta,quotes,calc,decorations,angles,patterns.meta}
  
+      \newcommand{\myequation}{\begin{equation}}
+      \newcommand{\myendequation}{\end{equation}}
+      \let\[\myequation
+      \let\]\myendequation
+
       \definecolor{dkgreen}{rgb}{0,0.3,0}
       \definecolor{gray}{rgb}{0.5,0.5,0.5}
       \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -81,7 +86,9 @@ M = {
       }
 
       \newcommand{\stepexpl}[1]{\parbox[t]{5cm}{\raggedright #1}}
-      \newcommand{\FU}{\unit{\meter\per\square\second}} % final units
+
+      \DeclareSIUnit{\FU}{\kilogram\square\meter} % final units
+      \newcommand{\FV}{g_{\mathrm{earth}}} % final variable
 
       \title{<>}
       \author{
@@ -99,7 +106,7 @@ M = {
       \fancyhf{}\pagestyle{fancy}\fancyhead[R]{<> \thepage}
       \maketitle\thispagestyle{fancy}\tableofcontents
       <>
-      \abstract{Abstracts are a summary of the experiment as a whole and should familiarize the reader with the purpose of the research. Abstracts will always be written last, even though they are the first paragraph of a lab report. Briefly include methods and results.}
+      \abstract{The findings of a lab conducted to calculate the magnitude of the gravitational field of earth \(\FV\) acting on a falling sphere are presented. Through the use of differential force equations to analyze the behavior of the sphere-earth system, the magnitude of the gravitational field of earth was derived to equal \qty{9999}{\FU}, which relative to the true value of \qty{9.80665}{\FU} yielded an error of \qty{9931}{\percent}.}
 
       \section{Materials}
       \begin{itemize}
@@ -118,9 +125,9 @@ M = {
       \section{Data}
       The raw data collected by conducting the prior procedure, along with constants used in calculations: 
       \begin{center}\begin{tabular}{lccccl}\toprule 
-      &\multicolumn{4}{c}{Trial Data (units)}& \\
+      &\multicolumn{4}{c}{Trial Data (\(t\)) (\unit{\second})}& \\
       \cmidrule(lr){2-5}
-      \(x\) (units) & 1 & 2 & 3 & avg. \\\midrule
+      \(x\) (\unit{\meter}) & 1 & 2 & 3 & avg. \\\midrule
       0.25        & 4.1 & 3.2 & 2.7 & 1.0 \\
       \bottomrule\end{tabular}\end{center}
       Constants: 
@@ -129,8 +136,10 @@ M = {
       \end{itemize}
 
       \section{Derivations}
+      %\begin{tikzpicture}[font=\footnotesize] % model goes here
+      %\end{tikzpicture}
       \begin{align}
-        \vec{F}_{net} &=m\vec{a} \\
+        \vv*{F}{net} &=m\vv{a} \\
                       &=\frac24 && \text{im yapping} \\
                       &=\frac12 && \stepexpl{this is a really long explanation that spans a few lines blah blah blah blah}
       \end{align}
@@ -138,12 +147,12 @@ M = {
       \section{Graphing \& Calculations}
       \begin{center}
         \begin{tabular}{cc}\toprule
-          \(d\) (\unit\meter) & \(\overline{t}^2\) (\unit{\square\second}) \\ \midrule
+          \(d\) (\unit\meter) & \(\overline{t}^2\) (\unit{\square\second}) \\\midrule
           0.50 & 0.6084\\
           0.75 & 1.0955\\
           1.00 & 1.2844\\
-          1.25 & 1.8045\\ \bottomrule
-        \end{tabular}
+          1.25 & 1.8045\\
+        \bottomrule\end{tabular}
       \end{center}
 
       % \begin{center}\includegraphics[scale=0.35]{"../R/plot.png"}\end{center}
@@ -152,21 +161,20 @@ M = {
       \end{lstlisting}
       Using the R language to calculate and visualize the data:
       \begin{center}\begin{tabular}{cc}\toprule
-        \(R^2\) & Equation \\\midrule
+        \(R^2\) & Linear Regression Model\\\midrule
         0.9589 & \(d \sim 0.64375t^2 + 0.10366\) \\
       \bottomrule\end{tabular}\end{center}
       
-      With a slope of 0.64375 indicated by the linear regression model, the experimental value of \(\theta \) may now be evaluated:
-      \begin{align}
+      With a slope of \(0.64375\) indicated by the linear regression model, the experimental value of \(\theta \) may now be evaluated:
+      \begin{align*}
         m &= 0.64375 \\
         \frac{g}{2}\sin \theta &= \\
         \sin \theta &= \frac{2}{g}\cdot 0.64375 \\
         \theta &= \arcsin\left(\frac{2}{g}\cdot 0.64375\right) \\
-               &= \qty{7.54}{\degree}
+               &= \qty{7.54}{\FU}
       \end{align}
 
-      The experimental value of \(\theta\) evaluates to \qty{7.54}{\degree}
-
+      The experimental value of \(\FV\) evaluates to \qty{7.54}{\FU}
 
       \section{Analysis}
       The percent error for our experiment is calculated as follows: \[\left\vert\frac{5192.83\FU-9.81\FU}{9.81\FU}\right\vert\cdot 100\% \approx 528.34\%\]
@@ -177,7 +185,7 @@ M = {
 
       \vfill\hfill\oldpilcrowfive\LaTeX
       \end{document}
-      ]], { i(1, "Lab Title"), i(3, "David Halliday"), i(4, "Kenneth Krane"), i(5, "Robert Resnick"), i(2, "Halliday Krane Parikh Resnick"), i(0) }
+      ]==], { i(1, "Lab Title"), i(3, "David Halliday"), i(4, "Kenneth Krane"), i(5, "Robert Resnick"), i(2, "Halliday Krane Parikh Resnick"), i(0) }
     )
   ),
   s({trig = "TemplateChemistry"},
@@ -190,7 +198,11 @@ M = {
       \usepackage{siunitx}
 
       \title{<> Lab}
-      \author{Miraj Parikh\thanks{In collaboration with: <>}}
+      \author{
+        <>
+        \and
+        Miraj Parikh
+      }
       \date{\today}
 
       \theoremstyle{definition}

@@ -51,6 +51,13 @@ M = {
     \end{align}
     ]], {i(0)}
   )),
+  aus({trig = '=IT'}, fmta(
+    [[
+    \begin{itemize}
+      \item <>
+    \end{itemize}
+    ]], {i(0)}
+  )),
   aus({trig = '=tikz'}, fmta(
     [[
     \begin{center}\begin{tikzpicture}[<>]
@@ -72,9 +79,9 @@ M = {
     \end{<>}\end{center}
     ]], {i(1,'tabular'), i(2), i(0), rep(1)}
   )),
-  aus({trig = '=sec'}, fmta([[\section{<>}]], i(1))),
-  aus({trig = '=ssec'}, fmta([[\subsection{<>}]], i(1))),
-  aus({trig = '=sssec'}, fmta([[\subsubsection{<>}]], i(1))),
+  aus({trig = '=S'}, fmta([[\section{<>}]], i(1))),
+  aus({trig = '=sS'}, fmta([[\subsection{<>}]], i(1))),
+  aus({trig = '=ssS'}, fmta([[\subsubsection{<>}]], i(1))),
   aus({trig = '=m'}, fmta([[\(<>\)]], i(1))),
   aus({trig = '=M'}, fmta([=[\[<>\]]=], i(1))),
   aus({trig = '=bf'}, fmta([[\textbf{<>}]], i(1))),
@@ -143,22 +150,30 @@ local auto_greek = {
   ['ve'] = 'varepsilon',
   ['z'] = 'zeta',
   ['et'] = 'eta',
-  ['th'] = 'theta',
-  ['Th'] = 'Theta',
+  ['h'] = 'theta',
+  ['H'] = 'Theta',
+  ['vh'] = 'vartheta',
+  ['k'] = 'kappa',
   ['l'] = 'lambda',
   ['L'] = 'Lambda',
   ['m'] = 'mu',
+  ['n'] = 'nu',
   ['x'] = 'xi',
   ['X'] = 'Xi',
+  ['p'] = 'pi',
+  ['P'] = 'Pi',
   ['r'] = 'rho',
   ['s'] = 'sigma',
+  ['S'] = 'Sigma',
   ['t'] = 'tau',
-  ['ph'] = 'phi',
-  ['vp'] = 'varphi',
-  ['Ph'] = 'Phi',
+  ['u'] = 'upsilon',
+  ['U'] = 'Upsilon',
+  ['f'] = 'phi',
+  ['vf'] = 'varphi',
+  ['F'] = 'Phi',
   ['x'] = 'chi',
-  ['ps'] = 'psi',
-  ['Ps'] = 'Psi',
+  ['y'] = 'psi',
+  ['Y'] = 'Psi',
   ['o'] = 'omega',
   ['O'] = 'Omega',
 }
