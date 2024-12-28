@@ -9,8 +9,8 @@ map("v", "J", ":m '>+1<CR>gv=gv")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
-map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
-map("i", "<C-e>", "<End>", { desc = "move end of line" })
+map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" })
+map("i", "<C-a>", "<End>", { desc = "move end of line" })
 map("i", "<C-h>", "<Left>", { desc = "move left" })
 map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
@@ -18,18 +18,41 @@ map("i", "<C-k>", "<Up>", { desc = "move up" })
 
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
+-- window transition
 map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
+-- filesave
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
 
+-- numbering
 map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
 map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 
-map("v", "<leader>y", "\"+y")
-map("n", "<leader>yy", "\"+yy")
+-- clipboard and deletion - Binds that involve ctrl use system clipboard
+map("v", "<C-y>", [["+y]], { desc = "visual copy to system clipboard" })
+map("n", "<C-y>", [["+y]], { desc = "normal copy to system clipboard - root" })
+map("n", "<A-y>", [["+yy]], { desc = "normal copy line to system clipboard" })
+
+map("v", "<C-d>", [["+d]], { desc = "visual cut to system clipboard" })
+map("n", "<C-d>", [["+d]], { desc = "normal cut to system clipboard - root" })
+map("n", "<A-d>", [["+dd]], { desc = "normal cut line to system clipboard" })
+
+map("v", "<C-c>", [["+c]], { desc = "visual change to system clipboard" })
+map("n", "<C-c>", [["+c]], { desc = "normal change to system clipboard - root" })
+map("n", "<A-c>", [["+cc]], { desc = "normal change line to system clipboard" })
+
+-- new pane
+map("n", "<leader>h", ":split<CR>", { desc = "new horizontal pane" })
+
+map("n", "<leader>v", ":vsplit<CR>", { desc = "new vertical pane" })
+
+-- nvimtree
+map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
+map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+
 -- map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
 --[[
@@ -59,10 +82,6 @@ end, { desc = "buffer close" })
 map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
 map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
 
--- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
-
 -- telescope
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
@@ -84,15 +103,6 @@ map(
 
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
-
--- new terminals
-map("n", "<leader>h", function()
-  require("nvchad.term").new { pos = "sp" }
-end, { desc = "terminal new horizontal term" })
-
-map("n", "<leader>v", function()
-  require("nvchad.term").new { pos = "vsp" }
-end, { desc = "terminal new vertical window" })
 
 -- toggleable
 map({ "n", "t" }, "<A-v>", function()

@@ -88,7 +88,26 @@ require("lazy").setup({
   -- Calendar
   -- { 'itchyny/calendar.vim', lazy = false },
   -- Theme/UI
-  { "Mofiqul/dracula.nvim" },
+  { 'Mofiqul/dracula.nvim' },
   { 'nvim-lualine/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons'} },
+  -- Telescope
   { 'nvim-telescope/telescope.nvim', tag = '0.1.8', dependencies = { 'nvim-lua/plenary.nvim' } },
+  -- Tree
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function() require('nvim-tree').setup({
+      sort = {
+        sorter = 'case_sensitive',
+      },
+      view = {
+        width = 30,
+      },
+      renderer = {
+        group_empty = true,
+      },
+      filters = {
+        dotfiles = true,
+      },
+    }) end
+  }
 })
