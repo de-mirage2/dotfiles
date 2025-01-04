@@ -23,17 +23,26 @@ local conds = require("luasnip.extras.expand_conditions")
 local postfix = require("luasnip.extras.postfix").postfix
 local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
-local ms = ls.multi_snippet
+-- local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
 function in_math() 
   return vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 1
 end
 
+function ams_cond()
+  return in_math() and vim.b.packages['amsmath'] ~= nil
+end
+
+local s =  ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'plain' }) -- plain snippet
 local rs = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'pattern' }) -- regex snippet
-local s =  ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'pattern' }) --  plain snippet
+local ms = ls.extend_decorator.apply(ls.multi_snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'plain' }) -- plain multisnippet
+
+local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain autosnippet
 local raus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' }) -- regex autosnippet
-local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain
+local maus = ls.extend_decorator.apply(ls.multi_snippet, { common = { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain'} }) -- plain multiautosnippet
+
+local ams_aus = ls.extend_decorator.apply(ls.snippet, { condition = ams_cond, show_condition = ams_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain ams autosnippet
 
 -- i hate lua --
 
@@ -45,54 +54,62 @@ M = {
   --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
   
   -- inv
-  aus({trig = 'inV'}, t('^{-1}')),
+  aus({trig = ',I'}, t('^{-1}')),
 
   -- complement
-  aus({trig = 'coM'}, t('^\\complement')),
+  ams_aus({trig = ',c'}, t('^\\complement')),
 
   -- e^{}
-  aus({trig = "eE"}, fmta([[e^{<>}]], {i(1)})),
+  maus({',e','eE'}, fmta([[e^{<>}]], {i(1)})),
 
   -- derivative
-  aus({trig = 'dydx'}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
-  aus({trig = 'ddx'}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
-  aus({trig = 'pypx'}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  aus({trig = 'ppx'}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus({trig = 'DD'}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
+  aus({trig = 'dD'}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
+  aus({trig = 'DP'}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus({trig = 'dP'}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
 
   -- fraction & binomial
   aus({trig = 'ff', priority=999}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
+  aus({trig = 'Ff', priority=999}, fmta([[\frac<>{<>}]], {i(1), i(2)})),
+  aus({trig = 'fF', priority=999}, fmta([[\frac{<>}<>]], {i(1), i(2)})),
   aus({trig = 'FF', priority=999}, fmta([[\frac<>]], {i(1)})),
   aus({trig = 'ncr'}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
 
   -- function
-  aus({trig = 'func'}, fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}'), i(4,'x'), i(0,'e^x')})),
+  aus({trig = 'Fn'}, fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}'), i(4,'x'), i(0,'e^x')})),
 
   -- limit, limsup, liminf
-  aus({trig = 'lmt'}, fmta([[\lim_{<>\to{<>}}\left(<>\right)]], {i(1), i(2,'\\infty'), i(0)})), 
+  aus({trig = ',l'}, fmta([[\lim_{<>\to{<>}}\left(<>\right)]], {i(1), i(2,'\\infty'), i(0)})), 
   aus({trig = 'lms'}, fmta([[\limsup_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
   aus({trig = 'lmi'}, fmta([[\liminf_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
 
   -- integrals - indef and def w/ contour variations
   aus({trig = 'int'}, fmta([[\int_{<>}^{<>}<>\,\mathrm{d}<>]], {i(1), i(2), i(0), i(3,'x')})), -- definite integral
-  aus({trig = 'Int'}, fmta([[\int<>\,\mathrm{d}<>]], {i(0), i(1,'x')})), -- indefinite integral
-  aus({trig = 'inT'}, fmta([[\int_{<>}<>\,\mathrm{d}<>]], {i(1), i(0), i(2,'x')})), -- integral over space
-  aus({trig = 'INT'}, fmta([[\int<>\,\mathrm{d}<>]], {i(2), i(1,'x')})), -- quick integral
-  aus({trig = 'ont'}, fmta([[\oint_{<>}<>\,\mathrm{d}<>]], {i(1,'C'), i(0), i(2,'z')})), -- definite contour integral
+  aus({trig = 'inT'}, fmta([[\int<>\,\mathrm{d}<>]], {i(0), i(1,'x')})), -- indefinite integral
+  aus({trig = 'iNT'}, fmta([[\int_{<>}<>\,\mathrm{d}<>]], {i(1), i(0), i(2,'x')})), -- integral over space
+  aus({trig = ',i' }, fmta([[\int<>\,\mathrm{d}<>]], {i(2), i(1,'x')})), -- quick integral
+  aus({trig = 'ont'}, fmta([[\oint_{<>}<>\,\mathrm{d}<>]], {i(1,'C'), i(0), i(2,'z')})), -- contour integral over space
   aus({trig = 'onT'}, fmta([[\oint<>\,\mathrm{d}<>]], {i(0), i(1,'z')})), -- indefinite contour integral
 
-  -- fonts
-  aus({trig = 'mtb'}, fmta([[\mathbb{<>}]], {i(1)})), -- blackboard bold
-  aus({trig = 'mtc'}, fmta([[\mathcal{<>}]], {i(1)})), -- calligraphic
+  -- math fonts
+  aus({trig = 'mtB'}, fmta([[\mathbb{<>}]], {i(1)})), -- blackboard bold
+  aus({trig = 'mtC'}, fmta([[\mathcal{<>}]], {i(1)})), -- calligraphic
+  aus({trig = 'mtF'}, fmta([[\mathfrak{<>}]], {i(1)})),  -- fraktur
+
   aus({trig = 'mtr'}, fmta([[\mathrm{<>}]], {i(1)})),  -- roman
+  aus({trig = 'mtt'}, fmta([[\mathtt{<>}]], {i(1)})),  -- typewriter
+  aus({trig = 'mti'}, fmta([[\mathit{<>}]], {i(1)})),  -- italic
+  aus({trig = 'mtb'}, fmta([[\mathsf{<>}]], {i(1)})),  -- bold
+  aus({trig = 'mts'}, fmta([[\mathsf{<>}]], {i(1)})),  -- sans serif
 
   -- left-right delimiters
-  aus({trig = 'lrp'}, fmta([[\left(<>\right)]], {i(1)})),
-  aus({trig = 'lr|'}, fmta([[\left|<>\right|]], {i(1)})),
-  aus({trig = 'lrb'}, fmta([=[\left[<>\right]]=], {i(1)})),
-  aus({trig = 'lre'}, fmta([[\left.<>\right\vert]], {i(1)})),
-  aus({trig = 'lrn'}, fmta([[\left\Vert<>\right\Vert]], {i(1)})),
-  aus({trig = 'lrs'}, fmta([[\left\{<>\right\}]], {i(1)})),
-  aus({trig = 'lrv'}, fmta([[\left\langle<>\right\rangle]], {i(1)})),
+  maus({'lrp','lr()'}, fmta([[\left(<>\right)]], {i(1)})), -- (p)arentheses
+  maus({'lra','lr|' }, fmta([[\left|<>\right|]], {i(1)})), -- (a)bsolute value / single bars
+  maus({'lrb','lr[]'}, fmta([=[\left[<>\right]]=], {i(1)})), -- square (b)rackets
+  maus({'lre','lr.' }, fmta([[\left.<>\right\vert]], {i(1)})), -- (e)valuation
+  maus({'lrn','lrm' }, fmta([[\left\Vert<>\right\Vert]], {i(1)})), -- (n)orm/(m)agnitude
+  maus({'lrc','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})), --  (c)urly brackets
+  maus({'lrv','lr<','lr>'}, fmta([[\left\langle<>\right\rangle]], {i(1)})), -- (v)ector angle brackets
 
   -- taylor-maclaurin
   aus({trig = 'tayl'}, fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}\left(<>\right)}{n!}\left(x-<>\right)^n]], {i(1), i(2, 'c'), rep(2)})),
@@ -109,7 +126,7 @@ M = {
   aus({trig = 'macn'}, fmta([[\sum_{n=1}^{\infty}(-1)^n\frac{<>^n}{n}]], {i(1,'x')})), -- ln(1+x)
 
   -- dot series
-  aus({trig = 'dot', priority=1000}, fmta([[\dot{<>}]], {i(1)})),
+  aus({trig = 'dot', priority=999}, fmta([[\dot{<>}]], {i(1)})),
   aus({trig = 'ddot', priority=1001}, fmta([[\ddot{<>}]], {i(1)})),
   aus({trig = 'dddot', priority=1002}, fmta([[\dddot{<>}]], {i(1)})),
   aus({trig = 'ddddot', priority=1003}, fmta([[\ddddot{<>}]], {i(1)})),
@@ -160,22 +177,21 @@ local auto_cmd_pair = {
   ['atan'] = 'arctan',
   ['ld.'] = 'ldots',
   ['cd.'] = 'cdots',
-  ['-='] = 'equiv',
+  [',='] = 'equiv',
   ['~='] = 'approx',
   ['~~'] = 'sim',
   ['!='] = 'neq',
-  [':='] = 'coloneq',
   ['>='] = 'geq',
   ['<='] = 'leq',
   ['**'] = 'cdot',
   ['xx'] = 'times',
-  ['dP'] = 'partial',
-  ['dD'] = 'mathrm{d}',
+  [',p'] = 'partial',
+  [',d'] = 'mathrm{d}',
+  ['!!'] = 'neg',
   ['EE'] = 'exists',
-  ['NE'] = 'nexists',
   ['FA'] = 'forall',
-  ['iN'] = 'in',
-  ['nN'] = 'notin',
+  ['IN'] = 'in',
+  ['!N'] = 'notin',
   ['NN'] = 'mathbb{N}',
   ['RR'] = 'mathbb{R}',
   ['ZZ'] = 'mathbb{Z}',
@@ -195,10 +211,10 @@ local auto_cmd_pair = {
   ['sinf'] = 'inf',
   ['ooo'] = 'infty',
   ['lll'] = 'ell',
+  ['h-'] = 'hbar',
+  ['ii'] = 'imath',
+  ['jj'] = 'jmath',
   ['del'] = 'nabla',
-  ['qed'] = 'blacksquare',
-  ['thfr'] = 'therefore',
-  ['becs'] = 'because',
   ['|>'] = 'mapsto',
   ['|->'] = 'longmapsto',
   ['->'] = 'to',
@@ -209,6 +225,14 @@ local auto_cmd_pair = {
   ['<H>'] = 'rightleftharpoons',
   ['+-'] = 'pm',
   ['-+'] = 'mp',
+}
+
+local ams_auto_cmd_pair = {
+  [':='] = 'coloneq',
+  ['qed'] = 'blacksquare',
+  ['thfr'] = 'therefore',
+  ['becs'] = 'because',
+  ['!E'] = 'nexists',
 }
 
 
@@ -226,6 +250,7 @@ local auto_greek = {
   ['h'] = 'theta',
   ['H'] = 'Theta',
   ['vh'] = 'vartheta',
+  ['i'] = 'iota',
   ['k'] = 'kappa',
   ['l'] = 'lambda',
   ['L'] = 'Lambda',
@@ -284,6 +309,12 @@ for k, v in pairs(auto_cmd_pair) do
   table.insert( auto_cmd_pair_snippets, aus( { trig = k, }, fmta([[\<>]], {v}) ) )
 end
 vim.list_extend(M, auto_cmd_pair_snippets)
+
+local ams_auto_cmd_pair_snippets = {}
+for k, v in pairs(ams_auto_cmd_pair) do 
+  table.insert( ams_auto_cmd_pair_snippets, ams_aus( { trig = k, }, fmta([[\<>]], {v}) ) )
+end
+vim.list_extend(M, ams_auto_cmd_pair_snippets)
 
 local auto_greek_snippets = {}
 for k, v in pairs(auto_greek) do 

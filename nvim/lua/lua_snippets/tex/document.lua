@@ -28,7 +28,15 @@ local k = require("luasnip.nodes.key_indexer").new_key
 
 function in_doc() 
   local is_in_doc = vim.fn["vimtex#env#is_inside"]("document")
-  return (is_in_doc[1] > 0 and is_in_doc[2] > 0 and (vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 0))
+  return is_in_doc[1] > 0 and is_in_doc[2] > 0 and vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 0
+end
+
+function ams_cond()
+  return in_doc() and vim.b.packages['amsmath'] ~= nil
+end
+
+function tg_cond()
+  return in_doc() and vim.b.packages['textgreek'] ~= nil
 end
 
 local get_visual = function(args, parent)
@@ -40,7 +48,9 @@ local get_visual = function(args, parent)
 end
 
 local s = ls.extend_decorator.apply(ls.snippet, { show_condition = in_doc, condition = in_doc })
-local aus = ls.extend_decorator.apply(s, { snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
+local aus = ls.extend_decorator.apply(ls.snippet, { show_condition = in_doc, condition = in_doc, snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
+local ams_aus = ls.extend_decorator.apply(ls.snippet, { show_condition = ams_cond, condition = ams_cond, snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
+local tg_aus = ls.extend_decorator.apply(ls.snippet, { show_condition = tg_cond, condition = tg_cond, snippetType = 'autosnippet', wordTrig = false, trigEngine = 'pattern' })
 
 M = {
   --s({trig = 'testDocument' }, t("document.lua LOADED")),
@@ -49,6 +59,13 @@ M = {
     \begin{align}
       <>
     \end{align}
+    ]], {i(0)}
+  )),
+  ams_aus({trig = '*ali'}, fmta(
+    [[
+    \begin{align*}
+      <>
+    \end{align*}
     ]], {i(0)}
   )),
   aus({trig = '=IT'}, fmta(
@@ -72,6 +89,13 @@ M = {
     \end{<>}
     ]], {i(1,'gather'), i(0), rep(1)}
   )),
+  ams_aus({trig = '*env'}, fmta(
+    [[
+    \begin{<>*}
+      <>
+    \end{<>*}
+    ]], {i(1,'gather'), i(0), rep(1)}
+  )),
   aus({trig = '=tab'}, fmta(
     [[
     \begin{center}\begin{<>}{<>}
@@ -86,6 +110,7 @@ M = {
   aus({trig = '=M'}, fmta([=[\[<>\]]=], i(1))),
   aus({trig = '=bf'}, fmta([[\textbf{<>}]], i(1))),
   aus({trig = '=it'}, fmta([[\textit{<>}]], i(1))),
+  aus({trig = '=sc'}, fmta([[\textsc{<>}]], i(1))),
   aus({trig = 'tmm'}, fmta([[\(<>\)]], d(1, get_visual))),
   aus({trig = 'tMM'}, fmta([=[\[<>\]]=], d(1, get_visual))),
   aus({trig = 'tbb'}, fmta([[\textbf{<>}]], d(1, get_visual))),
@@ -153,6 +178,7 @@ local auto_greek = {
   ['h'] = 'theta',
   ['H'] = 'Theta',
   ['vh'] = 'vartheta',
+  ['i'] = 'iota',
   ['k'] = 'kappa',
   ['l'] = 'lambda',
   ['L'] = 'Lambda',
@@ -186,7 +212,7 @@ vim.list_extend(M, auto_greek_snippets)
 
 local auto_expand_snippets = {}
 for k, v in pairs(auto_expand) do 
-  table.insert( auto_expand_snippets, aus( { trig = ';'..k, trigEngine = 'plain' }, fmta([[<>]], {v}) ) )
+  table.insert( auto_expand_snippets, tg_aus( { trig = ';'..k, trigEngine = 'plain' }, fmta([[\text<>]], {v}) ) )
 end
 vim.list_extend(M, auto_expand_snippets)
 return M

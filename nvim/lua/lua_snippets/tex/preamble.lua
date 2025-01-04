@@ -220,11 +220,11 @@ M = {
       ]], { i(1), i(2), i(0) }
     )
   ),
-  s({trig = "TemplatePROOF"},
+  s({trig = "TemplateFormalProof"},
     fmta(
       [[
       \documentclass{article}
-      \usepackage[a4paper,margin=2cm]{geometry}
+      \usepackage[a4paper,margin=2cm,includefoot,heightrounded]{geometry}
       \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
       \usepackage{tikz}
       \usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
@@ -235,11 +235,13 @@ M = {
       ]], { i(0) }
     )
   ),
-  s({trig = "TemplateJEE"},
+  s({trig = "TemplateShortMath"},
     fmta(
       [[
-      \documentclass[12pt,a4paper,notitlepage]{minimal}
+      \documentclass[10pt,notitlepage]{article}
+      \usepackage[a4paper,margin=1cm,includefoot,heightrounded]{geometry}
       \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
+      \allowdisplaybreaks[1]
       \usepackage{tikz}
       \usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
       %\usepackage{pgfplots}
@@ -252,7 +254,8 @@ M = {
   s({trig = "TemplateLinearAlgebra"},
     fmta(
       [[
-      \documentclass[12pt,a4paper]{minimal}
+      \documentclass[10pt]{minimal}
+      \usepackage[a4paper,includefoot,heightrounded]{geometry}
       \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs,fourier-orns}
       \title{Linear Algebra - <>}
       \author{Miraj M. Parikh}
