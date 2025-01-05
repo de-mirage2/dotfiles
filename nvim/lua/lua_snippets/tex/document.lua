@@ -32,11 +32,11 @@ function in_doc()
 end
 
 function ams_cond()
-  return in_doc() and vim.b.packages['amsmath'] ~= nil
+  return in_doc() and vim.b.vimtex.packages['amsmath'] ~= nil
 end
 
 function tg_cond()
-  return in_doc() and vim.b.packages['textgreek'] ~= nil
+  return in_doc() and vim.b.vimtex.packages['textgreek'] ~= nil
 end
 
 local get_visual = function(args, parent)
@@ -54,68 +54,102 @@ local tg_aus = ls.extend_decorator.apply(ls.snippet, { show_condition = tg_cond,
 
 M = {
   --s({trig = 'testDocument' }, t("document.lua LOADED")),
-  aus({trig = '=ali'}, fmta(
+  ams_aus('=al', fmta(
     [[
     \begin{align}
       <>
     \end{align}
     ]], {i(0)}
   )),
-  ams_aus({trig = '*ali'}, fmta(
+  ams_aus('*al', fmta(
     [[
     \begin{align*}
       <>
     \end{align*}
     ]], {i(0)}
   )),
-  aus({trig = '=IT'}, fmta(
+  aus('=eq', fmta(
+    [[
+    \begin{equation}<>\end{equation}
+    ]], {i(1)}
+  )),
+  aus('*eq', fmta(
+    [[
+    \begin{equation*}<>\end{equation*}
+    ]], {i(1)}
+  )),
+  ams_aus('=ga', fmta(
+    [[
+    \begin{gather}
+      <>
+    \end{gather}
+    ]], {i(0)}
+  )),
+  ams_aus('*ga', fmta(
+    [[
+    \begin{gather*}
+      <>
+    \end{gather*}
+    ]], {i(0)}
+  )),
+  aus('=it', fmta(
     [[
     \begin{itemize}
       \item <>
     \end{itemize}
     ]], {i(0)}
   )),
-  aus({trig = '=tikz'}, fmta(
+  ams_aus('=mu', fmta(
+    [[
+    \begin{multiline}
+      <>
+    \end{multiline}
+    ]], {i(0)}
+  )),
+  ams_aus('*mu', fmta(
+    [[
+    \begin{multiline*}
+      <>
+    \end{multiline*}
+    ]], {i(0)}
+  )),
+  aus('=tp', fmta(
     [[
     \begin{center}\begin{tikzpicture}[<>]
       <>
     \end{tikzpicture}\end{center}
     ]], {i(1), i(0)}
   )),
-  aus({trig = '=env'}, fmta(
+  aus('=tb', fmta(
+    [[
+    \begin{center}\begin{tabular}{<>}
+      <>
+    \end{tabular}\end{center}
+    ]], {i(1), i(0)}
+  )),
+  aus('nv', fmta(
     [[
     \begin{<>}
       <>
     \end{<>}
-    ]], {i(1,'gather'), i(0), rep(1)}
+    ]], {i(1), i(0), rep(1)}
   )),
-  ams_aus({trig = '*env'}, fmta(
-    [[
-    \begin{<>*}
-      <>
-    \end{<>*}
-    ]], {i(1,'gather'), i(0), rep(1)}
-  )),
-  aus({trig = '=tab'}, fmta(
-    [[
-    \begin{center}\begin{<>}{<>}
-      <>
-    \end{<>}\end{center}
-    ]], {i(1,'tabular'), i(2), i(0), rep(1)}
-  )),
-  aus({trig = '=S'}, fmta([[\section{<>}]], i(1))),
-  aus({trig = '=sS'}, fmta([[\subsection{<>}]], i(1))),
-  aus({trig = '=ssS'}, fmta([[\subsubsection{<>}]], i(1))),
-  aus({trig = '=m'}, fmta([[\(<>\)]], i(1))),
-  aus({trig = '=M'}, fmta([=[\[<>\]]=], i(1))),
-  aus({trig = '=bf'}, fmta([[\textbf{<>}]], i(1))),
-  aus({trig = '=it'}, fmta([[\textit{<>}]], i(1))),
-  aus({trig = '=sc'}, fmta([[\textsc{<>}]], i(1))),
-  aus({trig = 'tmm'}, fmta([[\(<>\)]], d(1, get_visual))),
-  aus({trig = 'tMM'}, fmta([=[\[<>\]]=], d(1, get_visual))),
-  aus({trig = 'tbb'}, fmta([[\textbf{<>}]], d(1, get_visual))),
-  aus({trig = 'tii'}, fmta([[\textit{<>}]], d(1, get_visual))),
-  aus({trig = '=sig'}, fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
+  aus({trig = '=s', priority = 997}, fmta([[\section{<>}]], i(1))),
+  aus({trig = '==s', priority = 998}, fmta([[\subsection{<>}]], i(1))),
+  aus({trig = '===s', priority = 999}, fmta([[\subsubsection{<>}]], i(1))),
+  aus('=m', fmta([[\(<>\)]], i(1))),
+  aus('=M', fmta([=[\[<>\]]=], i(1))),
+  aus('=bb', fmta([[\textbf{<>}]], i(1))),
+  aus('=ii', fmta([[\textit{<>}]], i(1))),
+  aus('=sc', fmta([[\textsc{<>}]], i(1))),
+  aus('=ee', fmta([[\emph{<>}]], i(1))),
+  aus('tmm', fmta([[\(<>\)]], d(1, get_visual))),
+  aus('tMM', fmta([=[\[<>\]]=], d(1, get_visual))),
+  aus('tbb', fmta([[\textbf{<>}]], d(1, get_visual))),
+  aus('tii', fmta([[\textit{<>}]], d(1, get_visual))),
+  aus('tsc', fmta([[\textsc{<>}]], d(1, get_visual))),
+  aus('tee', fmta([[\emph{<>}]], d(1, get_visual))),
+  aus('=SIG', fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)
       local r, c = snip.capture[1], snip.capture[2] -- rows and columns
@@ -146,22 +180,6 @@ M = {
       return str
     end )),
   ]=]
-}
-
-local auto_expand = {
-  ['indep'] = 'independent',
-  ['govt'] = 'government',
-  ['dept'] = 'department',
-  ['envt'] = 'environment',
-  ['entmt'] = 'entertainment',
-  ['natl'] = 'national',
-  ['intl'] = 'international',
-  ['thru'] = 'through',
-  ['w/'] = 'with',
-  ['lang'] = 'language',
-  ['wrt'] = 'with respect to',
-  ['a11y'] = 'accessibility',
-
 }
 
 local auto_greek = {
@@ -195,24 +213,42 @@ local auto_greek = {
   ['u'] = 'upsilon',
   ['U'] = 'Upsilon',
   ['f'] = 'phi',
-  ['vf'] = 'varphi',
   ['F'] = 'Phi',
-  ['x'] = 'chi',
+  ['vf'] = 'varphi',
+  ['c'] = 'chi',
   ['y'] = 'psi',
   ['Y'] = 'Psi',
   ['o'] = 'omega',
   ['O'] = 'Omega',
 }
 
+local auto_expand = {
+  ['a11y'] = 'accessibility',
+  ['dept'] = 'department',
+  ['envt'] = 'environment',
+  ['entmt'] = 'entertainment',
+  ['govt'] = 'government',
+  ['g11n'] = 'globalization',
+  ['indep'] = 'independent',
+  ['intl'] = 'international',
+  ['i10n'] = 'integration',
+  ['i18n'] = 'internationalization',
+  ['lang'] = 'language',
+  ['natl'] = 'national',
+  ['thru'] = 'through',
+  ['w/'] = 'with',
+  ['wrt'] = 'with respect to',
+}
+
 local auto_greek_snippets = {}
 for k, v in pairs(auto_greek) do 
-  table.insert( auto_greek_snippets, aus( { trig = ';' .. k, }, fmta([[\(\<>\)]], {v}) ) )
+  table.insert( auto_greek_snippets, tg_aus( { trig = ';' .. k, }, fmta([[{\text<>}]], {v}) ) )
 end
 vim.list_extend(M, auto_greek_snippets)
 
 local auto_expand_snippets = {}
 for k, v in pairs(auto_expand) do 
-  table.insert( auto_expand_snippets, tg_aus( { trig = ';'..k, trigEngine = 'plain' }, fmta([[\text<>]], {v}) ) )
+  table.insert( auto_expand_snippets, aus( { trig = k, trigEngine = 'plain' }, fmta('<>', {v}) ) )
 end
 vim.list_extend(M, auto_expand_snippets)
 return M

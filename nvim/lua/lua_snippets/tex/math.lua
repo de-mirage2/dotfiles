@@ -31,7 +31,11 @@ function in_math()
 end
 
 function ams_cond()
-  return in_math() and vim.b.packages['amsmath'] ~= nil
+  return in_math() and vim.b.vimtex.packages['amsmath'] ~= nil
+end
+
+function wasy_cond()
+  return in_math() and vim.b.vimtex.packages['wasy'] ~= nil
 end
 
 local s =  ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'plain' }) -- plain snippet
@@ -42,113 +46,123 @@ local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_co
 local raus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' }) -- regex autosnippet
 local maus = ls.extend_decorator.apply(ls.multi_snippet, { common = { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain'} }) -- plain multiautosnippet
 
-local ams_aus = ls.extend_decorator.apply(ls.snippet, { condition = ams_cond, show_condition = ams_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain ams autosnippet
-
--- i hate lua --
+local ams_aus = ls.extend_decorator.apply(ls.snippet, { condition = ams_cond, show_condition = ams_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain amsmath autosnippet
+local wasy_aus = ls.extend_decorator.apply(ls.snippet, { condition = wasy_cond, show_condition = wasy_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain wasysym autosnippet
 
 M = {
   -- s({trig = "testMath"}, t("math.lua LOADED")),
 
-  -- power & subscript
   --aus({trig = "++"}, fmta([[^{<>}]], {i(1)})),
   --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
   
-  -- inv
-  aus({trig = ',I'}, t('^{-1}')),
-
-  -- complement
-  ams_aus({trig = ',c'}, t('^\\complement')),
-
-  -- e^{}
   maus({',e','eE'}, fmta([[e^{<>}]], {i(1)})),
+  maus({',I', 'iI', 'inV'}, t('^{-1}')),
+  ams_aus(',c', t('^{\\complement}')),
 
-  -- derivative
-  aus({trig = 'DD'}, fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
-  aus({trig = 'dD'}, fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
-  aus({trig = 'DP'}, fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  aus({trig = 'dP'}, fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus('DD', fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
+  aus('dD', fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
+  aus('DP', fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus('dP', fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  
+  aus(',i', fmta([[\int{<>}\,\mathrm{d}{<>}]], {i(2,'f(x)'), i(1,'x')})),
+  aus('int', fmta([[\int_{<>}^{<>}{<>}\,\mathrm{d}{<>}]], {i(2,'-\\infty'), i(3,'\\infty'), i(4,'f(x)'), i(1,'x')})),
+  aus('inT', fmta([[\int_{<>}<>\,{\mathrm{d}<>}]], {i(2,'\\Omega'), i(3,'f(x)'), i(1,'x')})),
+  aus('InT', fmta([[\int\limits_{<>}<>\,{\mathrm{d}<>}]], {i(2,'x\\in\\Omega'), i(3,'f(x)'), i(1,'x')})),
+  ams_aus('i2nt', fmta([[\iint{<>}\,{\mathrm{d}<>}]], {i(2,'f(x)'), i(1,'^2x')})),
+  ams_aus('i2nT', fmta([[\iint_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^2'), i(3,'f(x,y)'), i(1,[[x\,\mathrm{d}y]])})),
+  ams_aus('I2nT', fmta([[\iint\limits_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^2'), i(3,'f(x,y)'), i(1,[[x\,\mathrm{d}y]])})),
+  ams_aus('i2NT', fmta([[\int_{<>}^{<>}\!\!\int_{<>}^{<>}{<>}\,{\mathrm{d}<>}]], {i(4,'0'), i(5,'2\\pi'), i(2,'-\\infty'), i(3,'\\infty'), i(6,'f(r,\\theta)r') i(1,[[r\,\mathrm{d}\theta]])})),
+  ams_aus('i3nt', fmta([[\iiint{<>}\,{\mathrm{d}<>}]], {i(2,'f(x)'), i(1,'^3x')})),
+  ams_aus('i3nT', fmta([[\iiint_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^3'),i(3,'f(x,y,z)'), i(1,[[x\,\mathrm{d}y\,\mathrm{d}z]])})),
+  ams_aus('I3nT', fmta([[\iiint\limits_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^3'),i(3,'f(x,y,z)'), i(1,[[x\,\mathrm{d}y\,\mathrm{d}z]])})),
+  ams_aus('i3NT', fmta([[\int_{<>}^{<>}\!\!\int_{<>}^{<>}\!\!\int_{<>}^{<>}{<>}\,{\mathrm{d}<>}]], {i(6,'0'),i(7,'2\\pi'), i(4,'0'), i(5,'2\\pi'), i(2,'-\\infty'), i(3,'\\infty'), i(8,[[f(\rho,\theta,\phi)\]]), i(1,[[\rho\,\mathrm{d}\theta\,\mathrm{d}\phi]])})),
+  aus('ont', fmta([[\oint_{<>}<>\,{\mathrm{d}<>}]], {i(2,'C'), i(3,'f(z)'), i(1,'z')})),
+  aus('onT', fmta([[\oint{<>}\,{\mathrm{d}<>}]], {i(2,'f(z)'), i(1,'z')})),
 
-  -- fraction & binomial
   aus({trig = 'ff', priority=999}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
   aus({trig = 'Ff', priority=999}, fmta([[\frac<>{<>}]], {i(1), i(2)})),
-  aus({trig = 'fF', priority=999}, fmta([[\frac{<>}<>]], {i(1), i(2)})),
-  aus({trig = 'FF', priority=999}, fmta([[\frac<>]], {i(1)})),
-  aus({trig = 'ncr'}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
+  aus({trig = 'fF', priority=999}, fmta([[\frac{<>}]], {i(1)})),
+  aus({trig = 'FF', priority=999}, t([[\frac]])),
+  aus({trig = 'nCr', priority=999}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
 
-  -- function
-  aus({trig = 'Fn'}, fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}'), i(4,'x'), i(0,'e^x')})),
+  aus('surj', fmta([[<> : <> \to <> \;;\; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}'), i(4,'x'), i(0,'e^x')})),
 
-  -- limit, limsup, liminf
-  aus({trig = ',l'}, fmta([[\lim_{<>\to{<>}}\left(<>\right)]], {i(1), i(2,'\\infty'), i(0)})), 
-  aus({trig = 'lms'}, fmta([[\limsup_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
-  aus({trig = 'lmi'}, fmta([[\liminf_{<>\to{<>}}\left(<>\right)]], {i(1), i(2), i(0)})), 
+  aus('lmi', fmta([[\liminf_{<>\to{<>}}]], {i(1), i(2)})), 
+  aus('lms', fmta([[\limsup_{<>\to{<>}}]], {i(1), i(2)})), 
+  maus({',l', 'lmt'}, fmta([[\lim_{<>\to{<>}}]], {i(1, 'x'), i(2,'\\infty')})), 
+  aus(',L', fmta([[\limits_{<>}^{<>}]], {i(1, '-\\infty'), i(2,'\\infty')})), 
 
-  -- integrals - indef and def w/ contour variations
-  aus({trig = 'int'}, fmta([[\int_{<>}^{<>}<>\,\mathrm{d}<>]], {i(1), i(2), i(0), i(3,'x')})), -- definite integral
-  aus({trig = 'inT'}, fmta([[\int<>\,\mathrm{d}<>]], {i(0), i(1,'x')})), -- indefinite integral
-  aus({trig = 'iNT'}, fmta([[\int_{<>}<>\,\mathrm{d}<>]], {i(1), i(0), i(2,'x')})), -- integral over space
-  aus({trig = ',i' }, fmta([[\int<>\,\mathrm{d}<>]], {i(2), i(1,'x')})), -- quick integral
-  aus({trig = 'ont'}, fmta([[\oint_{<>}<>\,\mathrm{d}<>]], {i(1,'C'), i(0), i(2,'z')})), -- contour integral over space
-  aus({trig = 'onT'}, fmta([[\oint<>\,\mathrm{d}<>]], {i(0), i(1,'z')})), -- indefinite contour integral
+  aus('amax', fmta([[\argmax_{<>}{<>}]], {i(1, 'x'), i(2)})),
+  aus('amin', fmta([[\argmin_{<>}{<>}]], {i(1, 'x'), i(2)})),
 
-  -- math fonts
-  aus({trig = 'mtB'}, fmta([[\mathbb{<>}]], {i(1)})), -- blackboard bold
-  aus({trig = 'mtC'}, fmta([[\mathcal{<>}]], {i(1)})), -- calligraphic
-  aus({trig = 'mtF'}, fmta([[\mathfrak{<>}]], {i(1)})),  -- fraktur
+  aus('mtb', fmta([[\mathbf{<>}]], {i(1)})),
+  aus('mti', fmta([[\mathit{<>}]], {i(1)})),
+  aus('mtr', fmta([[\mathrm{<>}]], {i(1)})),
+  aus('mts', fmta([[\mathsf{<>}]], {i(1)})),
+  aus('mtt', fmta([[\mathtt{<>}]], {i(1)})),
 
-  aus({trig = 'mtr'}, fmta([[\mathrm{<>}]], {i(1)})),  -- roman
-  aus({trig = 'mtt'}, fmta([[\mathtt{<>}]], {i(1)})),  -- typewriter
-  aus({trig = 'mti'}, fmta([[\mathit{<>}]], {i(1)})),  -- italic
-  aus({trig = 'mtb'}, fmta([[\mathsf{<>}]], {i(1)})),  -- bold
-  aus({trig = 'mts'}, fmta([[\mathsf{<>}]], {i(1)})),  -- sans serif
+  aus('mtB', fmta([[\mathbb{<>}]], {i(1)})),
+  aus('mtC', fmta([[\mathcal{<>}]], {i(1)})),
+  aus('mtF', fmta([[\mathfrak{<>}]], {i(1)})),
 
-  -- left-right delimiters
-  maus({'lrp','lr()'}, fmta([[\left(<>\right)]], {i(1)})), -- (p)arentheses
-  maus({'lra','lr|' }, fmta([[\left|<>\right|]], {i(1)})), -- (a)bsolute value / single bars
-  maus({'lrb','lr[]'}, fmta([=[\left[<>\right]]=], {i(1)})), -- square (b)rackets
-  maus({'lre','lr.' }, fmta([[\left.<>\right\vert]], {i(1)})), -- (e)valuation
-  maus({'lrn','lrm' }, fmta([[\left\Vert<>\right\Vert]], {i(1)})), -- (n)orm/(m)agnitude
-  maus({'lrc','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})), --  (c)urly brackets
-  maus({'lrv','lr<','lr>'}, fmta([[\left\langle<>\right\rangle]], {i(1)})), -- (v)ector angle brackets
+  maus({'lra','lr|' }, fmta([[\left|{<>}\right|]], {i(1)})),
+  maus({'lrb','lr[]'}, fmta([=[\left[{<>}\right]]=], {i(1)})),
+  maus({'lrc','lr{}'}, fmta([[\left\{{<>}\right\}]], {i(1)})),
+  maus({'lre','lr.' }, fmta([[\left.{<>}\right\vert]], {i(1)})),
+  maus({'lrn','lrm' }, fmta([[\left\Vert{<>}\right\Vert]], {i(1)})),
+  maus({'lrp','lr()'}, fmta([[\left({<>}\right)]], {i(1)})),
+  maus({'lrv','lr<','lr>'}, fmta([[\left\langle{<>}\right\rangle]], {i(1)})),
 
-  -- taylor-maclaurin
-  aus({trig = 'tayl'}, fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}\left(<>\right)}{n!}\left(x-<>\right)^n]], {i(1), i(2, 'c'), rep(2)})),
-  aus({trig = 'macl'}, fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}(0)x^n}{n!}]], {i(1)})),  
+  aus('tayl', fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}\left(<>\right)}{n!}\left(x-<>\right)^n]], {i(1), i(2, 'c'), rep(2)})),
+  aus('macl', fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}(0)x^n}{n!}]], {i(1)})),  
 
-  -- common maclaurin series
-  aus({trig = 'mace'}, fmta([[\sum_{n=0}^{\infty}\frac{<>^n}{n!}]], {i(1,'x')})), -- exp(x)
-  aus({trig = 'macs'}, fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})), -- sin(x)
-  aus({trig = 'macc'}, fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})), -- cos(x)
-  aus({trig = 'maca'}, fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})), -- arctan(x)
-  aus({trig = 'macS'}, fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})), -- sinh(x)
-  aus({trig = 'macC'}, fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})), -- cosh(x)
-  aus({trig = 'macA'}, fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})), -- arctanh(x)
-  aus({trig = 'macn'}, fmta([[\sum_{n=1}^{\infty}(-1)^n\frac{<>^n}{n}]], {i(1,'x')})), -- ln(1+x)
+  aus('macexp', fmta([[\sum_{n=0}^{\infty}\frac{<>^n}{n!}]], {i(1,'x')})),
+  aus('macsin', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})),
+  aus('maccos', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})),
+  aus('macatan', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})),
+  aus('macsnh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})),
+  aus('maccsh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})),
+  aus('macatnh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})),
+  aus('macln', fmta([[\sum_{n=1}^{\infty}(-1)^n\frac{<>^n}{n}]], {i(1,'x')})),
 
-  -- dot series
-  aus({trig = 'dot', priority=999}, fmta([[\dot{<>}]], {i(1)})),
-  aus({trig = 'ddot', priority=1001}, fmta([[\ddot{<>}]], {i(1)})),
-  aus({trig = 'dddot', priority=1002}, fmta([[\dddot{<>}]], {i(1)})),
-  aus({trig = 'ddddot', priority=1003}, fmta([[\ddddot{<>}]], {i(1)})),
-  
+  aus({trig = 'dot', priority=996}, fmta([[\dot{<>}]], {i(1)})),
+  aus({trig = 'ddot', priority=997}, fmta([[\ddot{<>}]], {i(1)})),
+  aus({trig = 'dddot', priority=998}, fmta([[\dddot{<>}]], {i(1)})),
+  aus({trig = 'ddddot', priority=999}, fmta([[\ddddot{<>}]], {i(1)})),
+ 
   -- subscript digital
   raus({trig = '([%a%)%]%}])0(%d)'}, f( function(_, snip) return snip.captures[1].."_{"..snip.captures[2].."}" end )), -- a01 -> a_{1} and k08 -> k_{8}
 }
 
-local auto_cmdparenth = {
-  'exp',
-  'Im',
-  'Re',
-  'Pr',
-  'gcd',
-  'lcm',
-}
+local auto_loglike_pair = {
+  ['Pr'] = 'Pr',
+  ['Im'] = 'Im',
+  ['Re'] = 'Re',
+  ['arG'] = 'arg',
+  ['deT'] = 'det',
+  ['diM'] = 'dim',
+  ['exP'] = 'exp',
+  ['keR'] = 'ker',
+  ['miN'] = 'min',
+  ['maX'] = 'max',
+  ['gcD'] = 'gcd',
 
-local auto_cmdbracket = {
-  'vec',
-  'bar',
-  'hat',
-  'tilde',
+  ['lG'] = 'lg',
+  ['lN'] = 'ln',
+  ['loG'] = 'log',
+
+  ['siN'] = 'sin',
+  ['snH'] = 'sinh',
+  ['asin'] = 'arcsin',
+  ['coS'] = 'cos',
+  ['csH'] = 'cosh',
+  ['acos'] = 'arccos',
+  ['taN'] = 'tan',
+  ['tnH'] = 'tanh',
+  ['seC'] = 'sec',
+  ['csC'] = 'csc',
+  ['coT'] = 'cot',
+  ['ctH'] = 'coth',
 }
 
 local auto_bigcmdparenth = {
@@ -159,62 +173,64 @@ local auto_bigcmdparenth = {
   'bigcup',
 }
 
-local auto_cmd = {
-  'aleph', -- non-func
-  'ast',
-  'perp',
-  'perpto',
-  'log', -- func
-  'ln',
-  'argmax',
-  'argmin',
+local auto_cmdbracket = {
+  'vec',
+  'bar',
+  'hat',
+  'tilde',
   'sqrt',
 }
 
+local auto_cmd = {
+  'aleph',
+  'perp',
+}
+
 local auto_cmd_pair = {
-  ['asin'] = 'arcsin',
-  ['acos'] = 'arccos',
-  ['atan'] = 'arctan',
+  [',p'] = 'partial',
+  [',d'] = 'mathrm{d}',
+  ['del'] = 'nabla',
+
+  ['lll'] = 'ell',
+  ['hh'] = 'hbar',
+  ['ii'] = 'imath',
+  ['jj'] = 'jmath',
+  ['ooo'] = 'infty',
+
+  ['+-'] = 'pm',
+  ['-+'] = 'mp',
+
+  ['**'] = 'ast',
+  ['XX'] = 'star',
+  ['@@'] = 'cdot',
+  ['xx'] = 'times',
+
   ['ld.'] = 'ldots',
   ['cd.'] = 'cdots',
+
   [',='] = 'equiv',
   ['~='] = 'approx',
   ['~~'] = 'sim',
   ['!='] = 'neq',
   ['>='] = 'geq',
   ['<='] = 'leq',
-  ['**'] = 'cdot',
-  ['xx'] = 'times',
-  [',p'] = 'partial',
-  [',d'] = 'mathrm{d}',
+
   ['!!'] = 'neg',
   ['EE'] = 'exists',
   ['FA'] = 'forall',
   ['IN'] = 'in',
   ['!N'] = 'notin',
-  ['NN'] = 'mathbb{N}',
-  ['RR'] = 'mathbb{R}',
-  ['ZZ'] = 'mathbb{Z}',
-  ['QQ'] = 'mathbb{Q}',
-  ['CC'] = 'mathbb{C}',
-  ['OO'] = 'emptyset',
+  ['O/'] = 'emptyset',
   ['cc'] = 'subset',
   ['qq'] = 'supset',
   ['cq'] = 'subseteq',
   ['qc'] = 'supseteq',
-  ['::'] = 'colon',
   ['VV'] = 'lor',
   ['MM'] = 'land',
-  ['UU'] = 'cup',
+  ['uu'] = 'cup',
   ['nn'] = 'cap',
   ['ssup'] = 'sup',
   ['sinf'] = 'inf',
-  ['ooo'] = 'infty',
-  ['lll'] = 'ell',
-  ['h-'] = 'hbar',
-  ['ii'] = 'imath',
-  ['jj'] = 'jmath',
-  ['del'] = 'nabla',
   ['|>'] = 'mapsto',
   ['|->'] = 'longmapsto',
   ['->'] = 'to',
@@ -223,16 +239,21 @@ local auto_cmd_pair = {
   ['<='] = 'impliedby',
   ['iff'] = 'iff',
   ['<H>'] = 'rightleftharpoons',
-  ['+-'] = 'pm',
-  ['-+'] = 'mp',
+  ['::'] = 'colon',
 }
 
 local ams_auto_cmd_pair = {
-  [':='] = 'coloneq',
-  ['qed'] = 'blacksquare',
+  ['CC'] = 'mathbb{C}',
+  ['HH'] = 'mathbb{H}',
+  ['NN'] = 'mathbb{N}',
+  ['QQ'] = 'mathbb{Q}',
+  ['RR'] = 'mathbb{R}',
+  ['ZZ'] = 'mathbb{Z}',
+  ['!E'] = 'nexists',
   ['thfr'] = 'therefore',
   ['becs'] = 'because',
-  ['!E'] = 'nexists',
+  [':='] = 'coloneq',
+  ['qed'] = 'blacksquare',
 }
 
 
@@ -275,13 +296,6 @@ local auto_greek = {
   ['o'] = 'omega',
   ['O'] = 'Omega',
 }
-
-local auto_cmdparenth_snippets = {}
-for _, v in ipairs(auto_cmdparenth) do
-  table.insert( auto_cmdparenth_snippets, aus( { trig = v, }, fmta([[\<>\left(<>\right)]], {v, i(0)}) ) )
-  --table.insert( auto_cmdparenth_snippets, aus( {regTrig = true, wordTrig = false, trig = [[(^\\)]]..v, }, fmta([[\<>\left(<>\right)]], {v, i(0)}) ) )
-end
-vim.list_extend(M, auto_cmdparenth_snippets)
 
 local auto_cmdbracket_snippets = {}
 for _, v in ipairs(auto_cmdbracket) do
