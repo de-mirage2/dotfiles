@@ -30,12 +30,12 @@ function in_math()
   return vim.api.nvim_eval("vimtex#syntax#in_mathzone()") == 1
 end
 
-function ams_cond()
+function amath()
   return in_math() and vim.b.vimtex.packages['amsmath'] ~= nil
 end
 
-function wasy_cond()
-  return in_math() and vim.b.vimtex.packages['wasy'] ~= nil
+function asymb_cond()
+  return in_math() and vim.b.vimtex.packages['amssymb'] ~= nil
 end
 
 local s =  ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, trigEngine = 'plain' }) -- plain snippet
@@ -46,8 +46,8 @@ local aus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_co
 local raus = ls.extend_decorator.apply(ls.snippet, { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' }) -- regex autosnippet
 local maus = ls.extend_decorator.apply(ls.multi_snippet, { common = { condition = in_math, show_condition = in_math, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain'} }) -- plain multiautosnippet
 
-local ams_aus = ls.extend_decorator.apply(ls.snippet, { condition = ams_cond, show_condition = ams_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain amsmath autosnippet
-local wasy_aus = ls.extend_decorator.apply(ls.snippet, { condition = wasy_cond, show_condition = wasy_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain wasysym autosnippet
+local ams_aus = ls.extend_decorator.apply(ls.snippet, { condition = amath, show_condition = amath, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain amsmath autosnippet
+local asymb_aus = ls.extend_decorator.apply(ls.snippet, { condition = asymb_cond, show_condition = asymb_cond, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain amssymb autosnippet
 
 M = {
   -- s({trig = "testMath"}, t("math.lua LOADED")),
@@ -193,8 +193,10 @@ local auto_cmd_pair = {
 
   ['lll'] = 'ell',
   ['hh'] = 'hbar',
-  ['ii'] = 'imath',
-  ['jj'] = 'jmath',
+  ['II'] = 'imath',
+  ['JJ'] = 'jmath',
+  ['ii'] = 'hat{\\imath}',
+  ['jj'] = 'hat{\\jmath}',
   ['ooo'] = 'infty',
 
   ['+-'] = 'pm',
