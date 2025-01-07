@@ -71,7 +71,7 @@ M = {
   ams_aus('i2nt', fmta([[\iint{<>}\,{\mathrm{d}<>}]], {i(2,'f(x)'), i(1,'^2x')})),
   ams_aus('i2nT', fmta([[\iint_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^2'), i(3,'f(x,y)'), i(1,[[x\,\mathrm{d}y]])})),
   ams_aus('I2nT', fmta([[\iint\limits_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^2'), i(3,'f(x,y)'), i(1,[[x\,\mathrm{d}y]])})),
-  ams_aus('i2NT', fmta([[\int_{<>}^{<>}\!\!\int_{<>}^{<>}{<>}\,{\mathrm{d}<>}]], {i(4,'0'), i(5,'2\\pi'), i(2,'-\\infty'), i(3,'\\infty'), i(6,'f(r,\\theta)r') i(1,[[r\,\mathrm{d}\theta]])})),
+  ams_aus('i2NT', fmta([[\int_{<>}^{<>}\!\!\int_{<>}^{<>}{<>}\,{\mathrm{d}<>}]], {i(4,'0'), i(5,'2\\pi'), i(2,'-\\infty'), i(3,'\\infty'), i(6,'f(r,\\theta)r'), i(1,[[r\,\mathrm{d}\theta]])})),
   ams_aus('i3nt', fmta([[\iiint{<>}\,{\mathrm{d}<>}]], {i(2,'f(x)'), i(1,'^3x')})),
   ams_aus('i3nT', fmta([[\iiint_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^3'),i(3,'f(x,y,z)'), i(1,[[x\,\mathrm{d}y\,\mathrm{d}z]])})),
   ams_aus('I3nT', fmta([[\iiint\limits_{<>}{<>}\,{\mathrm{d}<>}]], {i(2,'\\mathbb{R}^3'),i(3,'f(x,y,z)'), i(1,[[x\,\mathrm{d}y\,\mathrm{d}z]])})),
