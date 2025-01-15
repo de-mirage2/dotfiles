@@ -209,7 +209,7 @@ Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper i
 ## differential notation
 `,d` - differential notation, `\mathrm{d}`
 `,p` - partial differential notation (∂), `\partial`
-`del` - gradient, `\nabla`
+`VD` - gradient, `\nabla`
 ## letter-like
 `lll` - alternative to l, `\ell`
 `hh` - planck constant, `\hbar`

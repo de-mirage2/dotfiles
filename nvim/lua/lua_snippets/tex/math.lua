@@ -189,7 +189,7 @@ local auto_cmd = {
 local auto_cmd_pair = {
   [',p'] = 'partial',
   [',d'] = 'mathrm{d}',
-  ['del'] = 'nabla',
+  ['VD'] = 'nabla',
 
   ['lll'] = 'ell',
   ['hh'] = 'hbar',

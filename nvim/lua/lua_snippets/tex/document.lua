@@ -39,7 +39,7 @@ function tg_cond()
   return in_doc() and vim.b.vimtex.packages['textgreek'] ~= nil
 end
 
-local get_visual = function(args, parent)
+local get_vis = function(args, parent)
   if (#parent.snippet.env.LS_SELECT_RAW > 0) then
     return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
   else  -- If LS_SELECT_RAW is empty, return a blank insert node
@@ -127,7 +127,7 @@ M = {
     \end{tabular}\end{center}
     ]], {i(1), i(0)}
   )),
-  aus('nv', fmta(
+  aus('=nv', fmta(
     [[
     \begin{<>}
       <>
@@ -143,12 +143,12 @@ M = {
   aus('=ii', fmta([[\textit{<>}]], i(1))),
   aus('=sc', fmta([[\textsc{<>}]], i(1))),
   aus('=ee', fmta([[\emph{<>}]], i(1))),
-  aus('tmm', fmta([[\(<>\)]], d(1, get_visual))),
-  aus('tMM', fmta([=[\[<>\]]=], d(1, get_visual))),
-  aus('tbb', fmta([[\textbf{<>}]], d(1, get_visual))),
-  aus('tii', fmta([[\textit{<>}]], d(1, get_visual))),
-  aus('tsc', fmta([[\textsc{<>}]], d(1, get_visual))),
-  aus('tee', fmta([[\emph{<>}]], d(1, get_visual))),
+  aus('xmm', fmta([[\(<>\)]], d(1, get_vis))),
+  aus('xMM', fmta([=[\[<>\]]=], d(1, get_vis))),
+  aus('xbb', fmta([[\textbf{<>}]], d(1, get_vis))),
+  aus('xii', fmta([[\textit{<>}]], d(1, get_vis))),
+  aus('xsc', fmta([[\textsc{<>}]], d(1, get_vis))),
+  aus('xee', fmta([[\emph{<>}]], d(1, get_vis))),
   aus('=SIG', fmta([[\vfill\hfill\oldpilcrowfive\LaTeX % <>\usepackage{fourier-orns}]], i(0))),
   --[=[s({trig = "tablelab(%d)x(%d)", regTrig = true, snippetType = 'autosnippet', show_condition = in_doc, condition = in_doc},
     f(function(args, snip)

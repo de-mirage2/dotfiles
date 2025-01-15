@@ -5,7 +5,7 @@ vim.g.tex_flavor = 'latex'
 vim.g.vimtex_compiler_latexmk = {
   executable = 'latexmk',
   options = {
-    '-shell-escape',  -- Specifies the use of XeLaTeX
+    '-shell-escape',
     '-file-line-error',
     '-synctex=1',
     '-interaction=nonstopmode',

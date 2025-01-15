@@ -1,0 +1,111 @@
+local ls = require("luasnip")
+-- local s = ls.snippet
+local sn = ls.snippet_node
+local isn = ls.indent_snippet_node
+local t = ls.text_node
+local i = ls.insert_node
+local f = ls.function_node
+local c = ls.choice_node
+local d = ls.dynamic_node
+local r = ls.restore_node
+local events = require("luasnip.util.events")
+local ai = require("luasnip.nodes.absolute_indexer")
+local extras = require("luasnip.extras")
+local l = extras.lambda
+local rep = extras.rep
+local p = extras.partial
+local m = extras.match
+local n = extras.nonempty
+local dl = extras.dynamic_lambda
+local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
+local conds = require("luasnip.extras.expand_conditions")
+local postfix = require("luasnip.extras.postfix").postfix
+local types = require("luasnip.util.types")
+local parse = require("luasnip.util.parser").parse_snippet
+local ms = ls.multi_snippet
+local k = require("luasnip.nodes.key_indexer").new_key
+
+function islineone() return vim.fn.getpos(".")[2] == 1 end
+
+local ps =  ls.extend_decorator.apply(ls.snippet, { condition = islineone, show_condition = islineone, wordTrig = false, trigEngine = 'plain' }) -- plain snippet line 1
+local paus = ls.extend_decorator.apply(ls.snippet, { condition = islineone, show_condition = islineone, wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain autosnippet line 1
+
+local s =  ls.extend_decorator.apply(ls.snippet, { wordTrig = false, trigEngine = 'plain' }) -- plain snippet
+local aus = ls.extend_decorator.apply(ls.snippet, { wordTrig = false, snippetType = 'autosnippet', trigEngine = 'plain' }) -- plain autosnippet
+local raus = ls.extend_decorator.apply(ls.snippet, { wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' }) -- regex autosnippet
+
+M = {
+  paus('comp', fmt([=[
+  #include <algorithm>
+  #include <cmath>
+  #include <deque>
+  #include <iostream>
+  #include <iterator>
+  #include <map>
+  #include <numeric>
+  #include <queue>
+  #include <set>
+  #include <stack>
+  #include <unordered_map>
+  #include <unordered_set>
+  #include <utility>
+  #include <vector>
+
+  using namespace std;
+  typedef long long ll;
+  typedef long double ld;
+  typedef unsigned long long ull;
+  typedef unsigned int usi;
+  typedef unsigned short uss;
+  typedef pair<ll,ll> pll;
+  typedef pair<ull,ull> pul;
+  typedef pair<int,int> pii;
+  typedef pair<usi,usi> pui;
+  typedef vector<ll,ll> vll;
+  typedef vector<ull,ull> vul;
+  typedef vector<int,int> vii;
+  typedef vector<usi,usi> vui;
+  typedef vector<string> vs;
+  typedef vector<char> vc;
+
+  #define endl <<'\n'
+
+  #define MOD 1000000007;
+  #define PI 3.1415926535897932384626433832795;
+  #define EPS = 1e-9;
+  #define INF = 1e9;
+
+  // Faster Modulo
+  ll fm(const ll ___fmi, const ll ___fmc) { return ___fmi >= ___fmc ? ___fmc : ___fmi; }
+  int fm(const int ___fmi, const int ___fmc) { return ___fmi >= ___fmc ? ___fmc : ___fmi; }
+  usi fm(const usi ___fmi, const usi ___fmc) { return ___fmi >= ___fmc ? ___fmc : ___fmi; }
+  ull fm(const ull ___fmi, const ull ___fmc) { return ___fmi >= ___fmc ? ___fmc : ___fmi; }
+
+  int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    []
+    return 0;
+  }
+  ]=], {i(0)}, {delimiters='[]'})), 
+  aus('forl', fmt([=[
+  for (int [] = 0; [] < []; []++) {
+    []
+  }
+  ]=], {i(1, 'i'), rep(1), i(2,'n'), rep(1), i(0)}, {delimiters='[]'})),
+
+  aus('iff', fmt([=[
+  iff ([]) {
+    []
+  }
+  ]=], {i(1, 'true'), i(0)),
+
+  aus('iff', fmt([=[
+  iff ([]) {
+    []
+  }
+  ]=], {i(1, 'true'), i(0))
+}
+return M
