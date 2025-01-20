@@ -1,58 +1,28 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+set -o vi
 
-# Path to your oh-my-zsh installation.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
+# Set list of themes to pick when ZSH_THEME=random
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
+HYPHEN_INSENSITIVE="false"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 7
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 14
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -60,36 +30,22 @@ zstyle ':omz:update' frequency 7
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+HIST_STAMPS="yyyy-mm-dd"
 
 # Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux sudo history emoji encode64 copypath)
-autoload zmv
+# Standard and custom plugins found in $ZSH/plugins/ and $ZSH_CUSTOM/plugins/
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+plugins=(sudo history emoji)
+
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -109,17 +65,117 @@ export ARCHFLAGS="-arch x86_64"
 #bindkey -r '^[[1;5D'
 #bindkey '^[[1;5D' expand-or-complete
 #bindkey '\t' expand-or-complete
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+# Git aliases (copying omz plugin)
+
+alias g='git'
+alias ga='git add'
+alias gaa='git add -all'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbd='git branch --delete'
+alias gbD='git branch --delete --force'
+alias gc='git commit --verbose'
+alias gcm='git commit --verbose --message'
+alias gca='git commit --verbose --all'
+alias gcam='git commit --verbose --all --message'
+alias gm='git merge'
+alias gma='git merge --abort'
+alias gmc='git merge --continue'
+alias gms="git merge --squash"
+alias gmff="git merge --ff-only"
+alias gl='git pull'
+alias gpr='git pull --rebase'
+alias gprv='git pull --rebase -v'
+alias gpra='git pull --rebase --autostash'
+alias gprav='git pull --rebase --autostash -v'
+alias gp='git push'
+alias gpd='git push --dry-run'
+alias gpv='git push --verbose'
+alias gpod='git push origin --delete'
+alias gr='git remote'
+alias grv='git remote --verbose'
+alias gra='git remote add'
+alias grrm='git remote remove'
+alias grmv='git remote rename'
+alias grset='git remote set-url'
+alias grup='git remote update'
+alias grh='git reset'
+alias gru='git reset --'
+alias grhh='git reset --hard'
+alias grhk='git reset --keep'
+alias grhs='git reset --soft'
+alias gpristine='git reset --hard && git clean --force -dfx'
+alias gwipe='git reset --hard && git clean --force -df'
+
+
+# History aliases (copying omz plugin)
+alias h='history'
+alias hl='history | less'
+alias hs='history | grep'
+alias hsi='history | grep -i'
+
+
+# Base 64 aliases (copying omz plugin)
+encode64() {
+    if [[ $# -eq 0 ]]; then
+        cat | base64
+    else
+        printf '%s' $1 | base64
+    fi
+}
+
+encodefile64() {
+    if [[ $# -eq 0 ]]; then
+        echo "You must provide a filename"
+    else
+        base64 $1 > $1.txt
+        echo "${1}'s content encoded in base64 and saved as ${1}.txt"
+    fi
+}
+
+decode64() {
+    if [[ $# -eq 0 ]]; then
+        cat | base64 --decode
+    else
+        printf '%s' $1 | base64 --decode
+    fi
+}
+alias e64=encode64
+alias ef64=encodefile64
+alias d64=decode64
+
+
+# Copypath aliases (copying omz plugin)
+function copypath {
+  # If no argument passed, use current directory
+  local file="${1:-.}"
+
+  # If argument is not an absolute path, prepend $PWD
+  [[ $file = /* ]] || file="$PWD/$file"
+
+  # Copy the absolute path without resolving symlinks
+  # If clipcopy fails, exit the function with an error
+  print -n "${file:a}" | clipcopy || return 1
+
+  echo ${(%):-"%B${file:a}%b copied to clipboard."}
+}
+alias cppath='copypath'
+
+
+## Custom
+
+alias -g NUL='> /dev/null 2>&1'
+
+alias ZZ='exit'
+
+alias zshconf="nvim ~/.zshrc"
+alias omzconf="nvim ~/.oh-my-zsh"
 
 alias yay='paru'
 
+alias dud='du -hd1'
 alias l='lsd -lhF --color=auto'
 alias ls='lsd -lahF --color=auto'
 alias lt='lsd --tree'
@@ -127,17 +183,17 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='grep -E --color=auto'
 alias diff='diff --color=auto'
-alias ZZ='exit'
-alias pacsize="pacman -Qui | egrep '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less"
+
 alias neovimReset='rm -fr ~/.local/share/nvim ~/.local/state/nvim'
 
 alias pls='sudo'
+alias plz='sudo'
 
 alias freak="echo 'im 𝓯𝓻𝓮𝓪𝓴𝔂'"
 alias rosesarered="echo 'violetsareblue'"
 
 #Functions
-musicdl() {
+ydl() {
   yt-dlp $1 -f "ba" -x -o "$2"
 }
 
@@ -145,24 +201,8 @@ ytaudiostream() {
   yt-dlp -f bestaudio $1 -x -o - 2>/dev/null | ffplay -nodisp -autoexit -i - &>/dev/null
 }
 
-##plot2d() {
-#  #strIn = $1 | sed -e 's/[^\.](\*|\/|\^)/&/g'
-#  octave --eval "figure; axes('position',[0.1, 0.3, 0.8, 0.6]); x=linspace(-1, 1, 100); y=$1; plot(x,y); axis([-1,1]); hslider = uicontrol ('style', 'slider', 'Units', 'normalized', 'position', [0.1, 0.1, 0.8, 0.1], 'min', 1, 'max', 100, 'sliderstep', [0.01, 0.1], 'value', 10, 'callback', {@refreshX}); function refreshX (h, event) x=linspace(get(h,'value')*-1, get(h,'value'), floor(500*log10(1+10*get(h,'value'))));y=$1;plot(x,y);axis([get(h,'value')*-1,get(h,'value')]); end" --persist
-#}
-#
-#plot3d() {
-#  octave --eval "[x,y]=meshgrid($1,$2);mesh($1,$2,$3)" --persist
-#}
-#
 mcd() {
   mkdir -p $1 && cd $1 
-}
-
-function myman {
-    # `-t` and `-e`: run `tbl` and `eqn` on the input, for tables and equations
-    # `-mandoc`: use a set of troff macros specifically for manpages
-    # `-Tutf8`: output UTF-8 text rather than PostScript
-    gunzip < /usr/share/man/man1/"${1}.1.gz" | groff -t -e -mandoc -Tutf8 | less
 }
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
@@ -200,6 +240,6 @@ fi
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
-[[ -f /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh ]] && . /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh || true
+## [[ -f /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh ]] && . /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 

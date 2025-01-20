@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 10, // Waybar height (to be removed for auto height)
+    "height": 16, // Waybar height (to be removed for auto height)
     "margin": 0,
     //"width": 1280, // Waybar width
     "spacing": 5, // Gaps between modules (4px)
@@ -12,7 +12,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces","hyprland/workspaces", "custom/player"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "keyboard-state", "battery", "tray"],
+    "modules-right": ["cava", "pulseaudio", "backlight", "network", "cpu", "memory", "temperature", "battery", "tray"],
     // Modules configuration
     "hyprland/workspaces": {
           "disable-scroll": true,
@@ -49,39 +49,55 @@
     //         "focused": "",
     //         "default": ""
     //    }
-    }, 
-
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        },
-        "toolltip": false,
-    },
-    "tray": {
-        "icon-size": 14,
-        "spacing": 14,
+    "cava": {
+      "framerate":24,
     },
     "clock": {
         "interval": 1,
-        "format": "{:%a %d %b %H:%M:%S}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}",
+        "format": "{:%y/%m/%d(%a) %H:%M:%S}",
+        "tooltip-format": "{calendar}",
+        "format-alt": "{:%Z (%Ez from UTC)}",
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format":                 "<span size='x-large'>{icon} {format_source}</span>",
+        "format-bluetooth":       "<span size='x-large'>{icon} {format_source}</span>",
+        "format-bluetooth-muted": "<span size='x-large'>{icon}  {format_source}</span>",
+        "format-muted":           "<span size='x-large'>{format_source}</span>",
+        "tooltip-format":         "{desc}\n{volume}%",
+        "format-source":          "",
+        "format-source-muted":    "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "<span size='x-large'>{icon}</span>",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "<span size='x-large'></span>",
+        "format-ethernet": "<span size='x-large'></span>",
+        "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "<span size='x-large'></span>",
+        "interval": 5,
+        "on-click": "nm-connection-editor"
     },
     "cpu": {
         "interval": 10,
         "format": "<span size='x-large'></span>",
-        "tooltip-format": "{usage}% {avg_frequency}GHz",
+        "tooltip-format": "{avg_frequency}GHz",
         "states": {
             "critical": 75,
             "high": 40,
@@ -104,11 +120,6 @@
         "interval": 5,
         "format": "<span size='x-large'>{icon}</span>",
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "<span size='x-large'>{icon}</span>",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
     "battery": {
         "interval": 10,
         "states": {
@@ -122,35 +133,18 @@
         "tooltip-format": "{time} {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "<span size='x-large'></span>",
-        "format-ethernet": "<span size='x-large'></span>",
-        "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "<span size='x-large'></span>",
-        "interval": 5,
-        "on-click": "nm-connection-editor"
+    "tray": {
+        "icon-size": 14,
+        "spacing": 14,
     },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format":                 "<span size='x-large'>{icon} {format_source}</span>",
-        "format-bluetooth":       "<span size='x-large'>{icon} {format_source}</span>",
-        "format-bluetooth-muted": "<span size='x-large'>{icon}  {format_source}</span>",
-        "format-muted":           "<span size='x-large'>{format_source}</span>",
-        "tooltip-format":         "{desc}\n{volume}%",
-        "format-source":          "",
-        "format-source-muted":    "",
+
+    "idle_inhibitor": {
+        "format": "{icon}",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "activated": "",
+            "deactivated": ""
         },
-        "on-click": "pavucontrol"
+        "toolltip": false,
     },
     "custom/media": {
         "format": "{icon} {}",

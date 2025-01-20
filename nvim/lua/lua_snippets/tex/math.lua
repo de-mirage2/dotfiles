@@ -105,12 +105,12 @@ M = {
   aus('mtC', fmta([[\mathcal{<>}]], {i(1)})),
   aus('mtF', fmta([[\mathfrak{<>}]], {i(1)})),
 
-  maus({'lra','lr|' }, fmta([[\left|{<>}\right|]], {i(1)})),
-  maus({'lrb','lr[]'}, fmta([=[\left[{<>}\right]]=], {i(1)})),
-  maus({'lrc','lr{}'}, fmta([[\left\{{<>}\right\}]], {i(1)})),
+  maus({'lra','lr|' }, fmta([[\left|<>\right|]], {i(1)})),
+  maus({'lrb','lr[]'}, fmta([=[\left[<>\right]]=], {i(1)})),
+  maus({'lrc','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})),
   maus({'lre','lr.' }, fmta([[\left.{<>}\right\vert]], {i(1)})),
   maus({'lrn','lrm' }, fmta([[\left\Vert{<>}\right\Vert]], {i(1)})),
-  maus({'lrp','lr()'}, fmta([[\left({<>}\right)]], {i(1)})),
+  maus({'lrp','lr()'}, fmta([[\left(<>\right)]], {i(1)})),
   maus({'lrv','lr<','lr>'}, fmta([[\left\langle{<>}\right\rangle]], {i(1)})),
 
   aus('tayl', fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}\left(<>\right)}{n!}\left(x-<>\right)^n]], {i(1), i(2, 'c'), rep(2)})),
