@@ -1,5 +1,3 @@
-set -o vi
-
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -35,11 +33,12 @@ HIST_STAMPS="yyyy-mm-dd"
 # Which plugins would you like to load?
 # Standard and custom plugins found in $ZSH/plugins/ and $ZSH_CUSTOM/plugins/
 
+plugins=(sudo history emoji)
+
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-plugins=(sudo history emoji)
+source $ZSH_CUSTOM/plugins/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
 # User configuration
 
@@ -161,7 +160,7 @@ function copypath {
 
   echo ${(%):-"%B${file:a}%b copied to clipboard."}
 }
-alias cppath='copypath'
+alias cpath='copypath'
 
 
 ## Custom
@@ -205,6 +204,10 @@ mcd() {
   mkdir -p $1 && cd $1 
 }
 
+wavescrashing() {
+  play -c 2 -n synth brownnoise synth pinknoise mix synth 0 0 0 15 40 50 trapezium amod $1 50
+}
+
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -215,7 +218,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
-export XDG_MUSIC_DIR="/home/de_mirage/Music"
+# export XDG_MUSIC_DIR="$HOME/Music" # UNCOMMENT IF SOMETHING BREAKS
+export MUSIC="$HOME/Music"
 
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
@@ -227,6 +231,11 @@ export GDK_SCALE=1
 export GDK_DPI_SCALE=0.5
 export GTK_FONT_SCALE=0.5
 export GTK_THEME=Adwaita:dark
+
+# fix xim conflicting xcompose brainrot
+export GTK_IM_MODULE=xim
+export XMODIFIERS=@im=xim
+export QT_IM_MODULE=xim
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -243,3 +252,7 @@ fi
 ## [[ -f /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh ]] && . /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+
+set -o vi
+
+eval "$(pyenv virtualenv-init -)"

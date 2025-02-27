@@ -12,7 +12,13 @@
 <Multi_key> <o><o><o>  : "∞" infty
 <Multi_key> <E><E> : "∃" exists
 <Multi_key> <N><E> : "∄" nexists
-<Multi_key> <semicolon><I> : "∫" integral
+<Multi_key> <comma><T> : "ᵀ" transpose
+<Multi_key> <t><T> : "ᵀ" transpose
+<Multi_key> <T><T> : "ᵀ" transpose
+<Multi_key> <comma><i> : "∫" integral
+<Multi_key> <i><n><t> : "∫" integral
+<Multi_key> <s><q><r><t> : "√" sqrt
+<Multi_key> <period><period> : "⋅" cdot
 # GREEK
 
 <Multi_key> <semicolon> <a>  : "α"  U03B1  # GREEK SMALL LETTER ALPHA
@@ -462,7 +468,7 @@
 <Multi_key> <R> <O>			: "®"	registered # REGISTERED SIGN
 <Multi_key> <parenleft> <parenright> <parenright>: "🄯"	U1F12F # COPYLEFT SYMBOL
 # Special punctuation
-<Multi_key> <period> <period>		: "…"	ellipsis # HORIZONTAL ELLIPSIS
+<Multi_key> <period> <underscore>		: "…"	ellipsis # HORIZONTAL ELLIPSIS
 <Multi_key> <period> <minus>		: "·"	periodcentered # MIDDLE DOT
 <Multi_key> <period> <asciicircum>	: "·"	periodcentered # MIDDLE DOT
 <Multi_key> <asciicircum> <period>	: "·"	periodcentered # MIDDLE DOT

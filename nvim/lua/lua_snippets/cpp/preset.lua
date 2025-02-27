@@ -59,18 +59,10 @@ M = {
     typedef long long ll;
     typedef long double ld;
     typedef unsigned long long ull;
-    typedef unsigned int usi;
+    typedef unsigned int uii;
     typedef unsigned short uss;
-    typedef pair<ll,ll> pll;
-    typedef pair<ull,ull> pul;
-    typedef pair<int,int> pii;
-    typedef pair<usi,usi> pui;
-    typedef vector<ll,ll> vll;
-    typedef vector<ull,ull> vul;
-    typedef vector<int,int> vii;
-    typedef vector<usi,usi> vui;
-    typedef vector<string> vs;
-    typedef vector<char> vc;
+    #define pr pair
+    #define vec vector
 
     #define endl '\n'
 
@@ -80,9 +72,9 @@ M = {
     #define INF = 1e9;
 
     // Faster Positives Modulo
-    uss fm(const uss __fmi, const uss __fmc) { return __fmi >= __fmc ? __fmc : __fmi % __fmc; }
-    usi fm(const usi __fmi, const usi __fmc) { return __fmi >= __fmc ? __fmc : __fmi % __fmc; }
-    ull fm(const ull __fmi, const ull __fmc) { return __fmi >= __fmc ? __fmc : __fmi % __fmc; }
+    uss fm(const uss __fmi, const uss __fmc) { return __fmi < __fmc ? __fmi : __fmi % __fmc; }
+    uii fm(const uii __fmi, const uii __fmc) { return __fmi < __fmc ? __fmi : __fmi % __fmc; }
+    ull fm(const ull __fmi, const ull __fmc) { return __fmi < __fmc ? __fmi : __fmi % __fmc; }
 
     int main() {
       ios_base::sync_with_stdio(false);
@@ -113,18 +105,18 @@ M = {
   ),
 
   aus(
-    'iff',
+    ' iff',
     fmt([=[
-    if ([]) {
+     if ([]) {
       []
     }
     ]=], {i(1, 'true'), i(2)}, {delimiters='[]'})
   ),
 
   aus(
-    'ife',
+    ' ife',
     fmt([=[
-    if ([]) {
+     if ([]) {
       []
     } else {
       []

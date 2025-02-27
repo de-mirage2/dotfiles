@@ -56,13 +56,14 @@ M = {
   --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
   
   maus({',e','eE'}, fmta([[e^{<>}]], {i(1)})),
-  maus({',I', 'iI', 'inV'}, t('^{-1}')),
+  maus({',T','tT','TT'}, t('^{\\mathsf{T}}')),
+  maus({',I','iI','inV'}, t('^{-1}')),
   ams_aus(',c', t('^{\\complement}')),
 
   aus('DD', fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
   aus('dD', fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
-  aus('DP', fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  aus('dP', fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus('PP', fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus('pP', fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
   
   aus(',i', fmta([[\int{<>}\,\mathrm{d}{<>}]], {i(2,'f(x)'), i(1,'x')})),
   aus('int', fmta([[\int_{<>}^{<>}{<>}\,\mathrm{d}{<>}]], {i(2,'-\\infty'), i(3,'\\infty'), i(4,'f(x)'), i(1,'x')})),
@@ -85,7 +86,8 @@ M = {
   aus({trig = 'FF', priority=999}, t([[\frac]])),
   aus({trig = 'nCr', priority=999}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
 
-  aus('surj', fmta([[<> : <> \to <> \;;\; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}'), i(4,'x'), i(0,'e^x')})),
+  aus('Surj', fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}'), i(4,'x'), i(0,'e^x')})),
+  aus('Suj', fmta([[<> : <> \to <>]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}')})),
 
   aus('lmi', fmta([[\liminf_{<>\to{<>}}]], {i(1), i(2)})), 
   aus('lms', fmta([[\limsup_{<>\to{<>}}]], {i(1), i(2)})), 
@@ -101,9 +103,9 @@ M = {
   aus('mts', fmta([[\mathsf{<>}]], {i(1)})),
   aus('mtt', fmta([[\mathtt{<>}]], {i(1)})),
 
-  aus('mtB', fmta([[\mathbb{<>}]], {i(1)})),
-  aus('mtC', fmta([[\mathcal{<>}]], {i(1)})),
-  aus('mtF', fmta([[\mathfrak{<>}]], {i(1)})),
+  ams_aus('mtB', fmta([[\mathbb{<>}]], {i(1)})),
+  ams_aus('mtC', fmta([[\mathcal{<>}]], {i(1)})),
+  ams_aus('mtF', fmta([[\mathfrak{<>}]], {i(1)})),
 
   maus({'lra','lr|' }, fmta([[\left|<>\right|]], {i(1)})),
   maus({'lrb','lr[]'}, fmta([=[\left[<>\right]]=], {i(1)})),
@@ -197,6 +199,7 @@ local auto_cmd_pair = {
   ['JJ'] = 'jmath',
   ['ii'] = 'hat{\\imath}',
   ['jj'] = 'hat{\\jmath}',
+  ['kk'] = 'hat{k}',
   ['ooo'] = 'infty',
 
   ['+-'] = 'pm',
@@ -204,11 +207,11 @@ local auto_cmd_pair = {
 
   ['**'] = 'ast',
   ['XX'] = 'star',
-  ['@@'] = 'cdot',
+  ['..'] = 'cdot',
   ['xx'] = 'times',
 
-  ['ld.'] = 'ldots',
-  ['cd.'] = 'cdots',
+  ['.l'] = 'ldots',
+  ['.c'] = 'cdots',
 
   [',='] = 'equiv',
   ['~='] = 'approx',
@@ -220,8 +223,8 @@ local auto_cmd_pair = {
   ['!!'] = 'neg',
   ['EE'] = 'exists',
   ['FA'] = 'forall',
-  ['IN'] = 'in',
-  ['!N'] = 'notin',
+  ['ee'] = 'in',
+  ['!e'] = 'notin',
   ['O/'] = 'emptyset',
   ['cc'] = 'subset',
   ['qq'] = 'supset',
@@ -298,6 +301,12 @@ local auto_greek = {
   ['o'] = 'omega',
   ['O'] = 'Omega',
 }
+
+local auto_loglike_snippets = {}
+for _, v in ipairs(auto_loglike_pairs) do
+  table.insert( auto_loglike_snippets, aus( { trig = v, }, fmta([[\<>{<>}]], {v, i(1)}) ) )
+end
+vim.list_extend(M, auto_loglike_snippets)
 
 local auto_cmdbracket_snippets = {}
 for _, v in ipairs(auto_cmdbracket) do

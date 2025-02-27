@@ -13,23 +13,25 @@
 `=tb` - centered `tabular` environment with {} arguments
 `=nv` - general environment
 ## organization
-`=s` - `\section{}`
-`==s` - `\subsection{}`
-`===s` - `\subsubsection{}`
+`=S` - `\section{}`
+`==S` - `\subsection{}`
+`===S` - `\subsubsection{}`
 ## math
-`=m` - inline math - `\(\)`
+`,m` - inline math - `\(\)`
 (visual) `tmm` - visual inline math
-`=M` - display math - `\[\]`
+`,M` - display math - `\[\]`
 (visual) `tMM` - visual display math
 ## text styling
 `=bb` - boldface text - `\textbf{}`
-(visual) `tbb` - visual boldface text
-`=ii` - italicized text - `\textit{}`
-(visual) `tii` - visual italicized text
-`=sc` - small caps text - `\textsc{}`
-(visual) `tsc` - visual small caps text
+(visual) `xbb` - visual boldface text
 `=ee` - emphasized text - `\emph{}`
-(visual) `tee` - visual emphasized text
+(visual) `xee` - visual emphasized text
+`=ii` - italicized text - `\textit{}`
+(visual) `xii` - visual italicized text
+`=sc` - small caps text - `\textsc{}`
+(visual) `xsc` - visual small caps text
+`=sf` - sans serif text - `\textsf{}`
+(visual) `xsf` - visual sans serif text
 ## misc.
 `=sig` - signature, automatically inserted in the bottom righthand corner (fourier-orns)
 ## contractions, abbreviations, and shorthands
@@ -94,6 +96,7 @@
 #math.lua
 ## superscript exponents
 `,e`, `eE` - euler's exponent, `e^{}` [1]
+`,T`, `tT`, `TT`, - transpose, `^{\mathsf{T}}`
 `,I`, `iI`, `inV` - inverse, `^{-1}`
 `,c` - complement, `^{\complement}` (amsmath)
 ## derivatives
@@ -101,8 +104,8 @@
 `DD` - derivative as a fraction, dy/dx [2]
 `dD` - derivative as a function, d/dx [1]
 ### partial
-`DP` - partial derivative as a fraction, py/px [2]
-`dP` - partial derivative as a function, p/px [1]
+`PP` - partial derivative as a fraction, py/px [2]
+`pP` - partial derivative as a function, p/px [1]
 ## integrals
 Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper if paired then right to left 4) function
 ### regular
@@ -128,7 +131,8 @@ Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper i
 `FF` - open-open fraction, `\frac`
 `nCr` - binomial, `\binom{}{}` [2]
 ## function
-`surj` - surjective function declaration, `f : domain to range ; variable maps to function` [5]
+`Surj` - surjective function declaration, `f : domain to codomain ; input maps to expression` [5]
+`Suj` - surjective function declaration, `f : domain to codomain` [3]
 ## limit [3]
 `lmi` - limit infimum, `\liminf_{\to}\left(\right)`
 `lms` - limit supremum, `\limsup_{\to}\left(\right)`
@@ -213,8 +217,11 @@ Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper i
 ## letter-like
 `lll` - alternative to l, `\ell`
 `hh` - planck constant, `\hbar`
-`ii` - unit vector in the x-direction, `\imath`
-`jj` - unit vector in the y-direction, `\jmath`
+`II` - i with no brim, `\imath`
+`JJ` - j with no brim, `\jmath`
+`ii` - unit vector in the x-direction, `\hat{\imath}`
+`jj` - unit vector in the y-direction, `\hat{\jmath}`
+`kk` - unit vector in the z-direction, `\hat{k}`
 `ooo` - infinity, `\infty`
 ## plus/minus
 `+-` - plus or minus (±), `\pm`
@@ -222,9 +229,12 @@ Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper i
 ## filter notation
 `**` - asterisk (﹡), `\ast`
 `XX` - cross correlation (٭), `\star`
+## multiplication
+`..` - dot product (﹡), `\cdot`
+`xx` - cross product (٭), `\times`
 ## dots
-`ld.` - lower dots (...), `\ldots`
-`cd.` - center dots (...), `\cdots`
+`.d` - lower dots (...), `\ldots`
+`.c` - center dots (...), `\cdots`
 ## equivalency and relations
 `,=` - modularly congruent to (≡), `\equiv`
 `~=` - approximately equal to (≈), `\approx`
@@ -236,8 +246,8 @@ Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper i
 `!!` - negation, `\neg`
 `EE` - there exists, `\exists`
 `FA` - for all, `\forall`
-`IN` - is not an element of, `\in`
-`!N` - is an element of, `\notin`
+`ee` - is not an element of, `\in`
+`!e` - is an element of, `\notin`
 `O/` - empty set, `\emptyset`
 `cc` - is a subset of, `\subset`
 `qq` - is a supset of, `\supset`

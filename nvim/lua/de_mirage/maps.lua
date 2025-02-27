@@ -11,6 +11,7 @@ map("n", "<C-u>", "<C-u>zz")
 
 map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-a>", "<End>", { desc = "move end of line" })
+map("i", "<C-d>", "<C-h>", { desc = "delete character" })
 map("i", "<C-h>", "<Left>", { desc = "move left" })
 map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
@@ -19,10 +20,20 @@ map("i", "<C-k>", "<Up>", { desc = "move up" })
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
 -- window transition
-map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
-map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
-map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
-map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
+map("n", "<C-H>", "<C-w>h", { desc = "switch window left" })
+map("n", "<C-L>", "<C-w>l", { desc = "switch window right" })
+map("n", "<C-J>", "<C-w>j", { desc = "switch window down" })
+map("n", "<C-K>", "<C-w>k", { desc = "switch window up" })
+
+map("n", "<A-h>", "<C-w>H", { desc = "swap window left" })
+map("n", "<A-l>", "<C-w>L", { desc = "swap window right" })
+map("n", "<A-j>", "<C-w>J", { desc = "swap window down" })
+map("n", "<A-k>", "<C-w>K", { desc = "swap window up" })
+
+map("n", "<A-L>", "<C-w><", { desc = "widen pane" })
+map("n", "<A-H>", "<C-w>>", { desc = "narrow pane" })
+map("n", "<A-J>", "<C-w>+", { desc = "shorten pane" })
+map("n", "<A-K>", "<C-w>-", { desc = "heighten pane" })
 
 -- filesave
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
@@ -46,8 +57,11 @@ map("n", "<A-c>", [["+cc]], { desc = "normal change line to system clipboard" })
 
 -- new pane
 map("n", "<leader>h", ":split<CR>", { desc = "new horizontal pane" })
-
 map("n", "<leader>v", ":vsplit<CR>", { desc = "new vertical pane" })
+map("n", "<leader>t", ":belowright vsplit | terminal<CR>", { desc = "new vertical terminal" })
+map("n", "<leader>T", ":belowright split | terminal<CR>", { desc = "new horizontal terminal" })
+
+-- modify split 
 
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
