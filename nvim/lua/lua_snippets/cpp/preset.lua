@@ -36,12 +36,12 @@ local aus = ls.extend_decorator.apply(ls.snippet, { wordTrig = false, snippetTyp
 local raus = ls.extend_decorator.apply(ls.snippet, { wordTrig = false, snippetType = 'autosnippet', trigEngine = 'pattern' }) -- regex autosnippet
 
 M = {
-
   paus(
-    'comp',
+    'compfull',
     fmt([=[
     #include <algorithm>
     #include <cmath>
+    #include <climits>
     #include <deque>
     #include <iostream>
     #include <iterator>
@@ -56,13 +56,15 @@ M = {
     #include <vector>
 
     using namespace std;
-    typedef long long ll;
     typedef long double ld;
+    typedef long long ll;
+    typedef int ii;
+    typedef short ss;
     typedef unsigned long long ull;
     typedef unsigned int uii;
     typedef unsigned short uss;
     #define pr pair
-    #define vec vector
+    template <class T> using V = vector<T>;
 
     #define endl '\n'
 
@@ -75,6 +77,38 @@ M = {
     uss fm(const uss __fmi, const uss __fmc) { return __fmi < __fmc ? __fmi : __fmi % __fmc; }
     uii fm(const uii __fmi, const uii __fmc) { return __fmi < __fmc ? __fmi : __fmi % __fmc; }
     ull fm(const ull __fmi, const ull __fmc) { return __fmi < __fmc ? __fmi : __fmi % __fmc; }
+
+    int main() {
+      ios_base::sync_with_stdio(false);
+      cin.tie(NULL);
+      cout.tie(NULL);
+      []
+      return 0;
+    }]=], {i(0)}, {delimiters='[]'})
+  ), 
+
+  paus(
+    'compmin',
+    fmt([=[
+    #include <algorithm>
+    #include <cmath>
+    #include <climits>
+    #include <iostream>
+    #include <numeric>
+    #include <vector>
+
+    using namespace std;
+    typedef long long ll;
+    typedef int ii;
+    typedef short ss;
+    typedef unsigned long long ull;
+    typedef unsigned int uii;
+    typedef unsigned short uss;
+    template <class T> using V = vector<T>;
+
+    #define endl '\n'
+
+    #define MOD 1000000007;
 
     int main() {
       ios_base::sync_with_stdio(false);

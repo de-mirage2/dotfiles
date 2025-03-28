@@ -1,9 +1,9 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: CommitMono Nerd Font Propo;
-    font-size: 9px;
-    font-weight: 900;
-    padding: 0;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 0px;
     margin: -1;
 }
 
@@ -57,9 +57,9 @@ tooltip {
 #clock {
     color: #ddf;
     background-color: rgba(94, 161, 255,0.3);
-    min-width: 125px;
+    min-width: 160px;
     border: 1px solid rgba(94, 161, 255,0.5); 
-    border-radius: 100px;
+    border-radius: 10px;
     /* box-shadow: rgba(17, 17, 27, 0.2) 0 0 3 2px; */
 }
 

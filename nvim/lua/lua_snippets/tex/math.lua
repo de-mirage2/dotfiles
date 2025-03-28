@@ -136,7 +136,7 @@ M = {
   raus({trig = '([%a%)%]%}])0(%d)'}, f( function(_, snip) return snip.captures[1].."_{"..snip.captures[2].."}" end )), -- a01 -> a_{1} and k08 -> k_{8}
 }
 
-local auto_loglike_pair = {
+local auto_loglike_pairs = {
   ['Pr'] = 'Pr',
   ['Im'] = 'Im',
   ['Re'] = 'Re',
@@ -295,7 +295,7 @@ local auto_greek = {
   ['f'] = 'phi',
   ['vf'] = 'varphi',
   ['F'] = 'Phi',
-  ['x'] = 'chi',
+  ['c'] = 'chi',
   ['y'] = 'psi',
   ['Y'] = 'Psi',
   ['o'] = 'omega',

@@ -227,6 +227,7 @@ local auto_greek = {
 
 local auto_expand = {
   ['a11y'] = 'accessibility',
+  ['Dept'] = 'Department',
   ['dept'] = 'department',
   ['envt'] = 'environment',
   ['entmt'] = 'entertainment',
@@ -239,7 +240,10 @@ local auto_expand = {
   ['lang'] = 'language',
   ['natl'] = 'national',
   ['thf'] = 'thermodynamically favorable',
+  ['Thru'] = 'Through',
   ['thru'] = 'through',
+  ['vvf'] = 'vector-valued function',
+  ['w/'] = 'With',
   ['w/'] = 'with',
   ['wrt'] = 'with respect to',
 }

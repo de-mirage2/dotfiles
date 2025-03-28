@@ -16,7 +16,7 @@ op.nu = true
 
 op.updatetime = 50
 
-op.colorcolumn = "100"
+op.colorcolumn = "160"
 
 vim.g.mapleader = " "
 

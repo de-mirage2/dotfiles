@@ -228,16 +228,18 @@ export PATH="$PATH:/home/de_mirage/.local/bin"
 
 # fix GTK app brianrot
 export GDK_SCALE=1
-export GDK_DPI_SCALE=0.5
-export GTK_FONT_SCALE=0.5
+export GDK_DPI_SCALE=1
+export GTK_FONT_SCALE=1
 export GTK_THEME=Adwaita:dark
 
-# fix xim conflicting xcompose brainrot
-export GTK_IM_MODULE=xim
-export XMODIFIERS=@im=xim
-export QT_IM_MODULE=xim
+# fix xim conflicting xcompose brainrot (still not fixed)
+export GTK_IM_MODULE="xim"
+export XMODIFIERS="@im=xim"
+export QT_IM_MODULE="xim"
 
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fix zsh suggesting that neovim should edit an executable/song when it really shouldn't (not fixed)
+zstyle ':completion:*:*-custom:nvim:*' file-patterns '*(^*) *.*(*)'
+zstyle ':completion:*' completer _complete:-custom _complete _ignored
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
