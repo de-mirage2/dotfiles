@@ -60,6 +60,17 @@ M = {
   maus({',I','iI','inV'}, t('^{-1}')),
   ams_aus(',c', t('^{\\complement}')),
 
+  aus(';1', fmta([[\sin{<>}]], {i(1)})),
+  aus(';2', fmta([[\cos{<>}]], {i(1)})),
+  aus(';3', fmta([[\tan{<>}]], {i(1)})),
+  aus(';4', fmta([[\sec{<>}]], {i(1)})),
+  aus(';5', fmta([[\csc{<>}]], {i(1)})),
+  aus(';6', fmta([[\cot{<>}]], {i(1)})),
+  aus(';7', fmta([[\log{<>}]], {i(1)})),
+  aus(';8', fmta([[\log_2{<>}]], {i(1)})),
+  aus(';9', fmta([[\log_{10}{<>}]], {i(1)})),
+  aus(';0', fmta([[\ln{<>}]], {i(1)})),
+
   aus('DD', fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
   aus('dD', fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
   aus('PP', fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
@@ -109,7 +120,7 @@ M = {
 
   maus({'lra','lr|' }, fmta([[\left|<>\right|]], {i(1)})),
   maus({'lrb','lr[]'}, fmta([=[\left[<>\right]]=], {i(1)})),
-  maus({'lrc','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})),
+  maus({'lrc','lrs','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})),
   maus({'lre','lr.' }, fmta([[\left.{<>}\right\vert]], {i(1)})),
   maus({'lrn','lrm' }, fmta([[\left\Vert{<>}\right\Vert]], {i(1)})),
   maus({'lrp','lr()'}, fmta([[\left(<>\right)]], {i(1)})),
@@ -208,7 +219,7 @@ local auto_cmd_pair = {
   ['**'] = 'ast',
   ['XX'] = 'star',
   ['..'] = 'cdot',
-  ['xx'] = 'times',
+  ['##'] = 'times',
 
   ['.l'] = 'ldots',
   ['.c'] = 'cdots',
