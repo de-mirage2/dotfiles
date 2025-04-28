@@ -71,10 +71,10 @@ M = {
   aus(';9', fmta([[\log_{10}{<>}]], {i(1)})),
   aus(';0', fmta([[\ln{<>}]], {i(1)})),
 
-  aus('DD', fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
-  aus('dD', fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
-  aus('PP', fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
-  aus('pP', fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
+  aus('.D', fmta([[\frac{\mathrm{d}<>}{\mathrm{d}<>}]], {i(1,'y'), i(2,'x')})),
+  aus('.d', fmta([[\frac{\mathrm{d}}{\mathrm{d}<>}]], {i(1,'x')})),
+  aus('.P', fmta([[\frac{{\partial}<>}{{\partial}<>}]], {i(1), i(2)})),
+  aus('.p', fmta([[\frac{\partial}{{\partial}<>}]], {i(1)})),
   
   aus(',i', fmta([[\int{<>}\,\mathrm{d}{<>}]], {i(2,'f(x)'), i(1,'x')})),
   aus('int', fmta([[\int_{<>}^{<>}{<>}\,\mathrm{d}{<>}]], {i(2,'-\\infty'), i(3,'\\infty'), i(4,'f(x)'), i(1,'x')})),
@@ -94,7 +94,7 @@ M = {
   aus({trig = 'ff', priority=999}, fmta([[\frac{<>}{<>}]], {i(1), i(2)})),
   aus({trig = 'Ff', priority=999}, fmta([[\frac<>{<>}]], {i(1), i(2)})),
   aus({trig = 'fF', priority=999}, fmta([[\frac{<>}]], {i(1)})),
-  aus({trig = 'FF', priority=999}, t([[\frac]])),
+  -- aus({trig = 'FF', priority=999}, t([[\frac]])),
   aus({trig = 'nCr', priority=999}, fmta([[\binom{<>}{<>}]], {i(1), i(2)})),
 
   aus('Surj', fmta([[<> : <> \to <> ; <> \mapsto <> ]], {i(1,'f'), i(2, '\\mathbb{R}'), i(3, '\\mathbb{R}_{>0}'), i(4,'x'), i(0,'e^x')})),
@@ -120,28 +120,32 @@ M = {
 
   maus({'lra','lr|' }, fmta([[\left|<>\right|]], {i(1)})),
   maus({'lrb','lr[]'}, fmta([=[\left[<>\right]]=], {i(1)})),
-  maus({'lrc','lrs','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})),
+  maus({'lrs','lr{}'}, fmta([[\left\{<>\right\}]], {i(1)})),
   maus({'lre','lr.' }, fmta([[\left.{<>}\right\vert]], {i(1)})),
   maus({'lrn','lrm' }, fmta([[\left\Vert{<>}\right\Vert]], {i(1)})),
   maus({'lrp','lr()'}, fmta([[\left(<>\right)]], {i(1)})),
+  maus({'lrf','lr_'}, fmta([[\left\lfloor{<>}\right\rfloor]], {i(1)})),
+  maus({'lrc','lr^'}, fmta([[\left\lceil{<>}\right\rceil]], {i(1)})),
   maus({'lrv','lr<','lr>'}, fmta([[\left\langle{<>}\right\rangle]], {i(1)})),
 
   aus('tayl', fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}\left(<>\right)}{n!}\left(x-<>\right)^n]], {i(1), i(2, 'c'), rep(2)})),
   aus('macl', fmta([[\sum_{n=0}^{<>}\frac{f^{(n)}(0)x^n}{n!}]], {i(1)})),  
 
-  aus('macexp', fmta([[\sum_{n=0}^{\infty}\frac{<>^n}{n!}]], {i(1,'x')})),
-  aus('macsin', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})),
-  aus('maccos', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})),
-  aus('macatan', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})),
-  aus('macsnh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})),
-  aus('maccsh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})),
-  aus('macatnh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})),
-  aus('macln', fmta([[\sum_{n=1}^{\infty}(-1)^n\frac{<>^n}{n}]], {i(1,'x')})),
+  -- aus('macexp', fmta([[\sum_{n=0}^{\infty}\frac{<>^n}{n!}]], {i(1,'x')})),
+  -- aus('macsin', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})),
+  -- aus('maccos', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})),
+  -- aus('macatan', fmta([[\sum_{n=0}^{\infty}(-1)^n\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})),
+  -- aus('macsnh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{(2n+1)!}]], {i(1,'x')})),
+  -- aus('maccsh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n}}{(2n)!}]], {i(1,'x')})),
+  -- aus('macatnh', fmta([[\sum_{n=0}^{\infty}\frac{<>^{2n+1}}{2n+1}]], {i(1,'x')})),
+  -- aus('macln', fmta([[\sum_{n=1}^{\infty}(-1)^n\frac{<>^n}{n}]], {i(1,'x')})),
 
   aus({trig = 'dot', priority=996}, fmta([[\dot{<>}]], {i(1)})),
   aus({trig = 'ddot', priority=997}, fmta([[\ddot{<>}]], {i(1)})),
   aus({trig = 'dddot', priority=998}, fmta([[\dddot{<>}]], {i(1)})),
   aus({trig = 'ddddot', priority=999}, fmta([[\ddddot{<>}]], {i(1)})),
+
+  aus('cbrt', fmta([[\sqrt[3]{<>}]], {i(1)})),
  
   -- subscript digital
   raus({trig = '([%a%)%]%}])0(%d)'}, f( function(_, snip) return snip.captures[1].."_{"..snip.captures[2].."}" end )), -- a01 -> a_{1} and k08 -> k_{8}
@@ -164,17 +168,12 @@ local auto_loglike_pairs = {
   ['lN'] = 'ln',
   ['loG'] = 'log',
 
-  ['siN'] = 'sin',
   ['snH'] = 'sinh',
   ['asin'] = 'arcsin',
-  ['coS'] = 'cos',
   ['csH'] = 'cosh',
   ['acos'] = 'arccos',
-  ['taN'] = 'tan',
   ['tnH'] = 'tanh',
-  ['seC'] = 'sec',
-  ['csC'] = 'csc',
-  ['coT'] = 'cot',
+  ['atan'] = 'arctan',
   ['ctH'] = 'coth',
 }
 
@@ -232,7 +231,7 @@ local auto_cmd_pair = {
   ['<='] = 'leq',
 
   ['!!'] = 'neg',
-  ['EE'] = 'exists',
+  ['EX'] = 'exists',
   ['FA'] = 'forall',
   ['ee'] = 'in',
   ['!e'] = 'notin',
@@ -260,10 +259,23 @@ local auto_cmd_pair = {
 
 local ams_auto_cmd_pair = {
   ['CC'] = 'mathbb{C}',
+  ['BB'] = 'mathbb{B}',
+  ['EE'] = 'mathbb{E}',
+  ['GG'] = 'mathbb{G}',
   ['HH'] = 'mathbb{H}',
+  ['II'] = 'mathbb{I}',
+  ['JJ'] = 'mathbb{J}',
+  ['KK'] = 'mathbb{K}',
+  ['LL'] = 'mathcal{L}',
   ['NN'] = 'mathbb{N}',
+  ['OO'] = 'mathbb{O}',
+  ['SO'] = 'mathcal{O}',
+  ['PP'] = 'mathbb{P}',
   ['QQ'] = 'mathbb{Q}',
   ['RR'] = 'mathbb{R}',
+  ['SS'] = 'mathbb{S}',
+  ['SW'] = 'mathcal{W}',
+  ['SX'] = 'mathcal{X}',
   ['ZZ'] = 'mathbb{Z}',
   ['!E'] = 'nexists',
   ['thfr'] = 'therefore',

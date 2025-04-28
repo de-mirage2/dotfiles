@@ -1,24 +1,24 @@
 ## CUSTOM
-<Multi_key> <comma><p>  : "∂" partial
-<Multi_key> <comma><d>  : "𝑑" differential
-<Multi_key> <V><D>  : "∇" nabla
-<Multi_key> <l><l>  : "ℓ" ell
-<Multi_key> <h><h>  : "ℏ" hbar
-<Multi_key> <i><i>  : "î" ivec
-<Multi_key> <j><j>  : "ĵ" jvec
-<Multi_key> <k><k>  : "k̂" kvec
-<Multi_key> <I><I>  : "𝚤" imath
-<Multi_key> <J><J>  : "𝚥" jmath
-<Multi_key> <o><o><o>  : "∞" infty
-<Multi_key> <E><E> : "∃" exists
-<Multi_key> <N><E> : "∄" nexists
-<Multi_key> <comma><T> : "ᵀ" transpose
-<Multi_key> <t><T> : "ᵀ" transpose
-<Multi_key> <T><T> : "ᵀ" transpose
-<Multi_key> <comma><i> : "∫" integral
-<Multi_key> <i><n><t> : "∫" integral
-<Multi_key> <s><q><r><t> : "√" sqrt
-<Multi_key> <period><period> : "⋅" cdot
+<Multi_key> <comma><p>  : "∂" U2202
+<Multi_key> <comma><d>  : "𝑑" U1D451
+<Multi_key> <V><D>  : "∇" U2207
+<Multi_key> <l><l>  : "ℓ" U2113
+<Multi_key> <h><h>  : "ℏ" U210F
+<Multi_key> <i><i>  : "î" U00EE
+<Multi_key> <j><j>  : "ĵ" U0315
+<Multi_key> <k><k>  : "k̂" # Combination of U006B, U0302
+<Multi_key> <I><I>  : "𝚤" U0131
+<Multi_key> <J><J>  : "𝚥" U0237
+<Multi_key> <o><o><o>  : "∞" U221E
+<Multi_key> <E><E> : "∃" U2203
+<Multi_key> <N><E> : "∄" U2204
+<Multi_key> <comma><t> : "ᵀ" U1D40
+<Multi_key> <t><T> : "ᵀ" U1D40
+<Multi_key> <T><T> : "ᵀ" U1D40
+<Multi_key> <comma><i> : "∫" U222B
+<Multi_key> <i><n><t> : "∫" U222B
+<Multi_key> <s><q><r><t> : "√" U221A
+<Multi_key> <period><period> : "⋅" U22C5
 # GREEK
 
 <Multi_key> <semicolon> <a>  : "α"  U03B1  # GREEK SMALL LETTER ALPHA

@@ -238,8 +238,13 @@ export XMODIFIERS="@im=xim"
 export QT_IM_MODULE="xim"
 
 # fix zsh suggesting that neovim should edit an executable/song when it really shouldn't (not fixed)
-zstyle ':completion:*:*-custom:nvim:*' file-patterns '*(^*) *.*(*)'
-zstyle ':completion:*' completer _complete:-custom _complete _ignored
+function nv() {
+  nvim "$@"
+}
+_nv() {
+  _files -g '^(*.mp3|*.ogg|*.flac|*.wav|*.exe|*.out|*.bin|*.a|*.so|*.o|*.mod|*.png|*.jpg|*.jpeg)(.)'
+}
+compdef _nv nv
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -254,7 +259,9 @@ fi
 ## [[ -f /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh ]] && . /home/de_mirage/.config/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
-
 set -o vi
 
-eval "$(pyenv virtualenv-init -)"
+autoload -Uz compinit
+compinit
+
+# eval "$(pyenv virtualenv-init -)"
