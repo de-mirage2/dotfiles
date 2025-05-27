@@ -32,7 +32,7 @@ function in_doc()
 end
 
 function ams_cond()
-  return in_doc() and vim.b.vimtex.packages['amsmath'] ~= nil
+  return in_doc() and (vim.b.vimtex.packages['amsmath'] ~= nil or vim.b.vimtex.packages['mathtools'] ~= nil)
 end
 
 function tg_cond()
