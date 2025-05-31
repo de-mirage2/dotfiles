@@ -73,6 +73,11 @@ tooltip {
     margin-right: 0;
 }
 
+#battery {
+  border-right: none;
+  padding: 0 6px;
+}
+
 #battery.charging, #battery.plugged {
     border-color: #06863B;
 }
@@ -90,6 +95,26 @@ tooltip {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#backlight-slider slider, #pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#backlight-slider trough, #pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 80px;
+    border-radius: 5px;
+    background-color: black;
+}
+#backlight-slider highlight, #pulseaudio-slider highlight {
+    min-width: 10px;
+    border-radius: 5px;
+    background-color: #a8d;
 }
 
 label:focus {
@@ -130,7 +155,6 @@ label:focus {
 
 #tray {
   padding: 0 6px;
-  border-right: none;
 }
 
 #tray > .passive {

@@ -10,9 +10,9 @@
     "fixed-center": true,
     //"reload_style_on_change": true,
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces","hyprland/workspaces", "custom/player"],
+    "modules-left": ["sway/workspaces","hyprland/workspaces","tray"],
     "modules-center": ["clock"],
-    "modules-right": ["cava", "pulseaudio", "backlight", "network", "cpu", "memory", "temperature", "battery", "tray"],
+    "modules-right": ["pulseaudio","pulseaudio/slider","backlight","backlight/slider","network","cpu","memory","temperature","battery"],
     // Modules configuration
     "hyprland/workspaces": {
           "disable-scroll": true,
@@ -50,6 +50,10 @@
     //         "default": ""
     //    }
     },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 14,
+    },
     "cava": {
       "framerate":24,
     },
@@ -79,10 +83,21 @@
         },
         "on-click": "pavucontrol"
     },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal",
+    },
     "backlight": {
         // "device": "acpi_video1",
         "format": "<span size='x-large'>{icon}</span>",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "tooltip-format": "{percent}%",
+    },
+    "backlight/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal",
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -133,11 +148,6 @@
         "tooltip-format": "{time} {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
-    "tray": {
-        "icon-size": 14,
-        "spacing": 14,
-    },
-
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
