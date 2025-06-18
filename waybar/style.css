@@ -1,9 +1,9 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: CommitMono Nerd Font Propo;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
-    padding: 0px;
+    padding: 1px;
     margin: -1;
 }
 
