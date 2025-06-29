@@ -21,6 +21,7 @@ tooltip {
 }
 
 #workspaces button {
+    font-family: SF Pro;
     box-shadow: inset 0 -3px transparent;
     border: none;
     border-radius: 0;
@@ -31,7 +32,7 @@ tooltip {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     box-shadow: inset 0 -3px #ffffff;
 }
 
@@ -48,18 +49,19 @@ tooltip {
 {
   margin: 0;
   color: #aaf;
-  background-color: rgba(187, 187, 256, 0.1);
-  border-radius: 13px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
   padding: 0 4px;
   opacity: 0.9;
 }
 
 #clock {
-    color: #ddf;
-    background-color: rgba(94, 161, 255,0.3);
+    font-family: SF Pro;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.3);
     min-width: 160px;
-    border: 1px solid rgba(94, 161, 255,0.5); 
     border-radius: 10px;
+    padding: 0 10px;
     /* box-shadow: rgba(17, 17, 27, 0.2) 0 0 3 2px; */
 }
 
@@ -108,13 +110,15 @@ tooltip {
 #backlight-slider trough, #pulseaudio-slider trough {
     min-height: 10px;
     min-width: 80px;
-    border-radius: 5px;
-    background-color: black;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(0,0,0,0.3);
 }
 #backlight-slider highlight, #pulseaudio-slider highlight {
     min-width: 10px;
-    border-radius: 5px;
-    background-color: #a8d;
+    border-radius: 10px;
+    border: none;
+    background-color: #99e;
 }
 
 label:focus {

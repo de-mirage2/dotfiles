@@ -1,13 +1,13 @@
 window {
     background-color: transparent;
-    font-family: 'CommitMono Nerd Font';
+    font-family: 'SF Pro';
     /* font-weight: regular; */
-    font-size: 12px;
+    font-size: 18px;
 }
 
 #outer-box {
     padding: 2 2px;
-    background-color: rgba(0,0,0,0.35);
+    background-color: rgba(0,0,0,0.75);
     /* opacity: 0.2; */
     /* border-radius: 10px; */
     /* border: 1px solid rgba(220, 220, 220, 0.1); */
@@ -15,7 +15,7 @@ window {
 
 #input {
     color: #d6d6d6;
-    font-size: 14px;
+    font-size: 16px;
     padding: 3px 5px 3px 10px;
     margin: 2px 3px 0px 3px;
     background: transparent;
@@ -30,7 +30,7 @@ window {
     /* border: 1px solid rgba(220, 220, 220, 0.5); */
     /* background: rgba(255,255,255,0.05); */
 
-    background: linear-gradient(40deg,transparent, rgba(255,255,255,0.05) ,transparent,transparent,transparent,transparent);
+    background: linear-gradient(70deg,transparent,rgba(255,255,255,0.2),transparent,transparent,transparent,transparent);
 }
 #input > image {
     -gtk-icon-transform:scalex(1);
@@ -74,6 +74,7 @@ window {
     transition-duration:0.1s;
     /* background: rgba(255,255,255,0.15); */
     padding-left: 27px;
-    background: linear-gradient(60deg,transparent, rgba(255,255,255,0.05) ,transparent,transparent,transparent);
+    background: linear-gradient(70deg,transparent,rgba(255,255,255,0.2),transparent,transparent,transparent);
     border-left: 2px solid #5ea1ff;
+    font-size: 20px;
 }

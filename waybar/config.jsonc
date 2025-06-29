@@ -59,15 +59,15 @@
     },
     "clock": {
         "interval": 1,
-        "format": "{:%y/%m/%d(%a) %H:%M:%S}",
+        "format": "{:%d.%m.%y %a ❦ %H:%M}",
         "tooltip-format": "{calendar}",
         "format-alt": "{:%Z (%Ez from UTC)}",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format":                 "<span size='x-large'>{icon} {format_source}</span>",
-        "format-bluetooth":       "<span size='x-large'>{icon} {format_source}</span>",
-        "format-bluetooth-muted": "<span size='x-large'>{icon}  {format_source}</span>",
+        "format-bluetooth":       "<span size='x-large'>{icon} {format_source}</span>",
+        "format-bluetooth-muted": "<span size='x-large'>{icon}  {format_source}</span>",
         "format-muted":           "<span size='x-large'>{format_source}</span>",
         "tooltip-format":         "{desc}\n{volume}%",
         "format-source":          "",
