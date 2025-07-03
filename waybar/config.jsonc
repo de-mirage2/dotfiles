@@ -2,15 +2,15 @@
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 16, // Waybar height (to be removed for auto height)
-    "margin": 0,
-    //"width": 1280, // Waybar width
-    "spacing": 5, // Gaps between modules (4px)
-    "border-size": 2,
-    "padding": 10,
+    // "margin": 0,
+    // "width": 1920, // Waybar width
+    // "spacing": 0, // Gaps between modules (4px)
+    // "border-size": 2,
+    // "padding": 0,
     "fixed-center": true,
     //"reload_style_on_change": true,
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces","hyprland/workspaces","tray"],
+    "modules-left": ["hyprland/workspaces","tray"],
     "modules-center": ["clock"],
     "modules-right": ["pulseaudio","pulseaudio/slider","backlight","backlight/slider","network","cpu","memory","temperature","battery"],
     // Modules configuration
@@ -51,8 +51,8 @@
     //    }
     },
     "tray": {
-        "icon-size": 14,
-        "spacing": 14,
+        "icon-size": 16,
+        "spacing": 0,
     },
     "cava": {
       "framerate":24,
@@ -65,10 +65,10 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format":                 "<span size='x-large'>{icon} {format_source}</span>",
-        "format-bluetooth":       "<span size='x-large'>{icon} {format_source}</span>",
-        "format-bluetooth-muted": "<span size='x-large'>{icon}  {format_source}</span>",
-        "format-muted":           "<span size='x-large'>{format_source}</span>",
+        "format":                 "{icon} {format_source}",
+        "format-bluetooth":       "{icon} {format_source}",
+        "format-bluetooth-muted": "{icon}  {format_source}",
+        "format-muted":           "{format_source}",
         "tooltip-format":         "{desc}\n{volume}%",
         "format-source":          "",
         "format-source-muted":    "",
@@ -90,7 +90,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "<span size='x-large'>{icon}</span>",
+        "format": "{icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""],
         "tooltip-format": "{percent}%",
     },
@@ -101,17 +101,17 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "<span size='x-large'></span>",
-        "format-ethernet": "<span size='x-large'></span>",
+        "format-wifi": "",
+        "format-ethernet": "",
         "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "<span size='x-large'></span>",
+        "format-disconnected": "",
         "interval": 5,
         "on-click": "nm-connection-editor"
     },
     "cpu": {
         "interval": 10,
-        "format": "<span size='x-large'></span>",
+        "format": "",
         "tooltip-format": "{avg_frequency}GHz",
         "states": {
             "critical": 75,
@@ -121,7 +121,7 @@
     },
     "memory": {
         "interval": 10,
-        "format": "<span size='x-large'></span>",
+        "format": "",
         "tooltip-format": "{percentage}% {used}G/{total}G\nSwap: {swapPercentage}% {swapUsed}G/{swapTotal}G",
         //"on-click": "htop"
     },
@@ -133,7 +133,7 @@
         // "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""],
         "interval": 5,
-        "format": "<span size='x-large'>{icon}</span>",
+        "format": "{icon}",
     },
     "battery": {
         "interval": 10,
@@ -141,11 +141,11 @@
             // "good": 95,
             "critical": 15
         },
-        "format": "<span size='x-large'>{icon}</span>",
+        "format": "{icon}",
         "format-charging": "",
         "format-plugged": "",
         "format-time": "{H}:{m}",
-        "tooltip-format": "{time} {capacity}%",
+        "tooltip-format": "{time} left; {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
     "idle_inhibitor": {
@@ -159,7 +159,7 @@
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 40,
+        "malength": 40,
         "format-icons": {
             "spotify": "",
             "default": "🎜"

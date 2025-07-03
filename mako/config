@@ -1,4 +1,4 @@
-font=CommitMono Nerd Font Propo 10
+font=SF Pro 10
 format=<b>%a ⏵</b> %s\n%b
 sort=-time
 output=DP-2
