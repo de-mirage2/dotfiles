@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+map({"n","v"}, "k", "e", {remap=false})
+map({"n","v"}, "e", "k", {remap=false})
+map("n", "K", "E", {remap=false})
+map({"n","v"}, "E", "K", {remap=false})
+
 map("n", ";", ":")
 map("n", "<leader>pv", vim.cmd.Ex)
 
@@ -15,7 +20,7 @@ map("i", "<C-d>", "<C-h>", { desc = "delete character" })
 map("i", "<C-h>", "<Left>", { desc = "move left" })
 map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
-map("i", "<C-k>", "<Up>", { desc = "move up" })
+map("i", "<C-e>", "<Up>", { desc = "move up" })
 
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
@@ -23,17 +28,17 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<C-H>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-L>", "<C-w>l", { desc = "switch window right" })
 map("n", "<C-J>", "<C-w>j", { desc = "switch window down" })
-map("n", "<C-K>", "<C-w>k", { desc = "switch window up" })
+map("n", "<C-W>", "<C-w>e", { desc = "switch window up" })
 
 map("n", "<A-h>", "<C-w>H", { desc = "swap window left" })
 map("n", "<A-l>", "<C-w>L", { desc = "swap window right" })
 map("n", "<A-j>", "<C-w>J", { desc = "swap window down" })
-map("n", "<A-k>", "<C-w>K", { desc = "swap window up" })
+map("n", "<A-e>", "<C-w>K", { desc = "swap window up" })
 
 map("n", "<A-L>", "<C-w><", { desc = "widen pane" })
 map("n", "<A-H>", "<C-w>>", { desc = "narrow pane" })
 map("n", "<A-J>", "<C-w>+", { desc = "shorten pane" })
-map("n", "<A-K>", "<C-w>-", { desc = "heighten pane" })
+map("n", "<A-E>", "<C-w>-", { desc = "heighten pane" })
 
 -- filesave
 map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
@@ -44,16 +49,16 @@ map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 
 -- clipboard and deletion - Binds that involve ctrl use system clipboard
 map("v", "<C-y>", [["+y]], { desc = "visual copy to system clipboard" })
-map("n", "<C-y>", [["+y]], { desc = "normal copy to system clipboard - root" })
-map("n", "<A-y>", [["+yy]], { desc = "normal copy line to system clipboard" })
+-- map("n", "<D-y>", [["+y]], { desc = "normal copy to system clipboard - root" })
+map("n", "<C-y>", [["+yy]], { desc = "normal copy line to system clipboard" })
 
 map("v", "<C-d>", [["+d]], { desc = "visual cut to system clipboard" })
-map("n", "<C-d>", [["+d]], { desc = "normal cut to system clipboard - root" })
-map("n", "<A-d>", [["+dd]], { desc = "normal cut line to system clipboard" })
+-- map("n", "<A-d>", [["+d]], { desc = "normal cut to system clipboard - root" })
+map("n", "<C-d>", [["+dd]], { desc = "normal cut line to system clipboard" })
 
 map("v", "<C-c>", [["+c]], { desc = "visual change to system clipboard" })
-map("n", "<C-c>", [["+c]], { desc = "normal change to system clipboard - root" })
-map("n", "<A-c>", [["+cc]], { desc = "normal change line to system clipboard" })
+-- map("n", "<A-c>", [["+c]], { desc = "normal change to system clipboard - root" })
+map("n", "<C-c>", [["+cc]], { desc = "normal change line to system clipboard" })
 
 -- new pane
 map("n", "<leader>h", ":split<CR>", { desc = "new horizontal pane" })
@@ -65,7 +70,7 @@ map("n", "<leader>T", ":belowright split | terminal<CR>", { desc = "new horizont
 
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+map("n", "<leader>k", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 
 -- map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
 
