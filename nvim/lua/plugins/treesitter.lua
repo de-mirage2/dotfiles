@@ -8,6 +8,7 @@ require'nvim-treesitter.configs'.setup {
     "java", "xcompose", 
     "lua", "vim", "vimdoc", 
     "query",
+    "solidity",
     "r", "rnoweb", "markdown", "markdown_inline", "yaml"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)

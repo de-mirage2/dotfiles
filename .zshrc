@@ -112,8 +112,8 @@ alias gwipe='git reset --hard && git clean --force -df'
 # History aliases (copying omz plugin)
 alias h='history'
 alias hl='history | less'
-alias hs='history | grep'
-alias hsi='history | grep -i'
+alias hs='history | rg'
+alias hsi='history | rg -i'
 
 
 # Base 64 aliases (copying omz plugin)
@@ -147,7 +147,7 @@ alias d64=decode64
 
 
 # Copypath aliases (copying omz plugin)
-function copypath {
+function cpath {
   # If no argument passed, use current directory
   local file="${1:-.}"
 
@@ -160,8 +160,6 @@ function copypath {
 
   echo ${(%):-"%B${file:a}%b copied to clipboard."}
 }
-alias cpath='copypath'
-
 
 ## Custom
 
@@ -175,13 +173,17 @@ alias omzconf="nvim ~/.oh-my-zsh"
 alias yay='paru'
 
 alias dud='du -hd1'
-alias l='lsd -lhF --color=auto'
-alias ls='lsd -lahF --color=auto'
+alias l='lsd -lhF'
+alias ls='lsd -lahF'
 alias lt='lsd --tree'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='grep -E --color=auto'
-alias diff='diff --color=auto'
+alias frg='rg -F'
+# alias egrep='grep -E --color=auto'
+alias dif='difft'
+
+unalias grep
+# unalias sed
+# unalias cat
+# unalias diff
 
 alias neovimReset='rm -fr ~/.local/share/nvim ~/.local/state/nvim'
 
@@ -192,7 +194,7 @@ alias freak="echo 'im 𝓯𝓻𝓮𝓪𝓴𝔂'"
 alias rosesarered="echo 'violetsareblue'"
 
 #Functions
-ydl() {
+ytdl() {
   yt-dlp $1 -f "ba" -x -o "$2"
 }
 
@@ -263,5 +265,7 @@ set -o vi
 
 autoload -Uz compinit
 compinit
+
+eval "$(zoxide init zsh --cmd j)"
 
 # eval "$(pyenv virtualenv-init -)"
