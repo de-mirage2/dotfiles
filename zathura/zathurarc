@@ -1,0 +1,9 @@
+set selection-clipboard clipboard
+set adjust-open "best-fit"
+
+unmap [normal] k
+unmap [normal] K
+unmap [normal] e
+map [normal] k scroll half-down
+map [normal] e scroll up
+map [normal] E navigate previous
