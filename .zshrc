@@ -235,9 +235,9 @@ export GTK_FONT_SCALE=1
 export GTK_THEME=Adwaita:dark
 
 # fix xim conflicting xcompose brainrot (still not fixed)
-export GTK_IM_MODULE="xim"
+# export GTK_IM_MODULE="xim"
 export XMODIFIERS="@im=xim"
-export QT_IM_MODULE="xim"
+# export QT_IM_MODULE="xim"
 
 # fix zsh suggesting that neovim should edit an executable/song when it really shouldn't (not fixed)
 function nv() {
