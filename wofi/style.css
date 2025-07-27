@@ -7,13 +7,13 @@ window {
 
 #outer-box {
     padding: 2 2px;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
-    border: 1px solid rgba(220, 220, 220, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 #input {
-    color: #d6d6d6;
+    color: #000;
     font-size: 16px;
     padding: 3px 5px 3px 10px;
     margin: 2px 3px 0px 3px;
@@ -29,7 +29,7 @@ window {
     /* border: 1px solid rgba(220, 220, 220, 0.5); */
     /* background: rgba(255,255,255,0.05); */
 
-    background: linear-gradient(70deg,transparent,rgba(255,255,255,0.2),transparent,transparent);
+    background: linear-gradient(70deg,transparent,rgba(0, 0, 0, 0.2),transparent,transparent);
 }
 #input > image {
     -gtk-icon-transform:scalex(1);
@@ -53,11 +53,11 @@ window {
 }
 
 #text {
-    color: #a2acb0;
+    color: #666;
     padding-left : 15px;
 }
 #text:selected {
-    color: #ffffff;
+    color: #000;
 }
 
 #entry {

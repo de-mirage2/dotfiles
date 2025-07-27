@@ -199,11 +199,6 @@ export GDK_DPI_SCALE=1
 export GTK_FONT_SCALE=1
 export GTK_THEME=Adwaita:dark
 
-# fix xim conflicting xcompose brainrot (still not fixed) (idk what this even does bruh)
-# export GTK_IM_MODULE="xim"
-# export XMODIFIERS="@im=xim"
-# export QT_IM_MODULE="xim"
-
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init - zsh)"

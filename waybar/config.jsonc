@@ -20,6 +20,7 @@
       "temperature",
       "cpu",
       "memory",
+      "mpris",
       "battery",
       "battery#bat2",
       "network",
@@ -78,6 +79,18 @@
         "locked": "",
         "unlocked": ""
       }
+    },
+    "mpris": {
+      "format": "{player_icon}",
+      "format-paused": "{status_icon} <i>{title}</i>",
+      "player-icons": {
+        "default": "▶",
+        "mpv": "󰝚 "
+      },
+      "status-icons": {
+        "paused": "⏸"
+      },
+      "ignored-players": ["firefox"]
     },
     "mpd": {
       "format": "  {title} - {artist} {stateIcon} [{elapsedTime:%M:%S}/{totalTime:%M:%S}] {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}[{songPosition}/{queueLength}] [{volume}%]",
