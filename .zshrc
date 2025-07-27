@@ -1,12 +1,8 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
-
-# Set list of themes to pick when ZSH_THEME=random
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="false"
@@ -17,21 +13,13 @@ zstyle ':omz:update' frequency 14
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
 # You can set one of the optional three formats:
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
-
-# Which plugins would you like to load?
-# Standard and custom plugins found in $ZSH/plugins/ and $ZSH_CUSTOM/plugins/
 
 plugins=(sudo history emoji)
 
@@ -40,8 +28,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH_CUSTOM/plugins/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
-# User configuration
-
 export MANPATH="/usr/local/man:$MANPATH"
 
 export LANG=en_US.UTF-8
@@ -49,25 +35,7 @@ export LANG=en_US.UTF-8
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# Personal Keybinds
-#bindkey -r "^E"
-#bindkey "^E" edit-command-line
-#bindkey -r "^I"
-#bindkey "^I" end-of-line
-#bindkey -r "^F"
-#bindkey "^F" forward-word
-#bindkey -r "^B"
-#bindkey "^B" backward-word
-#
-#bindkey -r '^[[1;5C'
-#bindkey '^[[1;5C' autosuggest-accept
-#bindkey -r '^[[1;5D'
-#bindkey '^[[1;5D' expand-or-complete
-#bindkey '\t' expand-or-complete
-
-
 # Git aliases (copying omz plugin)
-
 alias g='git'
 alias ga='git add'
 alias gaa='git add -all'
@@ -171,14 +139,15 @@ alias zshconf="nvim ~/.zshrc"
 alias omzconf="nvim ~/.oh-my-zsh"
 
 alias yay='paru'
-
 alias dud='du -hd1'
 alias l='lsd -lhF'
 alias ls='lsd -lahF'
 alias lt='lsd --tree'
+alias lst='lsd --tree -a'
 alias frg='rg -F'
 # alias egrep='grep -E --color=auto'
 alias dif='difft'
+alias n='nvim'
 
 unalias grep
 # unalias sed
@@ -189,9 +158,6 @@ alias neovimReset='rm -fr ~/.local/share/nvim ~/.local/state/nvim'
 
 alias pls='sudo'
 alias plz='sudo'
-
-alias freak="echo 'im 𝓯𝓻𝓮𝓪𝓴𝔂'"
-alias rosesarered="echo 'violetsareblue'"
 
 #Functions
 ytdl() {
@@ -210,6 +176,7 @@ wavescrashing() {
   play -c 2 -n synth brownnoise synth pinknoise mix synth 0 0 0 15 40 50 trapezium amod $1 50
 }
 
+
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -220,37 +187,26 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
-# export XDG_MUSIC_DIR="$HOME/Music" # UNCOMMENT IF SOMETHING BREAKS
 export MUSIC="$HOME/Music"
 
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
-# Created by `pipx` on 2024-09-20 23:02:03
 export PATH="$PATH:/home/de_mirage/.local/bin"
 
-# fix GTK app brianrot
+# fix GTK app brianrot (?)
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
 export GTK_FONT_SCALE=1
 export GTK_THEME=Adwaita:dark
 
-# fix xim conflicting xcompose brainrot (still not fixed)
+# fix xim conflicting xcompose brainrot (still not fixed) (idk what this even does bruh)
 # export GTK_IM_MODULE="xim"
-export XMODIFIERS="@im=xim"
+# export XMODIFIERS="@im=xim"
 # export QT_IM_MODULE="xim"
 
-# fix zsh suggesting that neovim should edit an executable/song when it really shouldn't (not fixed)
-function nv() {
-  nvim "$@"
-}
-_nv() {
-  _files -g '^(*.mp3|*.ogg|*.flac|*.wav|*.exe|*.out|*.bin|*.a|*.so|*.o|*.mod|*.png|*.jpg|*.jpeg)(.)'
-}
-compdef _nv nv
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init - zsh)"
 
 if uwsm check may-start; then
   exec uwsm start hyprland.desktop
@@ -263,9 +219,12 @@ fi
 
 set -o vi
 
+# skip_global_compinit=1
+
 autoload -Uz compinit
 compinit
 
 eval "$(zoxide init zsh --cmd j)"
 
 # eval "$(pyenv virtualenv-init -)"
+
