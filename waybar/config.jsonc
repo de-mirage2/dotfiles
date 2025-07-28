@@ -2,8 +2,8 @@
   {
     "layer": "top",
     "position": "top",
-    "height": 18,
-    "spacing": 6,
+    "height": 24,
+    "spacing": 14,
     "modules-left": [
       "custom/emblem",
       "hyprland/window",
@@ -17,13 +17,13 @@
       // "mpd",
       "tray",
       "idle_inhibitor",
-      "temperature",
-      "cpu",
-      "memory",
+      // "temperature",
+      // "cpu",
+      // "memory",
       "mpris",
+      "network",
       "battery",
       "battery#bat2",
-      "network",
       // "pulseaudio",
       "backlight",
       // "keyboard-state",
@@ -31,6 +31,7 @@
     ],
     "hyprland/window": {
       "format": "{class}",
+      "tooltip": false,
       "min-length": 10,
       "justify": "center",
       "rewrite": {
@@ -39,35 +40,41 @@
     },
     "custom/emblem": {
       "format": "\uf303 ",
+      "tooltip": false,
       "on-click": "wofi --show drun",
       "tooltip": false
     },
     "custom/file": {
       "exec": "echo 'File'",
-      "interval": 60,
+      "tooltip": false,
+      "interval": "once",
       "return-type": "plain",
-      "on-click": "dolphin"
+      "on-click": "thunar"
     },
     "custom/edit": {
       "exec": "echo 'Edit'",
-      "interval": 60,
+      "tooltip": false,
+      "interval": "once",
       "return-type": "plain",
       "on-click": "gimp"
     },
     "custom/view": {
       "exec": "echo 'View'",
-      "interval": 60,
+      "tooltip": false,
+      "interval": "once",
       "return-type": "plain"
     },
     "custom/window": {
       "exec": "echo 'Window'",
-      "interval": 60,
+      "tooltip": false,
+      "interval": "once",
       "return-type": "plain",
       // "on-click": "gio open https://github.com/kamlendras/waybar/issues/new"
     },
     "custom/help": {
       "exec": "echo 'Help'",
-      "interval": 60,
+      "tooltip": false,
+      "interval": "once",
       "return-type": "plain",
       "on-click": "gio open https://github.com/Alexays/Waybar/wiki/"
     },
@@ -81,11 +88,11 @@
       }
     },
     "mpris": {
-      "format": "{player_icon}",
-      "format-paused": "{status_icon} <i>{title}</i>",
+      "format": "<big>{player_icon}</big>",
+      "format-paused": "{status_icon} ~ <i>{title}</i>",
       "player-icons": {
         "default": "▶",
-        "mpv": "󰝚 "
+        "mpv": "󰝚"
       },
       "status-icons": {
         "paused": "⏸"
@@ -129,7 +136,7 @@
       }
     },
     "tray": {
-      "spacing": 10
+      "spacing": 14
     },
     "clock": {
       "format": "{:%a %b %d   %H:%M %p}",
@@ -146,7 +153,7 @@
       // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
       "critical-threshold": 60,
       "format": "{icon}",
-      "format-tooltip": "{icon} {temperatureC}°C",
+      "format-tooltip": "{temperatureC}°C",
       "format-icons": [
         "",
         "",
@@ -154,7 +161,7 @@
       ]
     },
     "backlight": {
-      "format": "{icon}",
+      "format": "<big>{icon}</big>",
       "format-icons": [
         "",
         "",
@@ -174,7 +181,7 @@
         "warning": 20,
         "critical": 10
       },
-      "format": "<span size='large'>{icon}</span>",
+      "format": "<big>{icon}</big>",
       "format-charging": "",
       "format-plugged": "",
       "tooltip-format": "{capacity}%\n{power}W, {time}",
@@ -190,7 +197,7 @@
       "bat": "BAT2"
     },
     "network": {
-        "format-wifi": "<span size='large'>\udb81\udda9</span> ",
+        "format-wifi": "<big>\uf1eb </big>",
         "format-ethernet": " ",
         "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP)  ",

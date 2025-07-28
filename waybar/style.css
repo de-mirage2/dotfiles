@@ -17,8 +17,8 @@ window#waybar {
 }
 
 #custom-emblem, #custom-file, #custom-edit, #custom-view, #custom-help, #custom-window, #clock {
-  margin: 0 14px;
-  font-weight: 500;
+  margin: 0 10px;
+  font-weight: 600;
 }
 
 tooltip {
@@ -27,6 +27,15 @@ tooltip {
 tooltip label {
   color: white;
 }
+
+/* .modules-left > widget:first-child > #workspaces { */
+/*   margin-left: 0; */
+/* } */
+/**/
+/* .modules-right > widget:last-child > #workspaces { */
+/*   margin-right: 0; */
+/* } */
+
 
 #workspaces button {
   padding: 0 5px;
@@ -55,19 +64,16 @@ tooltip label {
 #mpris,
 #mpd {
   margin: 0;
-  padding: 0 4px;
+  padding: 0 6px;
+  font-size: 16px;
 }
 
-.modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
-}
-
-.modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
+#battery, #idle_inhibitor {
+  padding: 0px;
 }
 
 #battery.full {
-  color: #26e7bb;
+  color: #96ffeb;
 }
 
 #battery.sufficient {
@@ -87,21 +93,17 @@ tooltip label {
 }
 
 #battery.warning:not(.charging) {
-  background-color: rgba(200,40,40,0.5);
-  color: #ffffff;
-  padding-right: 0px;
+  color: #f86868;
 }
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
     color: #000000;
   }
 }
 
 #battery.critical:not(.charging) {
-  background-color: #f53c3c;
-  color: #ffffff;
+  color: #f53c3c;
   padding-right: 0px;
   animation-name: blink;
   animation-duration: 0.5s;
@@ -111,26 +113,29 @@ tooltip label {
 }
 
 label:focus {
-  background-color: #000000;
+  color: #000000;
 }
 
 #network.disconnected {
-  background-color: #f53c3c;
+  color: #f53c3c;
 }
 
 #temperature.critical {
-  background-color: #eb4d4b;
+  color: #eb4d4b;
+}
+
+#idle_inhibitor.deactivated {
+  color: rgba(255,255,255,0.5);
 }
 
 #idle_inhibitor.activated {
-  background-color: #ecf0f1;
-  color: #2d3436;
+  color: #fef;
 }
 
 #tray {
   margin-right: 4px;
   background-color: rgba(255, 255, 255, 0.2);
-  padding: 1 2px;
+  padding: 1 4px;
 }
 
 #tray > .needs-attention {
