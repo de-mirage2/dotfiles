@@ -19,6 +19,7 @@ window#waybar {
 #custom-emblem, #custom-file, #custom-edit, #custom-view, #custom-help, #custom-window, #clock {
   margin: 0 10px;
   font-weight: 600;
+  text-shadow: #111 0 0 10px;
 }
 
 tooltip {

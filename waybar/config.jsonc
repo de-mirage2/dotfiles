@@ -25,7 +25,7 @@
       "battery",
       "battery#bat2",
       // "pulseaudio",
-      "backlight",
+      // "backlight",
       // "keyboard-state",
       "clock"
     ],
@@ -88,16 +88,17 @@
       }
     },
     "mpris": {
-      "format": "<big>{player_icon}</big>",
+      "format": "{player_icon}",
       "format-paused": "{status_icon} ~ <i>{title}</i>",
       "player-icons": {
         "default": "▶",
-        "mpv": "󰝚"
+        // "mpv": "<big>󰝚</big>"
       },
       "status-icons": {
         "paused": "⏸"
       },
-      "ignored-players": ["firefox"]
+      "ignored-players": ["firefox"],
+      "interval": 1
     },
     "mpd": {
       "format": "  {title} - {artist} {stateIcon} [{elapsedTime:%M:%S}/{totalTime:%M:%S}] {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}[{songPosition}/{queueLength}] [{volume}%]",
@@ -139,7 +140,7 @@
       "spacing": 14
     },
     "clock": {
-      "format": "{:%a %b %d   %H:%M %p}",
+      "format": "{:%a %b %d\t%I:%M %p}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {

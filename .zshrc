@@ -145,9 +145,11 @@ alias ls='lsd -lahF'
 alias lt='lsd --tree'
 alias lst='lsd --tree -a'
 alias frg='rg -F'
+unalias ll
 # alias egrep='grep -E --color=auto'
 alias dif='difft'
 alias n='nvim'
+alias nf="fzf --bind 'enter:become(nvim {})' --style full --preview 'bat -n --color=always {}'"
 
 unalias grep
 # unalias sed
@@ -189,15 +191,15 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 export MUSIC="$HOME/Music"
 
-export ELECTRON_OZONE_PLATFORM_HINT=wayland
-
 export PATH="$PATH:/home/de_mirage/.local/bin"
+
+export FZF_DEFAULT_OPTS="--bind='ctrl-e:down' --height 40%"
 
 # fix GTK app brianrot (?)
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
 export GTK_FONT_SCALE=1
-export GTK_THEME=Adwaita:dark
+export GTK_THEME=MacTahoe Light
 
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -220,6 +222,9 @@ autoload -Uz compinit
 compinit
 
 eval "$(zoxide init zsh --cmd j)"
+
+# Set up fzf key bindings and fuzzy completion
+# source <(fzf --zsh)
 
 # eval "$(pyenv virtualenv-init -)"
 
