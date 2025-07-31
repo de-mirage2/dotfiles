@@ -28,7 +28,7 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<C-H>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-L>", "<C-w>l", { desc = "switch window right" })
 map("n", "<C-J>", "<C-w>j", { desc = "switch window down" })
-map("n", "<C-W>", "<C-w>e", { desc = "switch window up" })
+map("n", "<C-E>", "<C-w>k", { desc = "switch window up" })
 
 map("n", "<A-h>", "<C-w>H", { desc = "swap window left" })
 map("n", "<A-l>", "<C-w>L", { desc = "swap window right" })

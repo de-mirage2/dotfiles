@@ -10,7 +10,7 @@ if [[ $CURR != *"$1"* ]]; then
   case $1 in
 
     emoji)
-      rofi -show emoji -no-icons
+      rofi -show emoji -no-icons -modi emoji
       ;;
 
     drun)

@@ -149,7 +149,14 @@ unalias ll
 # alias egrep='grep -E --color=auto'
 alias dif='difft'
 alias n='nvim'
-alias nf="fzf --bind 'enter:become(nvim {})' --style full --preview 'bat -n --color=always {}'"
+alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|csv|sh|go)$' | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
+alias z='zathura'
+alias zf="fd -i '.*\\.(pdf|djvu|epub)$' | fzf --bind 'enter:become(zathura {})'"
+alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' | fzf --bind 'enter:become(mpv {})' --preview 'bat -n --color=always {}'"
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
+# fd . --extension flac --extension mp3 --extension ogg --extension m4a | fzf
 
 unalias grep
 # unalias sed
@@ -193,13 +200,19 @@ export MUSIC="$HOME/Music"
 
 export PATH="$PATH:/home/de_mirage/.local/bin"
 
-export FZF_DEFAULT_OPTS="--bind='ctrl-e:down' --height 40%"
+export FZF_DEFAULT_OPTS="--bind='ctrl-e:up' --height 40% --style full"
 
 # fix GTK app brianrot (?)
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
 export GTK_FONT_SCALE=1
 export GTK_THEME=MacTahoe Light
+
+# fix xim conflicting xcompose brainrot (still not fixed) (idk what this even does bruh)
+# export GTK_IM_MODULE="xim"
+export XMODIFIERS="@im=xim"
+# export QT_IM_MODULE="xim"
+
 
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -221,7 +234,7 @@ set -o vi
 autoload -Uz compinit
 compinit
 
-eval "$(zoxide init zsh --cmd j)"
+# eval "$(zoxide init zsh --cmd j)"
 
 # Set up fzf key bindings and fuzzy completion
 # source <(fzf --zsh)

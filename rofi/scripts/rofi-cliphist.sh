@@ -7,10 +7,8 @@ if [ -z "$@" ]; then
     cliphist list
   fi
 else
-  # echo $ROFI_RETV
-  # echo $@
-  if [ "$ROFI_RETV" -eq 3]; then
-    cliphist delete <<< "$@" # not working, $ROFI_RETV never equals 3?
+  if [ "$ROFI_RETV" -eq 10 ]; then
+    cliphist delete-query <<< "$@" # not working, $ROFI_RETV never equals 10?
   else 
     cliphist decode <<< "$@" | wl-copy
   fi

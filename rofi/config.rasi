@@ -1,5 +1,5 @@
 configuration {
-  modes: "drun,ssh,emoji,cliphist:~/.config/rofi/scripts/rofi-cliphist.sh";
+  modes: "drun,emoji,cliphist:~/.config/rofi/scripts/rofi-cliphist.sh";
   font: "SF Pro 20";
   location: 0;
 	yoffset: -100;
