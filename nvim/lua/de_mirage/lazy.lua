@@ -73,15 +73,9 @@ require('lazy').setup({
         lspconfig[server].setup(config)
       end
     end
-
-   -- -- example calling setup directly for each LSP
-   --  config = function()
-   --    local capabilities = require('blink.cmp').get_lsp_capabilities()
-   --    local lspconfig = require('lspconfig')
-   --
-   --    lspconfig['lua_ls'].setup({ capabilities = capabilities })
-   --  end
   },
+  -- Filetree
+  { 'stevearc/oil.nvim' , config = function() require("oil").setup() end, },
   -- Git
   { 'tpope/vim-fugitive' },
   -- Misc.
@@ -91,13 +85,9 @@ require('lazy').setup({
   -- LaTeX/TeX Utilities
   { 'lervag/vimtex', lazy = false },
   -- Competitive Programming
-  {
-	  'xeluxee/competitest.nvim',
-	  dependencies = 'MunifTanjim/nui.nvim',
-	  config = function() require('competitest').setup() end,
-  },
+  { 'xeluxee/competitest.nvim', dependencies = 'MunifTanjim/nui.nvim', config = function() require('competitest').setup() end, },
   -- Theme/UI
-  { 'Mofiqul/dracula.nvim' },
+  { 'folke/tokyonight.nvim', lazy = false, opts = {style = "moon"}, },
   { 'nvim-lualine/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons'} },
   -- Fuzzy Finder
   {

@@ -2,14 +2,14 @@ local map = vim.keymap.set
 
 map({"n","v"}, "k", "e", {remap=false})
 map({"n","v"}, "e", "k", {remap=false})
-map({"n","v"}, "K", "E", {remap=false})
-map({"n","v"}, "E", "K", {remap=false})
+map({"n",   }, "K", "E", {remap=false})
+map({"n",   }, "E", "K", {remap=false})
+map("v", "K", "E")
+map("v", "E", ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv")
 
 map("n", ";", ":")
-map("n", "<leader>f", vim.cmd.Ex)
-
-map("v", "K", ":m '<-2<CR>gv=gv")
-map("v", "J", ":m '>+1<CR>gv=gv")
+map("n", "<leader>j", "<CMD>Oil<CR>", { desc = "open parent directory" })
 
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
@@ -45,9 +45,9 @@ map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
 
 -- numbering
 map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
+map("n", "<leader>r", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
 
--- clipboard and deletion - Binds that involve ctrl use system clipboard
+-- clipboard and deletion  (binds that involve ctrl use system clipboard)
 map("v", "<C-y>", [["+y]], { desc = "visual copy to system clipboard" })
 -- map("n", "<D-y>", [["+y]], { desc = "normal copy to system clipboard - root" })
 map("n", "<C-y>", [["+yy]], { desc = "normal copy line to system clipboard" })
@@ -66,11 +66,9 @@ map("n", "<leader>v", ":vsplit<CR>", { desc = "new vertical pane" })
 map("n", "<leader>t", ":belowright vsplit | terminal<CR>", { desc = "new vertical terminal" })
 map("n", "<leader>T", ":belowright split | terminal<CR>", { desc = "new horizontal terminal" })
 
--- modify split 
-
--- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-map("n", "<leader>k", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+-- Comment
+map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
+map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
 
 --[[
 map("n", "<leader>fm", function()
@@ -82,28 +80,6 @@ map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic locli
 
 -- tabufline
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
--- Comment
-map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
-map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
-
--- telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
-map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
-map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
-map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
-map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
-map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
-map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
-map("n", "<leader>th", "<cmd>Telescope themes<CR>", { desc = "telescope nvchad themes" })
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
-map(
-  "n",
-  "<leader>fa",
-  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-  { desc = "telescope find all files" }
-)
 
 -- terminal
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
