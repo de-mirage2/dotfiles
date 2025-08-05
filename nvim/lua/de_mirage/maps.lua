@@ -2,11 +2,11 @@ local map = vim.keymap.set
 
 map({"n","v"}, "k", "e", {remap=false})
 map({"n","v"}, "e", "k", {remap=false})
-map("n", "K", "E", {remap=false})
+map({"n","v"}, "K", "E", {remap=false})
 map({"n","v"}, "E", "K", {remap=false})
 
 map("n", ";", ":")
-map("n", "<leader>pv", vim.cmd.Ex)
+map("n", "<leader>f", vim.cmd.Ex)
 
 map("v", "K", ":m '<-2<CR>gv=gv")
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -72,8 +72,6 @@ map("n", "<leader>T", ":belowright split | terminal<CR>", { desc = "new horizont
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 map("n", "<leader>k", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
 
--- map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
-
 --[[
 map("n", "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
@@ -84,19 +82,6 @@ map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic locli
 
 -- tabufline
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
-
-map("n", "<tab>", function()
-  require("nvchad.tabufline").next()
-end, { desc = "buffer goto next" })
-
-map("n", "<S-tab>", function()
-  require("nvchad.tabufline").prev()
-end, { desc = "buffer goto prev" })
-
-map("n", "<leader>x", function()
-  require("nvchad.tabufline").close_buffer()
-end, { desc = "buffer close" })
-
 -- Comment
 map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
 map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })

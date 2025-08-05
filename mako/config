@@ -1,10 +1,11 @@
-font=SF Pro 10
+font=SF Pro 12
 format=<b>%a ⏵</b> %s\n%b
 sort=-time
 output=DP-2
 layer=overlay
-anchor=bottom-center
-background-color=#322747
+anchor=top-right
+background-color=#FFFFFFD6
+text-color-#000000FF
 width=450
 height=110
 margin=5

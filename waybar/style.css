@@ -9,7 +9,8 @@
 
 window#waybar {
   border-radius: 0;
-  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+  border: 0;
+  background: linear-gradient(rgba(30,30,30,0.3), rgba(0,0,0,0.1));
 }
 
 #window {
@@ -40,7 +41,7 @@ tooltip label {
 
 #workspaces button {
   padding: 0 5px;
-  background: transparent;
+  background: rgba(100,100,100,0.2);
   color: white;
   border-bottom: 3px solid transparent;
 }
@@ -137,6 +138,12 @@ label:focus {
   margin-right: 4px;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 1 4px;
+}
+
+#tray menu * {
+  font-family: Ubuntu;
+  font-size: 12px;
+  color: black;
 }
 
 #tray > .needs-attention {

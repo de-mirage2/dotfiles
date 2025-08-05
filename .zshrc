@@ -149,7 +149,7 @@ unalias ll
 # alias egrep='grep -E --color=auto'
 alias dif='difft'
 alias n='nvim'
-alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|csv|sh|go)$' | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
+alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
 alias z='zathura'
 alias zf="fd -i '.*\\.(pdf|djvu|epub)$' | fzf --bind 'enter:become(zathura {})'"
 alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' | fzf --bind 'enter:become(mpv {})' --preview 'bat -n --color=always {}'"
