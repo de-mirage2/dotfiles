@@ -7,7 +7,7 @@
   padding: 0.1rem;
 }
 
-window#waybar {
+window#waybar.top {
   border-radius: 0;
   border: 0;
   background: linear-gradient(rgba(30,30,30,0.3), rgba(0,0,0,0.1));
@@ -49,6 +49,42 @@ tooltip label {
 #workspaces button.focused {
   background: #64727d;
   border-bottom: 3px solid white;
+}
+
+window#waybar.bottom {
+  background:transparent;
+}
+
+#taskbar {
+  background: linear-gradient(45deg, rgba(200,200,200,0.2), rgba(100, 100, 100,0.2), rgba(200,200,200,0.2));
+  border-radius: 16px;
+  margin-bottom: 5px;
+}
+
+/* #taskbar *:hover { */
+/*   opacity: 0.2; */
+/* } */
+
+#taskbar button {
+  border-width: 2px;
+  border-radius: 16px;
+  padding: 2px;
+  margin: 4px 5px;
+  color: #fff;
+  background: 
+    linear-gradient(rgba(155,155,155,0.6), rgba(100,100,100,0.6)) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(55,55,55,0.4), rgba(255,255,255,0.4)) border-box;
+}
+
+#taskbar button.active {
+  background:
+    linear-gradient(rgba(255,255,255,0.2), rgba(100,100,100,0.2)) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.5), rgba(155,155,155,0.5), rgba(255,255,255,0.5)) border-box;
+}
+
+#taskbar button:hover {
+  background: 
+    rgba(255,255,255,0.5) border-box;
 }
 
 #cpu,
@@ -149,13 +185,4 @@ label:focus {
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
   background-color: #eb4d4b;
-}
-
-#custom-os_button {
-  font-size: 32px;
-  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-#custom-os_button:hover {
-  background: white;
-  color: black;
 }

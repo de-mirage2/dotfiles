@@ -78,7 +78,8 @@
       "tooltip": false,
       "interval": "once",
       "return-type": "plain",
-      "on-click": "gio open https://github.com/Alexays/Waybar/wiki/"
+      "on-click": "gio open https://github.com/Alexays/Waybar/wiki/",
+      "on-click-right": "gio open https://wiki.hypr.land"
     },
     "keyboard-state": {
       "numlock": true,
@@ -228,7 +229,7 @@
     }
   },
     {
-    "layer": "bottom",
+    "layer": "top",
     "position": "bottom",
     "mod": "dock",
     "exclusive": false,
@@ -236,30 +237,29 @@
     "gtk-layer-shell": true,
     "height": 41,
     "width": 2,
-    "modules-left": [
-      "custom/os_button"
-    ],
     "modules-center": [
       "wlr/taskbar"
     ],
     "margin": "4",
     "spacing": "5",
     "sway/window": {
-      "max-length": 50
-    },
-    "custom/os_button": {
-      "format": "🔍",
-      "on-click": "wofi --show drun",
-      "tooltip": false
+      "max-length": 50 // what even is this
     },
     "wlr/taskbar": {
       "format": "{icon}",
-      "icon-size": 36,
+      "icon-size": 48,
       "spacing": 3,
       "on-click-middle": "close",
-      "tooltip-format": "{title}",
+      "tooltip": true,
+      "tooltip-format": "title={title} name={name} app_id={app_id}",
       "ignore-list": [],
-      "on-click": "activate"
+      "on-click": "activate",
+      // the following options are useless as the bar appears behind applications
+      "on-click-right": "minimize",
+      "disable-scroll": false,
+			"on-scroll-up": "hyprctl dispatch workspace e-1",
+			"on-scroll-down": "hyprctl dispatch workspace e+1",
+      "smooth-scrolling-threshold": 2.0,
     }
   }
 ]

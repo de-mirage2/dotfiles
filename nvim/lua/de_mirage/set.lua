@@ -20,6 +20,10 @@ op.colorcolumn = "160"
 
 vim.g.mapleader = " "
 
+op.title = true
+op.titlelen = 0
+op.titlestring = "nvim"
+
 o.mouse = "a"
 
 op.whichwrap:append {
@@ -30,4 +34,3 @@ op.whichwrap:append {
   h = true,
   l = true,
 }
-
