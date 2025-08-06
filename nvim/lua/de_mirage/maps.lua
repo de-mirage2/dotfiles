@@ -1,18 +1,17 @@
 local map = vim.keymap.set
 
+-- swapping k and e; adding swap-line function
 map({"n","v"}, "k", "e", {remap=false})
 map({"n","v"}, "e", "k", {remap=false})
-map({"n",   }, "K", "E", {remap=false})
-map({"n",   }, "E", "K", {remap=false})
-map("v", "K", "E")
+-- map({"v",   }, "K", "E", {remap=false}) -- unneeded
+-- map({"n",   }, "E", "", {remap=false}) -- unneeded
+-- map("v", "K", "E") -- error
+
 map("v", "E", ":m '<-2<CR>gv=gv")
 map("v", "J", ":m '>+1<CR>gv=gv")
 
 map("n", ";", ":")
 map("n", "<leader>j", "<CMD>Oil<CR>", { desc = "open parent directory" })
-
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
 
 map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-a>", "<End>", { desc = "move end of line" })
