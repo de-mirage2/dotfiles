@@ -96,6 +96,10 @@ require('lazy').setup({
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {}
   },
+  -- Eyeliner
+  {
+    'jinh0/eyeliner.nvim',
+  },
   -- Zettlekasten
   {
   'zk-org/zk-nvim',

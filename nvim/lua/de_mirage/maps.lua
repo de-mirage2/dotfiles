@@ -10,7 +10,9 @@ map({"n","v"}, "e", "k", {remap=false})
 map("v", "E", ":m '<-2<CR>gv=gv")
 map("v", "J", ":m '>+1<CR>gv=gv")
 
-map("n", ";", ":")
+map("n", ";", ":", {remap=false})
+map("n", ":", ";", {remap=false})
+
 map("n", "<leader>j", "<CMD>Oil<CR>", { desc = "open parent directory" })
 
 map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" })

@@ -71,15 +71,17 @@ window#waybar.bottom {
   padding: 2px;
   margin: 4px 5px;
   color: #fff;
-  background: 
-    linear-gradient(rgba(155,155,155,0.6), rgba(100,100,100,0.6)) padding-box,
-    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(55,55,55,0.4), rgba(255,255,255,0.4)) border-box;
-}
-
-#taskbar button.active {
+  opacity: 0.5;
   background:
     linear-gradient(rgba(255,255,255,0.2), rgba(100,100,100,0.2)) padding-box,
     linear-gradient(135deg, rgba(255,255,255,0.5), rgba(155,155,155,0.5), rgba(255,255,255,0.5)) border-box;
+}
+
+#taskbar button.active {
+  opacity: 1.0;
+  background: 
+    linear-gradient(rgba(155,155,155,0.6), rgba(100,100,100,0.6)) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(55,55,55,0.4), rgba(255,255,255,0.4)) border-box;
 }
 
 #taskbar button:hover {
