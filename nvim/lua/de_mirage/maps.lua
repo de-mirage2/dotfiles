@@ -1,29 +1,37 @@
 local map = vim.keymap.set
 
 -- swapping k and e; adding swap-line function
-map({"n","v"}, "k", "e", {remap=false})
-map({"n","v"}, "e", "k", {remap=false})
+map({"n","v","t",}, "k", "e", {remap=false})
+map({"n","v","t"}, "e", "k", {remap=false})
 -- map({"v",   }, "K", "E", {remap=false}) -- unneeded
 -- map({"n",   }, "E", "", {remap=false}) -- unneeded
 -- map("v", "K", "E") -- error
 
+-- swap lines in visual
 map("v", "E", ":m '<-2<CR>gv=gv")
 map("v", "J", ":m '>+1<CR>gv=gv")
 
+-- swap ; and :
 map("n", ";", ":", {remap=false})
 map("n", ":", ";", {remap=false})
 
+-- oil.nvim
 map("n", "<leader>j", "<CMD>Oil<CR>", { desc = "open parent directory" })
 
+-- insert options
 map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-a>", "<End>", { desc = "move end of line" })
 map("i", "<C-d>", "<C-h>", { desc = "delete character" })
 map("i", "<C-h>", "<Left>", { desc = "move left" })
 map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
-map("i", "<C-e>", "<Up>", { desc = "move up" })
+map({"i","t"}, "<C-e>", "<Up>", { desc = "move up" })
 
+-- clear highlights
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
+
+-- search within visual
+map('x', '<Leader>/', '<Esc>/\\%V')
 
 -- window transition
 map("n", "<C-H>", "<C-w>h", { desc = "switch window left" })

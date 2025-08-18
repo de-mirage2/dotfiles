@@ -227,39 +227,39 @@
       "on-click": "pavucontrol",
       "on-click-right": "foot -a pw-top pw-top"
     }
-  },
-    {
-    "layer": "top",
-    "position": "bottom",
-    "mod": "dock",
-    "exclusive": false,
-    "passthrough": false,
-    "gtk-layer-shell": true,
-    "height": 41,
-    "width": 2,
-    "modules-center": [
-      "wlr/taskbar"
-    ],
-    "margin": "4",
-    "spacing": "5",
-    "sway/window": {
-      "max-length": 50 // what even is this
-    },
-    "wlr/taskbar": {
-      "format": "{icon}",
-      "icon-size": 48,
-      "spacing": 3,
-      "on-click-middle": "close",
-      "tooltip": true,
-      "tooltip-format": "title={title} name={name} app_id={app_id}",
-      "ignore-list": [],
-      "on-click": "activate",
-      // the following options are useless as the bar appears behind applications
-      "on-click-right": "minimize",
-      "disable-scroll": false,
-			"on-scroll-up": "hyprctl dispatch workspace e-1",
-			"on-scroll-down": "hyprctl dispatch workspace e+1",
-      "smooth-scrolling-threshold": 2.0,
-    }
   }
+  // {
+  //   "layer": "top",
+  //   "position": "bottom",
+  //   "mod": "dock",
+  //   "exclusive": false,
+  //   "passthrough": false,
+  //   "gtk-layer-shell": true,
+  //   "height": 41,
+  //   "width": 2,
+  //   "modules-center": [
+  //     "wlr/taskbar"
+  //   ],
+  //   "margin": "4",
+  //   "spacing": "5",
+  //   "sway/window": {
+  //     "max-length": 50 // what even is this
+  //   },
+  //   "wlr/taskbar": {
+  //     "format": "{icon}",
+  //     "icon-size": 48,
+  //     "spacing": 3,
+  //     "on-click-middle": "close",
+  //     "tooltip": true,
+  //     "tooltip-format": "title={title} name={name} app_id={app_id}",
+  //     "ignore-list": [],
+  //     "on-click": "activate",
+  //     // the following options are useless as the bar appears behind applications
+  //     "on-click-right": "minimize",
+  //     "disable-scroll": false,
+  // 	"on-scroll-up": "hyprctl dispatch workspace e-1",
+  // 	"on-scroll-down": "hyprctl dispatch workspace e+1",
+  //     "smooth-scrolling-threshold": 2.0,
+  //   }
+  // }
 ]

@@ -1,5 +1,5 @@
 require 'plugins.fugitive'
--- require 'plugins.lsp'
+require 'plugins.custom-manim'
 require 'plugins.fzf-lua'
 require 'plugins.lualine'
 require 'plugins.tokyonight'
