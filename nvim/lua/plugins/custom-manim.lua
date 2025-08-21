@@ -114,13 +114,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost", "BufEnter", "TextChange
           -- end
 
           -- local command = string.format("echo '%s to %s' has %s matches; uv run manim render -p %s %s", class_row, cursor_row, count, vim.api.nvim_buf_get_name(0), class_name)
-          local command = string.format("uv run manim render %s %s", vim.fn.expand('%:p'), class_name)
+          local command = string.format("uv run manim render %s %s -v DEBUG", vim.fn.expand('%:p'), class_name)
 
           if (toggleMode == 0) then
             command = command .. string.format(' -sqm; mpv media/images/main/%s_ManimCE_*', class_name)
           elseif (toggleMode == 1) then
             command = command .. ' -p'
-          else
+          elseif (toggleMode == 2) then
             input_range = vim.fn.input("Enter range (formatted as: `x,y`): ")
             if input_range == "" then
               input_range = last_input_range
@@ -154,9 +154,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost", "BufEnter", "TextChange
           -- end
         end
 
-        vim.keymap.set("n", "<localleader>mm", function() render_scene(1) end, { noremap = false, silent = true })
-        vim.keymap.set("n", "<localleader>mi", function() render_scene(2)  end, { noremap = false, silent = true })
-        vim.keymap.set("n", "<localleader>mx", function() render_scene(3)  end, { noremap = false, silent = true })
+        vim.keymap.set("n", "<localleader>mi", function() render_scene(0)  end, { noremap = false, silent = true })
+        vim.keymap.set("n", "<localleader>mm", function() render_scene(1)  end, { noremap = false, silent = true })
+        vim.keymap.set("n", "<localleader>mx", function() render_scene(2)  end, { noremap = false, silent = true })
         vim.keymap.set("n", "<localleader>mp", function() play_video() end, { noremap = false, silent = true })
 
         return
