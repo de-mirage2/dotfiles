@@ -149,13 +149,21 @@ unalias ll
 # alias egrep='grep -E --color=auto'
 alias dif='difft'
 alias n='nvim'
-alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
+alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' -H . | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
 alias z='zathura'
-alias zf="fd -i '.*\\.(pdf|djvu|epub)$' | fzf --bind 'enter:become(zathura {})'"
-alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' | fzf --bind 'enter:become(mpv {})' --preview 'bat -n --color=always {}'"
+alias zf="fd -i '.*\\.(pdf|djvu|epub)$' . | fzf --bind 'enter:become(zathura {})'"
+alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' . | fzf --bind 'enter:become(mpv {})'"
+cd_to_dir() {
+  cd $1 && cd $(fd -t d | fzf +m --preview 'lsd --tree -a {}')
+}
+alias cf="cd_to_dir"
+mcd() {
+  mkdir -p $1 && cd $1 
+}
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
 }
+
 # fd . --extension flac --extension mp3 --extension ogg --extension m4a | fzf
 
 unalias grep
@@ -175,10 +183,6 @@ ytdl() {
 
 ytaudiostream() {
   yt-dlp -f bestaudio $1 -x -o - 2>/dev/null | ffplay -nodisp -autoexit -i - &>/dev/null
-}
-
-mcd() {
-  mkdir -p $1 && cd $1 
 }
 
 wavescrashing() {
@@ -209,9 +213,12 @@ export GTK_FONT_SCALE=1
 export GTK_THEME=MacTahoe Light
 
 # fix xim conflicting xcompose brainrot (still not fixed) (idk what this even does bruh)
-# export GTK_IM_MODULE="xim"
-export XMODIFIERS="@im=xim"
-# export QT_IM_MODULE="xim"
+# # export GTK_IM_MODULE="xim"
+# export XMODIFIERS="@im=xim"
+# # export QT_IM_MODULE="xim"
+# export GTK_IM_MODULE=ibus
+# export QT_IM_MODULE=ibus
+# export XMODIFIERS=@im=ibus
 
 
 # export PYENV_ROOT="$HOME/.pyenv"
