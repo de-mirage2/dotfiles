@@ -19,7 +19,8 @@ map("n", ":", ";", {remap=false})
 map("n", "<leader>j", "<CMD>Oil<CR>", { desc = "open parent directory" })
 
 -- insert options
-map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" })
+-- map("i", "<C-i>", "<ESC>^i", { desc = "move beginning of line" }) -- stupid terminal doesn't know the difference between C-i and Tab
+map("i", "<C-i>", "<Tab>", { desc = ":(" })
 map("i", "<C-a>", "<End>", { desc = "move end of line" })
 map("i", "<C-d>", "<C-h>", { desc = "delete character" })
 map("i", "<C-h>", "<Left>", { desc = "move left" })
@@ -32,6 +33,7 @@ map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
 -- search within visual
 map('x', '<Leader>/', '<Esc>/\\%V')
+map('x', '<Leader>?', '<Esc>?\\%V')
 
 -- window transition
 map("n", "<C-H>", "<C-w>h", { desc = "switch window left" })

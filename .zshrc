@@ -189,6 +189,19 @@ wavescrashing() {
   play -c 2 -n synth brownnoise synth pinknoise mix synth 0 0 0 15 40 50 trapezium amod $1 50
 }
 
+toCamel() {
+  if [ -z "$1" ]; then
+    echo "Usage: $0 \"Your sentence here\""
+  fi
+
+  echo "$1" \
+      | tr '\n' ' ' \
+      | sed 's/^[ \t]*//;s/[ \t]*$//' \
+      | tr '[:upper:]' '[:lower:]' \
+      | sed -E 's/[[:space:]]+/_/g' \
+      | sed -E 's/[^a-z0-9_]/-/g'
+}
+
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
@@ -199,10 +212,13 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:/home/de_mirage/.local/bin"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+
+# export CLASS_PATH="/usr/lib/jvm/java-21-openjdk"
+
 export EDITOR="/usr/bin/nvim"
 export MUSIC="$HOME/Music"
-
-export PATH="$PATH:/home/de_mirage/.local/bin"
 
 export FZF_DEFAULT_OPTS="--bind='ctrl-e:up' --height 40% --style full"
 

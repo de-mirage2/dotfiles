@@ -32,8 +32,10 @@ require('lazy').setup({
     version = 'v2.*',
     config = function()
       require('luasnip').config.set_config({
-        history = false,
         enable_autosnippets = true,
+        history = true,
+        region_check_events = "InsertEnter",
+        delete_check_events = "TextChanged,InsertLeave",
         -- cut_selection_keys = '<Tab>',
       })
       require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/snippets' })
@@ -45,7 +47,7 @@ require('lazy').setup({
     dependencies = { 'L3MON4D3/LuaSnip' },
     version = '1.*',
     opts = {
-      keymap = { preset = 'super-tab' },
+      keymap = { preset = 'super-tab' }, -- causes issues with tabbing
       snippets = { preset = 'luasnip' },
       sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
       -- completion = {menu = {auto_show = false}}, -- fixed with 'hidden = true' in snippets
@@ -73,6 +75,16 @@ require('lazy').setup({
         lspconfig[server].setup(config)
       end
     end
+  },
+  -- Convenience
+  {
+    "willothy/flatten.nvim",
+    config = true,
+    -- or pass configuration with
+    -- opts = {  }
+    -- Ensure that it runs first to minimize delay when opening file from terminal
+    lazy = false,
+    priority = 1067,
   },
   -- Filetree
   { 'stevearc/oil.nvim' , config = function() require("oil").setup() end, },
