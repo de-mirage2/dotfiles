@@ -147,6 +147,7 @@ alias lst='lsd --tree -a'
 alias frg='rg -F'
 unalias ll
 # alias egrep='grep -E --color=auto'
+alias ff='firefox -new-tab'
 alias dif='difft'
 alias n='nvim'
 alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' -H . | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"

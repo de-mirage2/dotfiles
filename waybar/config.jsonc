@@ -4,7 +4,7 @@
   {
     "layer": "top",
     "position": "top",
-    "height": 24,
+    "height": 26,
     "spacing": 14,
     "modules-left": [
       "custom/emblem",
@@ -15,6 +15,7 @@
       "custom/window",
       "custom/help",
     ],
+    "modules-center": ["custom/workspace"],
     "modules-right": [
       // "mpd",
       "tray",
@@ -25,26 +26,30 @@
       "mpris",
       "network",
       "battery",
-      "battery#bat2",
+      // "battery#bat2",
       // "pulseaudio",
       // "backlight",
       // "keyboard-state",
       "clock"
     ],
+    "custom/emblem": {
+      "format": "\uf303 ",
+      "tooltip": false,
+      // "on-click": "wofi --show drun",
+      "on-click": "hyprctl dispatch workspace 1",
+      "tooltip": false
+    },
     "hyprland/window": {
       "format": "{class}",
       "tooltip": false,
       "min-length": 10,
       "justify": "center",
       "rewrite": {
-        "^(?!.*\\S).*": "Finder"
+        "^(?!.*\\S).*": "Finder",
+        // "(.*)Mozilla Firefox": "Firefox",
+        // "(.*)Discord(.*)": "Vesktop",
+        // "(.*)Anki": "Anki",
       }
-    },
-    "custom/emblem": {
-      "format": "\uf303 ",
-      "tooltip": false,
-      "on-click": "wofi --show drun",
-      "tooltip": false
     },
     "custom/file": {
       "exec": "echo 'File'",
@@ -79,7 +84,11 @@
       "interval": "once",
       "return-type": "plain",
       "on-click": "gio open https://github.com/Alexays/Waybar/wiki/",
-      "on-click-right": "gio open https://wiki.hypr.land"
+      "on-click-right": "gio open https://wiki.hypr.land",
+    },
+    "custom/workspace": {
+      "exec": "~/.config/hypr/scripts/workspaceToRoman.sh",
+      "signal": 1
     },
     "keyboard-state": {
       "numlock": true,
@@ -92,7 +101,7 @@
     },
     "mpris": {
       "format": "{player_icon}",
-      "format-paused": "{status_icon} ~ <i>{title}</i>",
+      "format-paused": "{status_icon} <i>{title} ~ {position}/{length}</i>",
       "player-icons": {
         "default": "▶",
         // "mpv": "<big>󰝚</big>"
@@ -101,7 +110,8 @@
         "paused": "⏸"
       },
       "ignored-players": ["firefox"],
-      "interval": 1
+      // "signal": 2,
+      // "interval": 1
     },
     "mpd": {
       "format": "  {title} - {artist} {stateIcon} [{elapsedTime:%M:%S}/{totalTime:%M:%S}] {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}[{songPosition}/{queueLength}] [{volume}%]",
@@ -197,9 +207,9 @@
         " "
       ]
     },
-    "battery#bat2": {
-      "bat": "BAT2"
-    },
+    // "battery#bat2": {
+    //   "bat": "BAT2"
+    // },
     "network": {
         "format-wifi": "<big>\uf1eb </big>",
         "format-ethernet": " ",

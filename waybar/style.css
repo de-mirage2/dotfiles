@@ -89,6 +89,11 @@ window#waybar.bottom {
     rgba(255,255,255,0.5) border-box;
 }
 
+#custom-workspace {
+  font-family: Noto Serif Display Black; 
+  font-weight: 900;
+}
+
 #cpu,
 #memory,
 #disk,
@@ -175,7 +180,7 @@ label:focus {
 #tray {
   margin-right: 4px;
   background-color: rgba(255, 255, 255, 0.2);
-  padding: 1 4px;
+  padding: 1px 4px;
 }
 
 #tray menu * {

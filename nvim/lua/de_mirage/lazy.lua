@@ -36,6 +36,7 @@ require('lazy').setup({
         history = true,
         region_check_events = "InsertEnter",
         delete_check_events = "TextChanged,InsertLeave",
+        store_selection_keys="<Tab>",
         -- cut_selection_keys = '<Tab>',
       })
       require('luasnip.loaders.from_lua').lazy_load({ paths = '~/.config/nvim/snippets' })
@@ -47,9 +48,27 @@ require('lazy').setup({
     dependencies = { 'L3MON4D3/LuaSnip' },
     version = '1.*',
     opts = {
-      keymap = { preset = 'super-tab' }, -- causes issues with tabbing
+      keymap = {
+        
+        ['<A-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<A-k>'] = { 'hide', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
+
+        ['<A-o>'] = { 'snippet_forward', 'fallback' },
+        ['<A-i>'] = { 'snippet_backward', 'fallback' },
+
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<A-p>'] = { 'select_prev', 'fallback_to_mappings' },
+        ['<A-n>'] = { 'select_next', 'fallback_to_mappings' },
+
+        ['<A-b>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<A-f>'] = { 'scroll_documentation_down', 'fallback' },
+
+        ['<A-s>'] = { 'show_signature', 'hide_signature', 'fallback' }, 
+      }, -- causes issues with tabbing
       snippets = { preset = 'luasnip' },
-      sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
+      sources = { default = { 'lsp', 'path', 'snippets', }, },
       -- completion = {menu = {auto_show = false}}, -- fixed with 'hidden = true' in snippets
     }, 
   },
