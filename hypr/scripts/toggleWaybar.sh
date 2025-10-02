@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CURR=$(pgrep -xa waybar)
 

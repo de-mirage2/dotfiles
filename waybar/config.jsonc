@@ -102,6 +102,7 @@
     "mpris": {
       "format": "{player_icon}",
       "format-paused": "{status_icon} <i>{title} ~ {position}/{length}</i>",
+      "title-len": 30,
       "player-icons": {
         "default": "▶",
         // "mpv": "<big>󰝚</big>"
