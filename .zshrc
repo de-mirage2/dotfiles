@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -21,7 +22,8 @@ COMPLETION_WAITING_DOTS="true"
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
 
-plugins=(sudo history emoji)
+# plugins=(sudo history emoji) # emoji too unoptimal
+plugins=(sudo history)
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -154,6 +156,7 @@ alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|htm
 alias z='zathura'
 alias zf="fd -i '.*\\.(pdf|djvu|epub)$' . | fzf --bind 'enter:become(zathura {})'"
 alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' . | fzf --bind 'enter:become(mpv {})'"
+alias mpvr="mpv $(shuf -n1 -e **/*.(flac|mp3))"
 cd_to_dir() {
   cd $1 && cd $(fd -t d | fzf +m --preview 'lsd --tree -a {}')
 }
@@ -237,7 +240,6 @@ export GTK_THEME=MacTahoe Light
 # export QT_IM_MODULE=ibus
 # export XMODIFIERS=@im=ibus
 
-
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init - zsh)"
@@ -256,7 +258,14 @@ set -o vi
 # skip_global_compinit=1
 
 autoload -Uz compinit
-compinit
+# compinit # this snippet should make more optimal
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+
+
 
 # eval "$(zoxide init zsh --cmd j)"
 
@@ -265,3 +274,4 @@ compinit
 
 # eval "$(pyenv virtualenv-init -)"
 
+# zprof 
