@@ -1,6 +1,13 @@
 # zmodload zsh/zprof
+
+DISABLE_AUTO_UPDATE="true"
+DISABLE_MAGIC_FUNCTIONS="true"
+# DISABLE_COMPFIX="true"
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
+
+# export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
@@ -8,8 +15,8 @@ ZSH_THEME="agnoster"
 CASE_SENSITIVE="true"
 HYPHEN_INSENSITIVE="false"
 
-zstyle ':omz:update' mode auto
-zstyle ':omz:update' frequency 14
+# zstyle ':omz:update' mode auto
+# zstyle ':omz:update' frequency 28
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -85,7 +92,6 @@ alias hl='history | less'
 alias hs='history | rg'
 alias hsi='history | rg -i'
 
-
 # Base 64 aliases (copying omz plugin)
 encode64() {
     if [[ $# -eq 0 ]]; then
@@ -149,7 +155,8 @@ alias lst='lsd --tree -a'
 alias frg='rg -F'
 unalias ll
 # alias egrep='grep -E --color=auto'
-alias ff='firefox -new-tab'
+alias ff='firefox --new-tab'
+alias timeZsh='for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done'
 alias dif='difft'
 alias n='nvim'
 alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' -H . | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
@@ -158,7 +165,10 @@ alias zf="fd -i '.*\\.(pdf|djvu|epub)$' . | fzf --bind 'enter:become(zathura {})
 alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' . | fzf --bind 'enter:become(mpv {})'"
 alias mpvr="mpv $(shuf -n1 -e **/*.(flac|mp3))"
 cd_to_dir() {
-  cd $1 && cd $(fd -t d | fzf +m --preview 'lsd --tree -a {}')
+  if [[ -z $1 ]] then
+    cd $1
+  fi
+  cd $(fd -t d | fzf +m --preview 'lsd --tree -a {}')
 }
 alias cf="cd_to_dir"
 mcd() {
@@ -259,11 +269,10 @@ set -o vi
 
 autoload -Uz compinit
 # compinit # this snippet should make more optimal
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-	compinit;
-else
-	compinit -C;
-fi;
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 
 
