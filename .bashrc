@@ -121,8 +121,6 @@ toCamel() {
       | sed -E 's/[^a-z0-9_]/-/g'
 }
 
-
-
 # Git aliases (copying omz plugin)
 alias g='git'
 alias ga='git add'
@@ -164,6 +162,9 @@ alias grhs='git reset --soft'
 alias gpristine='git reset --hard && git clean --force -dfx'
 alias gwipe='git reset --hard && git clean --force -df'
 
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 
 
