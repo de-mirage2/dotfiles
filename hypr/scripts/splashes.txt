@@ -1,4 +1,29 @@
 #
+# Archimedes (as quoted by John F. Kennedy)
+#
+Give me a place where I can stand—and I shall move the world.
+#
+# Ralph Waldo Emerson
+#
+Without ambition one starts nothing. Without work one finishes nothing. The prize will not be sent to you. You have to win it.
+#
+# Roy T. Bennett - The Light in the Heart
+#
+Be brave enough to live the life of your dreams according to your vision and purpose instead of the expectations and opinions of others.
+Believe in your infinite potential. Your only limitations are those you set upon yourself.
+The biggest wall you have to climb is the one you build in your mind.
+What's done is done. What's gone is gone. One of life's lessons is always moving on.
+#
+# Albert Einstein
+#
+There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.
+#
+# F. Scott Fitzgerald - The Great Gatsby
+#
+Gatsby believed in the green light, the orgastic future that year by year recedes before us. It eluded us then, but that's no matter—to-morrow we will run faster, stretch out our arms farther. . . . And one fine morning— 
+So we beat on, boats against the current, borne back ceaselessly into the past.
+In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since. "Whenever you feel like criticizing any one," he told me, "just remember that all the people in this world haven't had the advantages that you've had."
+#
 # Some Dude from Young Sheldon
 #
 At the gates, God will never ask you "Why weren't you Einstein?" But he might ask you "Why weren't you Miraj?"
@@ -8,7 +33,7 @@ At the gates, God will never ask you "Why weren't you Einstein?" But he might as
 If you live for their acceptance, you'll die from their rejection.
 Dress for the apocalypse you want, not for the one you live in.
 #
-# Kate Chopin - The Awakening ch. 4
+# Kate Chopin - The Awakening
 #
 The voice of the sea is seductive; never ceasing, whispering, clamoring, murmuring, inviting the soul to wander for a spell in abysses of solitude; to lose itself in mazes of inward contemplation.
 #

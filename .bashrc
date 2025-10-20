@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:/home/de_mirage/.local/bin"
@@ -14,8 +10,10 @@ export EDITOR="/usr/bin/nvim"
 export MUSIC="$HOME/Music"
 
 export FZF_DEFAULT_OPTS="--bind='ctrl-e:up' --height 40% --style full"
+# probably won't use alt-c much
+export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target --preview 'tree -C {}'"
 
-# fix GTK app brianrot (?)
+# fix GTK app misbehavior (?)
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
 export GTK_FONT_SCALE=1
@@ -39,16 +37,14 @@ export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 #####
 ###
 
+force_color_prompt=yes
+
 eval "$(fzf --bash)"
 
 source "$HOME/.config/bash/ps1.sh"
 PS1="$(_mkps1)"
 
-source ~/.config/git-prompt.sh
-
-# SEP_R=$'\uE0B0'  # 
-# SEP_L=$'\uE0B2'  # 
-# PROMPT_COMMAND='PS1_CMD1=$(__git_ps1 " (%s)")'; PS1='\[\e[38;5;23m\]${SEP_L}\[\e[38;5;159;48;5;23m\]\u\[\e[2m\]@\[\e[22m\]\h\[\e[39m\] \[\e[38;5;23;48;5;159m\]${SEP_R}\[\e[39m\] \[\e[38;5;23m\]\w\[\e[39m\] \[\e[0;38;5;159m\]${SEP_R}\[\e[0m\]${PS1_CMD1} \[\e[2m\]\$\[\e[0m\] '
+source "$HOME/.config/git-prompt.sh"
 
 alias l='lsd -lhF'
 alias ls='lsd -lahF'
@@ -62,7 +58,7 @@ alias lst='lsd --tree -a'
 alias frg='rg -F'
 alias dif='difft'
 alias ff='firefox --new-tab'
-alias timeBash='for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done'
+alias timeBash='for i in $(seq 1 10); do /usr/bin/time bash -i -c exit; done'
 alias neovimReset='rm -fr ~/.local/share/nvim ~/.local/state/nvim'
 
 mn() {
@@ -83,14 +79,19 @@ cd_to_dir() {
 alias cf="cd_to_dir"
 
 mcd() {
-  mkdir -p $1 && cd $1 
+  mkdir -p "$*" && cd "$*"
 }
 
-alias nf="fd -i '.*\\.(tex|ssh|py|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' -H . | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
-alias zf="fd -i '.*\\.(pdf|djvu|epub)$' . | fzf --bind 'enter:become(zathura {})'"
+alias md='mkdir'
+alias rd='rmdir'
 alias cf="cd_to_dir"
-alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' . | fzf --bind 'enter:become(mpv {})'"
 alias mpvr="mpv \$(shuf -n1 -e **/*.(flac|mp3))"
+
+
+# # superseded by <C-f>
+# alias nf="fd -i '.*\\.(tex|ssh|py|java|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' -H . | rg -vi 'put\\d\\.txt' | fzf --bind 'enter:become(nvim {})' --preview 'bat -n --color=always {}'"
+# alias zf="fd -i '.*\\.(pdf|djvu|epub)$' . | fzf --bind 'enter:become(zathura {})'"
+# alias mpvf="fd -i '.*\\.(mp3|mp4|ogg|flac|wav|m4a|mkv|aac|3gp|aiff|opus|webm|gifv|flv|avi|mov|wmv|m3u)$' . | fzf --bind 'enter:become(mpv {})'"
 
 alias pls='sudo'
 alias plz='sudo'
@@ -109,11 +110,11 @@ wavescrashing() {
 }
 
 toCamel() {
-  if [ -z "$1" ]; then
+  if [ -z "$*" ]; then
     echo "Usage: $0 \"Your sentence here\""
   fi
 
-  echo "$1" \
+  echo "$*" \
       | tr '\n' ' ' \
       | sed 's/^[ \t]*//;s/[ \t]*$//' \
       | tr '[:upper:]' '[:lower:]' \
@@ -162,15 +163,21 @@ alias grhs='git reset --soft'
 alias gpristine='git reset --hard && git clean --force -dfx'
 alias gwipe='git reset --hard && git clean --force -df'
 
-set -o vi
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+fi
 
-
+if [[ -s "$HOME/.config/bash/fzf_custom.sh" ]]; then
+  source "$HOME/.config/bash/fzf_custom.sh" 
+  bind -x '"\C-f": fzf_file_complete_with_query'
+fi
 
 
 
 if uwsm check may-start; then
     exec uwsm start hyprland.desktop
 fi
+
