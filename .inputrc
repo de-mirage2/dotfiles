@@ -7,13 +7,13 @@ set completion-prefix-display-length 15
 
 set editing-mode vi
 set show-mode-in-prompt on
-# set vi-ins-mode-string \1\e[34;1m\2(ins)\1\e[0m\2
-# set vi-cmd-mode-string \1\e[35;1m\2(cmd)\1\e[0m\2
+set vi-ins-mode-string \1\e[34;1m\2(i)\1\e[0m\2\1\e[5 q\2
+set vi-cmd-mode-string \1\e[32;1m\2(c)\1\e[0m\2\1\e[1 q\2
 #
 # Prepend I to indicate insert mode and have blinking bar
-set vi-ins-mode-string "(i)\1\e[5 q\2"
+# set vi-ins-mode-string "(i)\1\e[5 q\2"
 # prepend C to indicate command mode and have a blinking block
-set vi-cmd-mode-string "(c)\1\e[1 q\2"
+# set vi-cmd-mode-string "(c)\1\e[1 q\2"
 set blink-matching-paren on
 
 $if mode=vi

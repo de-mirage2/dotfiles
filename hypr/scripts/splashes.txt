@@ -1,4 +1,8 @@
 #
+#  dan_waterworth on Stack Overflow (paraphrased)
+#
+Evil is a polynomial and has many roots, some of them complex.
+#
 # Archimedes (as quoted by John F. Kennedy)
 #
 Give me a place where I can stand—and I shall move the world.

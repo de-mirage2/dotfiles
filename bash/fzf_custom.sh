@@ -27,7 +27,7 @@ fzf_file_complete_with_query() {
     file_list_cmd="fd -i '.*\\.(tex|ssh|py|java|cpp|cs|c|lua|pl|r|rs|ts|tsx|php|js|jsx|css|html|sol|md|txt|conf|rasi|ini|json|jsonc|csv|sh|go)$' -H ."
   fi
 
-  if [[ "$cmd" == "cd" || "$cmd" == "mcd" || "$cmd" == "rd" || "$cmd" == "ls" ]]; then
+  if [[ "$cmd" == "cd" || "$cmd" == "mcd" || "$cmd" == "rd" || "$cmd" == "ls" || "$cmd" == "mpvc" ]]; then
     file_list_cmd="fd -t d ."
   fi
 
@@ -37,7 +37,7 @@ fzf_file_complete_with_query() {
 
   if [[ -n "$selected" ]]; then
     # Rebuild the command line
-    READLINE_LINE="${line_before_last_word}${selected}${right}"
+    READLINE_LINE="${line_before_last_word}\"${selected}\"${right}"
     READLINE_POINT=${#READLINE_LINE}
   fi
 }

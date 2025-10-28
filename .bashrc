@@ -30,6 +30,9 @@ export LESS_TERMCAP_us=$(tput smul; tput setaf 4) # Blue
 # End underlining
 export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 
+shopt -s cdspell
+shopt -s dirspell
+
 ###
 #####
 # If not running interactively, don't do anything
@@ -85,6 +88,7 @@ mcd() {
 alias md='mkdir'
 alias rd='rmdir'
 alias cf="cd_to_dir"
+alias mpvc="mpv --shuffle"
 alias mpvr="mpv \$(shuf -n1 -e **/*.(flac|mp3))"
 
 

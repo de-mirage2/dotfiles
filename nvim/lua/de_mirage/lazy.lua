@@ -102,6 +102,7 @@ require('lazy').setup({
     lazy = false,
     priority = 1067,
   },
+  { 'farmergreg/vim-lastplace', lazy = false },
   -- Filetree
   { 'stevearc/oil.nvim' , config = function() require("oil").setup() end, },
   -- Git
