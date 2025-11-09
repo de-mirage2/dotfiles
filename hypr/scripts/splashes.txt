@@ -1,4 +1,8 @@
 #
+# William Koglin
+#
+If anybody's picking on you, it should be yourself.
+#
 #  dan_waterworth on Stack Overflow (paraphrased)
 #
 Evil is a polynomial and has many roots, some of them complex.
@@ -26,7 +30,7 @@ There are only two ways to live your life. One is as though nothing is a miracle
 #
 Gatsby believed in the green light, the orgastic future that year by year recedes before us. It eluded us then, but that's no matter—to-morrow we will run faster, stretch out our arms farther. . . . And one fine morning— 
 So we beat on, boats against the current, borne back ceaselessly into the past.
-In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since. "Whenever you feel like criticizing any one," he told me, "just remember that all the people in this world haven't had the advantages that you've had."
+In my younger and more vulnerable years my father gave me some advice... "Whenever you feel like criticizing any one," he told me, "just remember that all the people in this world haven't had the advantages that you've had."
 #
 # Some Dude from Young Sheldon
 #
