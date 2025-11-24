@@ -45,7 +45,7 @@ require('lazy').setup({
   {
     'saghen/blink.cmp',
     lazy = false,  -- lazy loading handled internally
-    dependencies = { 'L3MON4D3/LuaSnip' },
+    dependencies = { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     version = '1.*',
     opts = {
       keymap = {
@@ -72,27 +72,7 @@ require('lazy').setup({
       -- completion = {menu = {auto_show = false}}, -- fixed with 'hidden = true' in snippets
     }, 
   },
-  {'j-hui/fidget.nvim'},
-  -- {
-  --   'neovim/nvim-lspconfig',
-  --   dependencies = { 'saghen/blink.cmp', 'j-hui/fidget.nvim' },
-  --
-  --   -- example using `opts` for defining servers
-  --   opts = {
-  --     servers = {
-  --       clangd = {},
-  --       texlab = {},
-  --       jdtls = {},
-  --       rust_analyzer = {},
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     vim.lsp.config['*'] = {
-  --       capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-  --     }
-  --   end
-  -- },
-  -- Convenience
+  { 'j-hui/fidget.nvim' },
   {
     "willothy/flatten.nvim",
     config = true,
@@ -133,4 +113,4 @@ require('lazy').setup({
   {
   'zk-org/zk-nvim',
   },
-})
+}, { rocks = { enabled = false } })

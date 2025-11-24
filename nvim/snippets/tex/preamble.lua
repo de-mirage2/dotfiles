@@ -254,18 +254,51 @@ M = {
   s({trig = "TemplateLinearAlgebra"},
     fmta(
       [[
-      \documentclass[10pt]{minimal}
-      \usepackage[a4paper,includefoot,heightrounded]{geometry}
+      \documentclass[10pt]{article}
+      \usepackage[letterpaper,margin=0.5in,includefoot,heightrounded]{geometry}
       \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs,fourier-orns}
-      \title{Linear Algebra - <>}
+
+      \newtheoremstyle{solStyle}  % name
+        {3pt}                    % Space above
+        {3pt}                    % Space below
+        {\normalfont}            % Body font (upright)
+        {}                       % Indent amount
+        {\bfseries}              % Theorem head font
+        {.}                      % Punctuation after theorem head
+        {2em}                      % Space after theorem head
+        {}                       % Theorem head spec
+
+      \theoremstyle{solStyle}
+      \newtheorem{solution}{Solution}
+
+      \makeatletter
+      \newcommand{\course}[1]{\gdef\@course{#1}}%
+      \def\@maketitle{%
+        \newpage
+        \null
+        \let \footnote \thanks
+        \flushright
+          {\Large \@title}\hfill{\large\scshape \@course}%
+          \vskip .5em%
+          \@author%
+          \vskip .25em%
+          \@date%
+        \par
+        \vskip 1.5em}
+      \makeatother
+
+      \title{Week <> assignment}
+      \course{MATH 416: Abstract Linear Algebra}
       \author{Miraj M. Parikh}
       \date{\today}
+
       \begin{document}
         \maketitle
+        \begin{solution}
         <>
-      \vfill\hfill\oldpilcrowfive\LaTeX
+        \end{solution}
       \end{document}
-      ]], { i(1), i(0) }
+      ]], { i(1, "1"), i(0, "We begin by") }
     )
   ),
   --[=[s({trig="tablelab"},
@@ -287,3 +320,4 @@ M = {
 }
 
 return M
+
