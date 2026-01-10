@@ -5,7 +5,7 @@ arabic=${vars[0]}
 special=${vars[1]}
 
 if [[ special -ne 0 ]]; then
-  echo "shoot the lights out" 
+  echo "$(~/.config/hypr/scripts/random-splash.sh ~/.config/hypr/scripts/specialSplashes.txt)" 
   exit 0
 fi
 

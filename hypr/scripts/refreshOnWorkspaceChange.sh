@@ -8,7 +8,7 @@ echo "SOCKET FOUND AT: $SOCKET"
 
 handle() {
   case "$1" in
-    workspace*|activespecial*)
+    workspacev2*|activespecialv2*)
       echo "Received '$line', Calling custom/workspace refresh."
       pkill -RTMIN+1 waybar
       ;;

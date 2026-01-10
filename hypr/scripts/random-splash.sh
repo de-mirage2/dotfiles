@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo $(rg -Nv '^#' ~/.config/hypr/scripts/splashes.txt | shuf -n 1)
+echo $(rg -Nv '^#' $1 | shuf -n 1)
