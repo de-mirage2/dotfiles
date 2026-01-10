@@ -4,11 +4,9 @@ mapfile -t vars < <(hyprctl monitors | rg 'workspace' | rg '\s-?(\d{1,3})\s' -or
 arabic=${vars[0]}
 special=${vars[1]}
 
-# echo "arabic = $arabic special = $special"
-
 if [[ special -ne 0 ]]; then
-  echo 0
-  exit 1
+  echo "shoot the lights out" 
+  exit 0
 fi
 
 tens=("" "Ⅹ" "ⅩⅩ" "ⅩⅩⅩ" "ⅩⅬ" "Ⅼ" "ⅬⅩ" "ⅬⅩⅩ" "ⅬⅩⅩⅩ" "ⅩⅭ")

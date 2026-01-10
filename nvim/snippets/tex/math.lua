@@ -55,10 +55,10 @@ M = {
   --aus({trig = "++"}, fmta([[^{<>}]], {i(1)})),
   --aus({trig = "--"}, fmta([[_{<>}]], {i(1)})),
   
-  maus({',e','eE'}, fmta([[e^{<>}]], {i(1)})),
-  maus({',T','tT','TT'}, t('^{\\mathsf{T}}')),
-  maus({',I','iI','inV'}, t('^{-1}')),
-  ams_aus(',c', t('^{\\complement}')),
+  aus(',E', fmta([[e^{<>}]], {i(1)})),
+  aus(',T', t('^{\\mathsf{T}}')),
+  aus(',I', t('^{-1}')),
+  ams_aus(',C', t('^{\\complement}')),
 
   aus(';1', fmta([[\sin{<>}]], {i(1)})),
   aus(';2', fmta([[\cos{<>}]], {i(1)})),
@@ -191,6 +191,7 @@ local auto_cmdbracket = {
   'hat',
   'tilde',
   'sqrt',
+  'pmod',
 }
 
 local auto_cmd = {
@@ -223,7 +224,7 @@ local auto_cmd_pair = {
   ['.l'] = 'ldots',
   ['.c'] = 'cdots',
 
-  [',='] = 'equiv',
+  ['=='] = 'equiv',
   ['~='] = 'approx',
   ['~~'] = 'sim',
   ['!='] = 'neq',
@@ -244,8 +245,6 @@ local auto_cmd_pair = {
   ['MM'] = 'land',
   ['uu'] = 'cup',
   ['nn'] = 'cap',
-  ['ssup'] = 'sup',
-  ['sinf'] = 'inf',
   ['|>'] = 'mapsto',
   ['|->'] = 'longmapsto',
   ['->'] = 'to',

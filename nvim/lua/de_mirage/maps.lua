@@ -6,6 +6,8 @@ map({"n","v","t"}, "e", "k", {remap=false})
 -- map({"v",   }, "K", "E", {remap=false}) -- unneeded
 -- map({"n",   }, "E", "", {remap=false}) -- unneeded
 -- map("v", "K", "E") -- error
+map({"n","v","t",}, "gk", "ge", {remap=false})
+map({"n","v","t"}, "ge", "gk", {remap=false})
 
 -- swap lines in visual
 map("v", "E", ":m '<-2<CR>gv=gv")

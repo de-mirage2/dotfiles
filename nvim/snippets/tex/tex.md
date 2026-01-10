@@ -95,17 +95,17 @@
 
 #math.lua
 ## superscript exponents
-`,e`, `eE` - euler's exponent, `e^{}` [1]
-`,T`, `tT`, `TT`, - transpose, `^{\mathsf{T}}`
-`,I`, `iI`, `inV` - inverse, `^{-1}`
-`,c` - complement, `^{\complement}` (amsmath)
+`,C` - complement, `^{\complement}` (amsmath)
+`,E` - euler's exponent, `e^{}` [1]
+`,I` - inverse, `^{-1}`
+`,T` - transpose, `^{\mathsf{T}}`
 ## derivatives
 ### regular
-`DD` - derivative as a fraction, dy/dx [2]
-`dD` - derivative as a function, d/dx [1]
+`.D` - derivative as a fraction, dy/dx [2]
+`.d` - derivative as a function, d/dx [1]
 ### partial
-`PP` - partial derivative as a fraction, py/px [2]
-`pP` - partial derivative as a function, p/px [1]
+`.P` - partial derivative as a fraction, py/px [2]
+`.p` - partial derivative as a function, p/px [1]
 ## integrals
 Insertion nodes are ordered as 1) differential 2) bounds, first lower to upper if paired then right to left 4) function
 ### regular

@@ -2,7 +2,7 @@
 
 if [ -z "$@" ]; then
   if [ -z $(cliphist list) ]; then
-    echo 'empty'
+    echo 'The lone and level sands stretch far away. '
   else
     cliphist list
   fi

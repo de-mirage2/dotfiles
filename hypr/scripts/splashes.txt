@@ -1,4 +1,16 @@
 #
+# Percy Shelley
+#
+"My name is Ozymandias, King of Kings: Look on my works, ye Mighty, and despair!"
+#
+# Tony Guoga
+#
+Of course I lied, it's poker Phil!
+#
+# Shakespeare
+#
+Come what come may, time and the hour run through the roughest day
+#
 # William Koglin
 #
 If anybody's picking on you, it should be yourself.
@@ -34,7 +46,7 @@ In my younger and more vulnerable years my father gave me some advice... "Whenev
 #
 # Some Dude from Young Sheldon
 #
-At the gates, God will never ask you "Why weren't you Einstein?" But he might ask you "Why weren't you Miraj?"
+# At the gates, God will never ask you "Why weren't you Einstein?" But he might ask you "Why weren't you Miraj?"
 #
 # Miscellaneous
 #
