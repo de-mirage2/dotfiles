@@ -15,18 +15,13 @@
       "custom/window",
       "custom/help",
     ],
-    "modules-center": ["custom/workspace"],
+    "modules-center": ["custom/roman"],
     "modules-right": [
-      // "mpd",
-      "tray",
+      "group/control",
       "idle_inhibitor",
-      // "temperature",
-      // "cpu",
-      // "memory",
       "mpris",
+      "group/pc",
       "network",
-      "battery",
-      // "battery#bat2",
       // "pulseaudio",
       // "backlight",
       // "keyboard-state",
@@ -86,9 +81,11 @@
       "on-click": "gio open https://github.com/Alexays/Waybar/wiki/",
       "on-click-right": "gio open https://wiki.hypr.land",
     },
-    "custom/workspace": {
+    "custom/roman": {
       "exec": "~/.config/hypr/scripts/workspaceToRoman.sh",
-      "signal": 1
+      "tooltip": false,
+      "return-type": "plain",
+      "signal": 1,
     },
     "keyboard-state": {
       "numlock": true,
@@ -99,20 +96,39 @@
         "unlocked": ""
       }
     },
+    "group/pc": {
+      "orientation": "horizontal",
+      "drawer": {
+        "transition-duration": 200,
+        "transition-left-to-right": false,
+      },
+      "modules": [
+        "battery",
+        "cpu",
+        "memory",
+        "temperature",
+      ]
+    },
+    "custom/pc": {
+      "format": "<big>\uf21e</big>   ",
+      "tooltip": false,
+    },
     "mpris": {
       "format": "{player_icon}",
-      "format-paused": "{status_icon} <i>{title} ~ {position}/{length}</i>",
+      // "format-paused": "{status_icon} <i>{title} ~ {position}/{length}</i>",
+      "format-paused": "{status_icon}",
+      "tooltip-format": "{title}\n{artist}\n{position}/{length}\nvia {player} ({status})",
       "title-len": 30,
       "player-icons": {
-        "default": "▶",
+        "default": "<big>\uf144 </big>",
         // "mpv": "<big>󰝚</big>"
       },
       "status-icons": {
-        "paused": "⏸"
+        "paused": "<big>\uf28b </big>"
       },
       "ignored-players": ["firefox"],
-      // "signal": 2,
-      // "interval": 1
+      "on-scroll-up": "wpctl set-volume @DEFAULT_SINK@ 2%+",
+      "on-scroll-down": "wpctl set-volume @DEFAULT_SINK@ 3%-"
     },
     "mpd": {
       "format": "  {title} - {artist} {stateIcon} [{elapsedTime:%M:%S}/{totalTime:%M:%S}] {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}[{songPosition}/{queueLength}] [{volume}%]",
@@ -145,13 +161,29 @@
     },
     "idle_inhibitor": {
       "format": "{icon}",
+      "tooltip": false,
       "format-icons": {
-        "activated": "",
-        "deactivated": ""
+        "activated": "<big>\uf06e </big>",
+        "deactivated": "<big>\uf070 </big>"
       }
     },
+    "group/control": {
+      "orientation": "horizontal",
+      "drawer": {
+        "transition-duration": 200,
+        "transition-left-to-right": false,
+      },
+      "modules": [
+        "custom/control",
+        "tray",
+      ]
+    },
+    "custom/control": {
+      "format": "<big>\uf0c9</big>   ",
+      "tooltip": false,
+    },
     "tray": {
-      "spacing": 14
+      "spacing": 7
     },
     "clock": {
       "format": "{:%a %b %d    %I:%M %p}",
@@ -161,7 +193,7 @@
       "format": " "
     },
     "memory": {
-      "format": " "
+      "format": " "
     },
     "temperature": {
       // "thermal-zone": 2,
@@ -193,30 +225,21 @@
       "states": {
         "full": 100,
         "sufficient": 80,
+        "reduced": 40,
         "warning": 20,
         "critical": 10
       },
-      "format": "<big>{icon}</big>",
+      "format": "<big>\uf21e</big> ",
       "format-charging": "",
       "format-plugged": "",
       "tooltip-format": "{capacity}%\n{power}W, {time}",
-      "format-icons": [
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
     },
-    // "battery#bat2": {
-    //   "bat": "BAT2"
-    // },
     "network": {
-        "format-wifi": "<big>\uf1eb </big>",
-        "format-ethernet": " ",
+        "format-wifi": "<big>\uf1eb </big> ",
+        "format-ethernet": "  ",
         "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP)  ",
-        "format-disconnected": "",
+        "format-disconnected": " ",
         "interval": 5,
         "on-click": "nm-connection-editor"
     },

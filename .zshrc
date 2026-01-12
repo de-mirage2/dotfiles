@@ -85,6 +85,9 @@ alias grhs='git reset --soft'
 alias gpristine='git reset --hard && git clean --force -dfx'
 alias gwipe='git reset --hard && git clean --force -df'
 
+# custom
+# alias differator='python ~/Work/Personal/Differator/main.py'
+
 
 # History aliases (copying omz plugin)
 alias h='history'

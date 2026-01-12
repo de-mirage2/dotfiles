@@ -4,13 +4,12 @@
   font-family: SF Pro;
   min-height: 0;
   border-radius: 1rem;
-  padding: 0.1rem;
 }
 
 window#waybar.top {
   border-radius: 0;
   border: 0;
-  background: linear-gradient(rgba(30,30,30,0.3), rgba(0,0,0,0.1));
+  background: linear-gradient(rgba(30,30,30,0.5), rgba(0,0,0,0.1));
 }
 
 #window {
@@ -23,36 +22,21 @@ window#waybar.top {
   text-shadow: #111 0 0 10px;
 }
 
+#custom-roman {
+  font-family: Free Serif;
+  font-size: 16px;
+}
+
 #clock {
   margin: 0 4px 0 0;
 }
 
 tooltip {
-  background: #000000;
+  background: rgba(0,0,0,0.5);
 }
 tooltip label {
   color: white;
-}
-
-/* .modules-left > widget:first-child > #workspaces { */
-/*   margin-left: 0; */
-/* } */
-/**/
-/* .modules-right > widget:last-child > #workspaces { */
-/*   margin-right: 0; */
-/* } */
-
-
-#workspaces button {
-  padding: 0 5px;
-  background: rgba(100,100,100,0.2);
-  color: white;
-  border-bottom: 3px solid transparent;
-}
-
-#workspaces button.focused {
-  background: #64727d;
-  border-bottom: 3px solid white;
+  font-weight: 500;
 }
 
 window#waybar.bottom {
@@ -107,19 +91,15 @@ window#waybar.bottom {
 #network,
 #pulseaudio,
 #wireplumber,
-#custom-media,
 #idle_inhibitor,
-#scratchpad,
 #mpris,
-#mpd {
-  margin: 0;
+#custom-control {
+  margin: 0 -2px;
   padding: 0 0 0 6px;
   font-size: 16px;
 }
 
-#battery, #idle_inhibitor {
-  padding: 0px;
-}
+#battery {margin-right: 4px;}
 
 #battery.full {
   color: #90ffff;
@@ -133,16 +113,24 @@ window#waybar.bottom {
   color: #b6f6f6;
 }
 
+#battery.reduced {
+  color: #d4f760;
+}
+
+#battery.charging.reduced, #battery.plugged.reduced {
+  color: #c7f089;
+}
+
 #battery.charging.warning, #battery.plugged.warning {
   color: #e2e83c;
 }
 
-#battery.charging.critical, #battery.plugged.critical {
-  color: #ff5225;
-}
-
 #battery.warning:not(.charging) {
   color: #f86868;
+}
+
+#battery.charging.critical, #battery.plugged.critical {
+  color: #ff5225;
 }
 
 @keyframes blink {
@@ -169,6 +157,8 @@ label:focus {
   color: #f53c3c;
 }
 
+#temperature {margin-right: 6px;}
+
 #temperature.critical {
   color: #eb4d4b;
 }
@@ -182,9 +172,8 @@ label:focus {
 }
 
 #tray {
-  margin-right: 4px;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 1px 4px;
+  margin-right: 5px;
+  background: none;
 }
 
 #tray menu * {
