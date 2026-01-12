@@ -17,18 +17,19 @@
     ],
     "modules-center": ["custom/roman"],
     "modules-right": [
-      "group/control",
-      "idle_inhibitor",
       "mpris",
       "group/pc",
+      "idle_inhibitor",
+      "bluetooth",
       "network",
       // "pulseaudio",
       // "backlight",
       // "keyboard-state",
+      "group/control",
       "clock"
     ],
     "custom/emblem": {
-      "format": "\uf303 ",
+      "format": "<big>\uf303 </big>",
       "tooltip": false,
       // "on-click": "wofi --show drun",
       "on-click": "hyprctl dispatch workspace 1",
@@ -37,7 +38,7 @@
     "hyprland/window": {
       "format": "{class}",
       "tooltip": false,
-      "min-length": 10,
+      "min-length": 5,
       "justify": "center",
       "rewrite": {
         "^(?!.*\\S).*": "Finder",
@@ -51,7 +52,9 @@
       "tooltip": false,
       "interval": "once",
       "return-type": "plain",
-      "on-click": "thunar"
+      "on-click": "thunar",
+      "on-click-right": "thunar ~/Music",
+      "on-click-middle": "thunar ~/Work"
     },
     "custom/edit": {
       "exec": "echo 'Edit'",
@@ -101,6 +104,7 @@
       "drawer": {
         "transition-duration": 200,
         "transition-left-to-right": false,
+        "click-to-reveal": false,
       },
       "modules": [
         "battery",
@@ -163,8 +167,8 @@
       "format": "{icon}",
       "tooltip": false,
       "format-icons": {
-        "activated": "<big>\uf06e </big>",
-        "deactivated": "<big>\uf070 </big>"
+        "activated": "<small>\uf06e </small>",
+        "deactivated": "<small>\uf070 </small>"
       }
     },
     "group/control": {
@@ -172,6 +176,7 @@
       "drawer": {
         "transition-duration": 200,
         "transition-left-to-right": false,
+        "click-to-reveal": true,
       },
       "modules": [
         "custom/control",
@@ -179,14 +184,14 @@
       ]
     },
     "custom/control": {
-      "format": "<big>\uf0c9</big>   ",
+      "format": "\uf0c9 ",
       "tooltip": false,
     },
     "tray": {
       "spacing": 7
     },
     "clock": {
-      "format": "{:%a %b %d    %I:%M %p}",
+      "format": "{:%a %b %d\t%R %p}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
@@ -229,19 +234,23 @@
         "warning": 20,
         "critical": 10
       },
-      "format": "<big>\uf21e</big> ",
+      "format": "\uf21e ",
       "format-charging": "",
       "format-plugged": "",
       "tooltip-format": "{capacity}%\n{power}W, {time}",
     },
+    "bluetooth": {
+      "format": "\uf294 ",
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    },
     "network": {
-        "format-wifi": "<big>\uf1eb </big> ",
-        "format-ethernet": "  ",
-        "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
-        "format-linked": "{ifname} (No IP)  ",
-        "format-disconnected": " ",
-        "interval": 5,
-        "on-click": "nm-connection-editor"
+      "format-wifi": "\uf1eb ",
+      "format-ethernet": "  ",
+      "tooltip-format": "{ifname}  via:\n{essid}\nIP: {ipaddr}\nGateway: {gwaddr}\nSubnetmask: {netmask}\nStrength (%/dBm): {signalStrength}/{signaldBm}\nByte Speed (D|U): {bandwidthDownBytes} | {bandwidthUpBytes}",
+      "format-linked": "{ifname} (No IP)  ",
+      "format-disconnected": " ",
+      "interval": 5,
+      "on-click": "nm-connection-editor"
     },
     "pulseaudio": {
       "scroll-step": 5,

@@ -9,27 +9,31 @@
 window#waybar.top {
   border-radius: 0;
   border: 0;
-  background: linear-gradient(rgba(30,30,30,0.5), rgba(0,0,0,0.1));
-}
-
-#window {
-  font-weight: 900;
+  background: linear-gradient(
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0)
+  );
 }
 
 #custom-emblem, #custom-file, #custom-edit, #custom-view, #custom-help, #custom-window, #clock {
   margin: 0 8px;
-  font-weight: 500;
-  text-shadow: #111 0 0 10px;
+  font-weight: 600;
 }
+
+#custom-emblem:hover, #custom-file:hover, #custom-edit:hover, #custom-view:hover, #custom-help:hover, #custom-window:hover, #clock:hover, #window:hover { text-shadow: #000 0 0 5px; }
+
+#window { font-weight: 900; }
+
+#custom-emblem { margin-left: 20px; }
+
 
 #custom-roman {
   font-family: Free Serif;
+  font-weight: 900;
   font-size: 16px;
 }
 
-#clock {
-  margin: 0 4px 0 0;
-}
+#clock { margin: 0 4px 0 0; }
 
 tooltip {
   background: rgba(0,0,0,0.5);
@@ -44,7 +48,7 @@ window#waybar.bottom {
 }
 
 #taskbar {
-  background: linear-gradient(45deg, rgba(200,200,200,0.2), rgba(100, 100, 100,0.2), rgba(200,200,200,0.2));
+  background: linear-gradient(45deg, rgba(200,200,200,0.2), rgba(0,0,0,0));
   border-radius: 16px;
   margin-bottom: 5px;
 }
@@ -53,35 +57,8 @@ window#waybar.bottom {
 /*   opacity: 0.2; */
 /* } */
 
-#taskbar button {
-  border-width: 2px;
-  border-radius: 16px;
-  padding: 2px;
-  margin: 4px 5px;
-  color: #fff;
-  opacity: 0.5;
-  background:
-    linear-gradient(rgba(255,255,255,0.2), rgba(100,100,100,0.2)) padding-box,
-    linear-gradient(135deg, rgba(255,255,255,0.5), rgba(155,155,155,0.5), rgba(255,255,255,0.5)) border-box;
-}
 
-#taskbar button.active {
-  opacity: 1.0;
-  background: 
-    linear-gradient(rgba(155,155,155,0.6), rgba(100,100,100,0.6)) padding-box,
-    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(55,55,55,0.4), rgba(255,255,255,0.4)) border-box;
-}
-
-#taskbar button:hover {
-  background: 
-    rgba(255,255,255,0.5) border-box;
-}
-
-#custom-workspace {
-  font-family: Noto Serif Display Black; 
-  font-weight: 900;
-}
-
+#bluetooth,
 #cpu,
 #memory,
 #disk,
@@ -99,45 +76,27 @@ window#waybar.bottom {
   font-size: 16px;
 }
 
-#battery {margin-right: 4px;}
+#custom-control { margin: 0 4px; }
 
-#battery.full {
-  color: #90ffff;
-}
+#battery {margin-right: 0px;}
 
-#battery.sufficient {
-  color: #ffffff;
-}
+#battery.full { color: #90ffff; }
 
-#battery.charging.sufficient, #battery.plugged.sufficient {
-  color: #b6f6f6;
-}
+#battery.sufficient { color: #ffffff; }
 
-#battery.reduced {
-  color: #d4f760;
-}
+#battery.charging.sufficient, #battery.plugged.sufficient { color: #b6f6f6; }
 
-#battery.charging.reduced, #battery.plugged.reduced {
-  color: #c7f089;
-}
+#battery.reduced { color: #d4f760; }
 
-#battery.charging.warning, #battery.plugged.warning {
-  color: #e2e83c;
-}
+#battery.charging.reduced, #battery.plugged.reduced { color: #c7f089; }
 
-#battery.warning:not(.charging) {
-  color: #f86868;
-}
+#battery.charging.warning, #battery.plugged.warning { color: #e2e83c; }
 
-#battery.charging.critical, #battery.plugged.critical {
-  color: #ff5225;
-}
+#battery.warning:not(.charging) { color: #f86868; }
 
-@keyframes blink {
-  to {
-    color: #000000;
-  }
-}
+#battery.charging.critical, #battery.plugged.critical { color: #ff5225; }
+
+@keyframes blink { to { color: #000000; } }
 
 #battery.critical:not(.charging) {
   color: #f53c3c;
@@ -149,32 +108,19 @@ window#waybar.bottom {
   animation-direction: alternate;
 }
 
-label:focus {
-  color: #000000;
-}
+label:focus { color: #000000; }
 
-#network.disconnected {
-  color: #f53c3c;
-}
+#network.disconnected { color: #f53c3c; }
 
-#temperature {margin-right: 6px;}
+#temperature { margin-right: 6px; }
 
-#temperature.critical {
-  color: #eb4d4b;
-}
+#temperature.critical { color: #eb4d4b; }
 
-#idle_inhibitor.deactivated {
-  color: rgba(255,255,255,0.5);
-}
+#idle_inhibitor.deactivated { color: rgba(255,255,255,0.5); }
 
-#idle_inhibitor.activated {
-  color: #fef;
-}
+#idle_inhibitor.activated { color: #fef; }
 
-#tray {
-  margin-right: 5px;
-  background: none;
-}
+#tray { margin-right: -2px; }
 
 #tray menu * {
   font-family: Ubuntu;
